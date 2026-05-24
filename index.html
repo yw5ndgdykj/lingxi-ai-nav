@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>灵犀AI导航 - 发现最聪明的AI工具</title>
+    <title id="siteTitle">灵犀AI导航 - 发现最聪明的AI工具</title>
+    <meta name="description" id="siteDesc" content="灵犀AI导航是专业的AI工具导航平台，收录100+细分领域1500+AI工具">
+    <meta name="keywords" content="AI工具,AI导航,人工智能,灵犀AI导航">
+    <meta name="author" content="灵犀AI导航">
+    <meta property="og:title" id="ogTitle" content="灵犀AI导航 - 发现最聪明的AI工具">
+    <meta property="og:description" id="ogDesc" content="专业的AI工具导航平台，收录100+细分领域1500+AI工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
+    <meta property="og:image" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -31,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0a15 0%, #0f0f2a 50%, #0a0a15 100%);
+            background: radial-gradient(ellipse at 20% 30%, #0a0a1a 0%, #050510 100%);
             z-index: -2;
             pointer-events: none;
         }
@@ -41,20 +53,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 15, 0.65);
-            backdrop-filter: blur(1px);
+            background: rgba(5, 5, 16, 0.5);
+            backdrop-filter: blur(2px);
             z-index: -1;
             pointer-events: none;
         }
         
         .content-wrapper { flex: 1; }
         
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         .hero-section {
             position: relative;
             z-index: 2;
-            background: rgba(10, 10, 20, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+            background: rgba(10, 10, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
             margin-bottom: 20px;
         }
         .hero-container {
@@ -66,7 +82,7 @@
         .hero-title h1 {
             font-size: 3rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #00d4ff, #a855f7, #ff6b6b);
+            background: linear-gradient(135deg, #00d4ff, #a855f7, #f472b6);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -74,889 +90,440 @@
         }
         .hero-title p { color: #a0a0b0; font-size: 15px; margin-top: 8px; }
         
-        /* 搜索区域 */
-        .hero-search-section { max-width: 600px; margin: 15px auto; }
-        .hero-search-box {
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 140px;
             display: flex;
-            align-items: center;
-            background: rgba(15, 15, 25, 0.9);
-            border: 2px solid rgba(0, 212, 255, 0.4);
-            border-radius: 50px;
-            padding: 5px 5px 5px 20px;
-            transition: all 0.3s;
+            gap: 8px;
+            z-index: 10;
         }
-        .hero-search-box:focus-within { border-color: #00d4ff; box-shadow: 0 0 20px rgba(0,212,255,0.3); }
-        .hero-search-icon { font-size: 20px; color: #00d4ff; margin-right: 10px; }
-        .hero-search-input { flex: 1; background: none; border: none; color: #e0e0e0; font-size: 15px; outline: none; padding: 10px 0; }
-        .hero-search-clear {
-            background: none;
-            border: none;
-            color: #606080;
-            cursor: pointer;
-            font-size: 18px;
-            padding: 0 8px;
-            display: none;
-        }
-        .hero-search-clear:hover { color: #00d4ff; }
-        .hero-search-btn {
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            border: none;
-            border-radius: 50px;
-            padding: 8px 24px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .hero-search-btn:hover { opacity: 0.9; }
-        
-        .search-stats { text-align: center; font-size: 13px; color: #606080; margin-top: 8px; display: none; }
-        .search-stats span { color: #00d4ff; }
-        .search-history { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .history-tag {
-            background: rgba(0, 212, 255, 0.08);
-            padding: 4px 12px;
-            border-radius: 20px;
+        .lang-btn {
+            background: rgba(0, 212, 255, 0.12);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 30px;
             font-size: 12px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             color: #a0a0b0;
         }
-        .history-tag:hover { background: rgba(0,212,255,0.2); color: #00d4ff; transform: translateY(-1px); }
-        .clear-history { color: #ff6b6b; opacity: 0.6; }
-        .clear-history:hover { opacity: 1; color: #ff6b6b; }
-        
-        .hero-search-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; font-size: 13px; }
-        .hero-search-tags a { color: #a0a0b0; cursor: pointer; padding: 4px 12px; border-radius: 20px; background: rgba(0,212,255,0.1); text-decoration: none; transition: all 0.2s; font-size: 13px; }
-        .hero-search-tags a:hover { background: rgba(0,212,255,0.25); color: #00d4ff; }
-        
-        .quick-nav { display: flex; justify-content: center; gap: 20px; margin: 15px 0; flex-wrap: wrap; }
-        .quick-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 40px;
-            cursor: pointer;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-        .quick-nav-item:hover { background: rgba(0, 212, 255, 0.25); transform: translateY(-2px); }
-        
-        /* 筛选排序栏 */
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding: 12px 16px;
-            background: rgba(15, 15, 25, 0.4);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .filter-label {
-            font-size: 14px;
-            color: #a0a0b0;
-        }
-        .filter-btn {
-            background: rgba(0, 212, 255, 0.08);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #c0c0d0;
-        }
-        .filter-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-        }
-        .filter-btn.active {
+        .lang-btn.active {
             background: linear-gradient(135deg, #00d4ff, #a855f7);
             color: white;
             border-color: transparent;
         }
-        .view-toggle {
-            display: flex;
-            gap: 4px;
-            background: rgba(0, 212, 255, 0.08);
-            border-radius: 30px;
-            padding: 3px;
-        }
-        .view-btn {
-            background: none;
-            border: none;
-            padding: 5px 14px;
-            border-radius: 30px;
-            font-size: 13px;
-            cursor: pointer;
-            color: #a0a0b0;
-            transition: all 0.2s;
-        }
-        .view-btn.active {
-            background: rgba(0, 212, 255, 0.25);
-            color: #00d4ff;
-        }
-        .view-btn:hover { color: #00d4ff; }
+        .lang-btn:hover { background: rgba(0,212,255,0.25); transform: translateY(-1px); }
         
-        /* 列表视图样式 */
-        .tools-grid.list-view {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .tools-grid.list-view .tool-card {
-            display: flex;
-            align-items: center;
-            text-align: left;
-            padding: 12px 16px;
-            gap: 16px;
-        }
-        .tools-grid.list-view .tool-icon {
-            margin: 0;
-            width: 48px;
-            height: 48px;
-            flex-shrink: 0;
-        }
-        .tools-grid.list-view .tool-info {
-            flex: 1;
-            text-align: left;
-        }
-        .tools-grid.list-view .tool-name {
-            margin-bottom: 4px;
-        }
-        .tools-grid.list-view .tool-desc {
-            margin-bottom: 0;
-            padding: 0;
-        }
-        .tools-grid.list-view .tool-tags {
-            justify-content: flex-start;
-            margin-bottom: 0;
-        }
-        .tools-grid.list-view .tool-footer {
-            flex-shrink: 0;
-            border-top: none;
-            padding-top: 0;
-            margin-top: 0;
-            min-width: 120px;
-        }
-        .tools-grid.list-view .favorite-btn {
-            position: relative;
-            top: 0;
-            right: 0;
-            margin-left: 8px;
-        }
-        
-        .featured-section { margin: 15px 0; }
-        .featured-title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 17px; font-weight: 600; color: #00d4ff; }
-        .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-        .featured-card {
-            background: rgba(15, 15, 25, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 212, 255, 0.25);
-            border-radius: 14px;
-            padding: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .featured-card:hover { transform: translateY(-3px); border-color: #00d4ff; }
-        .featured-name { font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; }
-        .featured-hot { font-size: 12px; color: #ff6b6b; background: rgba(255,107,107,0.15); padding: 2px 6px; border-radius: 20px; }
-        .featured-desc { font-size: 13px; color: #9090a0; margin-top: 6px; line-height: 1.4; }
-        .tip-banner {
-            background: linear-gradient(90deg, rgba(0,212,255,0.1), rgba(168,85,247,0.1), rgba(0,212,255,0.1));
-            border-radius: 10px;
-            padding: 12px 18px;
-            margin: 15px 0 0;
-            text-align: center;
-            font-size: 14px;
-            color: #a0a0b0;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        .tip-banner a { color: #00d4ff; cursor: pointer; font-size: 14px; }
-        .main-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 32px 30px;
-            display: flex;
-            gap: 25px;
-            position: relative;
-            z-index: 1;
-        }
-        .sidebar {
-            width: 240px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 85px;
-            height: calc(100vh - 110px);
-            overflow-y: auto;
-            background: rgba(15, 15, 25, 0.5);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 12px 0;
-        }
-        .sidebar-item {
-            padding: 12px 24px;
-            font-size: 15px;
-            color: #c0c0d0;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .sidebar-item:hover { background: rgba(0,212,255,0.15); color: #00d4ff; padding-left: 28px; }
-        
-        .sidebar-fav-section {
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            margin-top: 10px;
-            padding-top: 10px;
-        }
-        .fav-count {
-            background: rgba(0, 212, 255, 0.2);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-left: auto;
-        }
-        
-        .content-area { flex: 1; min-width: 0; }
-        .category-block {
-            margin-bottom: 50px;
-            scroll-margin-top: 85px;
-            transition: opacity 0.3s;
-        }
-        .category-header {
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-        }
-        .category-title { 
-            font-size: 22px; 
-            font-weight: 700; 
-            color: #00d4ff; 
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .category-title span { font-size: 24px; }
-        .subcategory-bar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        .subcategory-btn {
-            background: none;
-            border: none;
-            padding: 6px 16px;
-            font-size: 14px;
-            color: #a0a0b0;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: all 0.2s;
-        }
-        .subcategory-btn:hover { background: rgba(0,212,255,0.12); color: #00d4ff; }
-        .subcategory-btn.active { background: linear-gradient(135deg, #00d4ff, #a855f7); color: white; }
-        .more-btn {
-            background: none;
-            border: none;
-            padding: 6px 12px;
-            font-size: 13px;
-            color: #606070;
-            cursor: pointer;
-            border-radius: 20px;
-            margin-left: auto;
-        }
-        .more-btn:hover { color: #00d4ff; }
-
-        /* 卡片样式 */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-        }
-        
-        .tool-card {
-            background: rgba(18, 18, 32, 0.75);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.25);
-            padding: 18px 14px 14px 14px;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            cursor: pointer;
-            position: relative;
-            text-align: center;
-        }
-        .tool-card:hover {
-            transform: translateY(-4px);
-            border-color: #00d4ff;
-            box-shadow: 0 15px 25px -10px rgba(0, 212, 255, 0.2);
-            background: rgba(22, 22, 38, 0.85);
-        }
-        
-        .tool-icon {
-            width: 72px;
-            height: 54px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px auto;
-            font-size: 28px;
-            transition: all 0.3s;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-        .tool-card:hover .tool-icon {
-            transform: scale(1.02);
-            border-color: #00d4ff;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-        }
-        
-        .tool-name {
-            font-size: 18px;
-            font-weight: 700;
-            color: #e0e0e0;
-            margin-bottom: 6px;
-            letter-spacing: -0.2px;
-        }
-        
-        .tool-desc {
-            font-size: 13px;
-            color: #a0a0b0;
-            line-height: 1.45;
-            margin-bottom: 10px;
-            padding: 0 6px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            min-height: 36px;
-        }
-        
-        .tool-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        .tool-tag {
-            background: rgba(0, 212, 255, 0.12);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            color: #80d4ff;
-            font-weight: 500;
-        }
-        
-        .tool-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: #606080;
-            border-top: 1px solid rgba(0, 212, 255, 0.12);
-            padding-top: 10px;
-            margin-top: 4px;
-        }
-        .tool-link {
-            color: #00d4ff;
-            font-weight: 500;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-            font-size: 12px;
-        }
-        .tool-card:hover .tool-link { opacity: 1; }
-        
-        .favorite-btn {
+        .user-bar {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.4);
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            opacity: 0.5;
-            color: #ffd700;
-            width: 30px;
-            height: 30px;
+            top: 20px;
+            right: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .favorite-btn:hover, .favorite-btn.active { 
-            opacity: 1; 
-            background: rgba(0, 0, 0, 0.6);
-            transform: scale(1.05);
-        }
-        
-        .free-badge {
-            display: inline-block;
-            font-size: 10px;
-            padding: 2px 10px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(168,85,247,0.2));
-            color: #00d4ff;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        /* 收藏页面样式 */
-        .favorites-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-        }
-        .favorites-header h2 {
-            color: #00d4ff;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .fav-actions {
-            display: flex;
-            gap: 10px;
-        }
-        .fav-action-btn {
-            background: rgba(0, 212, 255, 0.1);
+        .user-avatar:hover { transform: scale(1.08); box-shadow: 0 0 20px rgba(0,212,255,0.5); }
+        .login-btn {
+            background: rgba(0, 212, 255, 0.12);
             border: 1px solid rgba(0, 212, 255, 0.3);
             padding: 8px 18px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
-            transition: all 0.2s;
-            color: #a0a0b0;
+            transition: all 0.3s;
         }
-        .fav-action-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-            transform: translateY(-1px);
-        }
-        .fav-category-filter {
+        .login-btn:hover { background: rgba(0, 212, 255, 0.25); transform: translateY(-2px); }
+        
+        .hero-search-section { max-width: 650px; margin: 15px auto; }
+        .hero-search-box {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            align-items: center;
+            background: rgba(15, 15, 25, 0.85);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 60px;
+            padding: 8px 8px 8px 24px;
+            transition: all 0.3s;
         }
-        .fav-cat-btn {
-            background: none;
-            border: none;
-            padding: 6px 18px;
-            font-size: 14px;
-            color: #a0a0b0;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: all 0.2s;
+        .hero-search-box:focus-within { border-color: #00d4ff; box-shadow: 0 0 25px rgba(0,212,255,0.25); }
+        .hero-search-icon { font-size: 20px; color: #00d4ff; margin-right: 12px; }
+        .hero-search-input { flex: 1; background: none; border: none; color: #e0e0e0; font-size: 15px; outline: none; padding: 12px 0; }
+        .hero-search-clear {
+            background: none; border: none; color: #606080; cursor: pointer; font-size: 18px; padding: 0 10px; display: none;
         }
-        .fav-cat-btn:hover, .fav-cat-btn.active {
-            background: rgba(0, 212, 255, 0.2);
-            color: #00d4ff;
-        }
-        .empty-fav {
-            text-align: center;
-            padding: 60px 20px;
-            color: #606080;
-        }
-        .empty-fav .empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.5; }
-        .back-to-home {
-            display: inline-block;
-            margin-top: 20px;
+        .hero-search-clear:hover { color: #00d4ff; }
+        .hero-search-btn {
             background: linear-gradient(135deg, #00d4ff, #a855f7);
-            padding: 10px 28px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 14px;
+            border: none; border-radius: 50px; padding: 8px 24px;
+            color: white; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s;
+        }
+        .hero-search-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .search-stats { text-align: center; font-size: 13px; color: #606080; margin-top: 10px; display: none; }
+        .search-history { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .history-tag {
+            background: rgba(0, 212, 255, 0.08); padding: 5px 14px; border-radius: 20px;
+            font-size: 12px; cursor: pointer; transition: all 0.2s; color: #a0a0b0;
+        }
+        .history-tag:hover { background: rgba(0,212,255,0.2); color: #00d4ff; transform: translateY(-2px); }
+        .hero-search-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 12px; font-size: 13px; }
+        .hero-search-tags a { color: #a0a0b0; cursor: pointer; padding: 5px 14px; border-radius: 20px; background: rgba(0,212,255,0.08); text-decoration: none; transition: all 0.2s; font-size: 13px; }
+        .hero-search-tags a:hover { background: rgba(0,212,255,0.2); color: #00d4ff; transform: translateY(-2px); }
+        
+        .quick-nav { display: flex; justify-content: center; gap: 20px; margin: 15px 0; flex-wrap: wrap; }
+        .quick-nav-item {
+            display: flex; align-items: center; gap: 8px; padding: 8px 18px;
+            background: rgba(0, 212, 255, 0.08); border-radius: 40px; cursor: pointer;
+            border: 1px solid rgba(0, 212, 255, 0.2); font-size: 13px; transition: all 0.3s;
+        }
+        .quick-nav-item:hover { background: rgba(0, 212, 255, 0.2); transform: translateY(-3px); }
+        
+        .daily-card {
+            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(168,85,247,0.08));
+            border-radius: 20px; padding: 24px; margin: 20px 0; border: 1px solid rgba(0,212,255,0.2);
+            position: relative; overflow: hidden;
+        }
+        .daily-card::before {
+            content: "✨ 今日推荐";
+            position: absolute; top: 0; left: 0;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            padding: 6px 18px; font-size: 12px; border-radius: 0 0 12px 0; font-weight: 600;
+        }
+        .daily-content { margin-top: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+        .daily-icon { font-size: 56px; }
+        .daily-info { flex: 1; }
+        .daily-name { font-size: 24px; font-weight: 700; color: #00d4ff; margin-bottom: 10px; }
+        .daily-desc { color: #a0a0b0; font-size: 14px; margin-bottom: 14px; line-height: 1.5; }
+        .daily-btn {
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            border: none; border-radius: 30px; padding: 10px 28px;
+            color: white; font-size: 14px; cursor: pointer; transition: all 0.3s;
+        }
+        .daily-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,212,255,0.3); }
+        
+        .filter-bar {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            gap: 15px; margin-bottom: 25px; padding: 15px 20px;
+            background: rgba(15, 15, 25, 0.4); backdrop-filter: blur(12px);
+            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+        .filter-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .filter-label { font-size: 14px; color: #a0a0b0; }
+        .filter-btn {
+            background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 7px 18px; border-radius: 30px; font-size: 13px; cursor: pointer;
+            transition: all 0.2s; color: #c0c0d0;
+        }
+        .filter-btn:hover { background: rgba(0,212,255,0.2); color: #00d4ff; transform: translateY(-1px); }
+        .filter-btn.active {
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            color: white; border-color: transparent;
+        }
+        .view-toggle {
+            display: flex; gap: 4px; background: rgba(0, 212, 255, 0.08);
+            border-radius: 30px; padding: 4px;
+        }
+        .view-btn {
+            background: none; border: none; padding: 6px 16px; border-radius: 30px;
+            font-size: 13px; cursor: pointer; color: #a0a0b0; transition: all 0.2s;
+        }
+        .view-btn.active { background: rgba(0,212,255,0.25); color: #00d4ff; }
+        
+        .featured-section { margin: 20px 0; }
+        .featured-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 18px; font-weight: 600; color: #00d4ff; }
+        .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .featured-card {
+            background: rgba(15, 15, 25, 0.5); backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 16px;
+            padding: 16px; cursor: pointer; transition: all 0.3s;
+        }
+        .featured-card:hover { transform: translateY(-4px); border-color: #00d4ff; }
+        .featured-name { font-size: 16px; font-weight: 700; display: flex; justify-content: space-between; }
+        .featured-hot { font-size: 12px; color: #ff6b6b; background: rgba(255,107,107,0.15); padding: 3px 8px; border-radius: 20px; }
+        .featured-desc { font-size: 13px; color: #9090a0; margin-top: 8px; line-height: 1.4; }
+        .tip-banner {
+            background: linear-gradient(90deg, rgba(0,212,255,0.08), rgba(168,85,247,0.08), rgba(0,212,255,0.08));
+            border-radius: 12px; padding: 12px 20px; margin: 20px 0 0;
+            text-align: center; font-size: 14px; color: #a0a0b0; border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+        .tip-banner a { color: #00d4ff; cursor: pointer; font-size: 14px; }
+        .main-container {
+            max-width: 1600px; margin: 0 auto; padding: 0 32px 30px;
+            display: flex; gap: 25px; position: relative; z-index: 1;
+        }
+        .sidebar {
+            width: 250px; flex-shrink: 0; position: sticky; top: 85px;
+            height: calc(100vh - 110px); overflow-y: auto;
+            background: rgba(15, 15, 25, 0.4); backdrop-filter: blur(12px);
+            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15); padding: 15px 0;
+        }
+        .sidebar-item {
+            padding: 12px 24px; font-size: 14px; color: #c0c0d0; cursor: pointer;
+            transition: all 0.3s; display: flex; align-items: center; gap: 12px;
+            border-radius: 12px; margin: 3px 10px;
+        }
+        .sidebar-item:hover { background: rgba(0,212,255,0.12); color: #00d4ff; padding-left: 28px; transform: translateX(4px); }
+        .sidebar-fav-section { border-top: 1px solid rgba(0, 212, 255, 0.15); margin-top: 12px; padding-top: 12px; }
+        .fav-count { background: rgba(0, 212, 255, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 12px; margin-left: auto; }
+        
+        .content-area { flex: 1; min-width: 0; }
+        .category-block { margin-bottom: 50px; scroll-margin-top: 85px; }
+        .category-header { margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid rgba(0, 212, 255, 0.2); }
+        .category-title { font-size: 20px; font-weight: 700; color: #00d4ff; display: flex; align-items: center; gap: 8px; }
+        .subcategory-bar {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+            margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 212, 255, 0.12);
+        }
+        .subcategory-btn {
+            background: none; border: none; padding: 6px 16px;
+            font-size: 13px; color: #a0a0b0; cursor: pointer; border-radius: 20px; transition: all 0.2s;
+        }
+        .subcategory-btn:hover { background: rgba(0,212,255,0.12); color: #00d4ff; }
+        .subcategory-btn.active { background: linear-gradient(135deg, #00d4ff, #a855f7); color: white; }
+        .more-btn {
+            background: none; border: none; padding: 6px 14px; font-size: 12px;
+            color: #606070; cursor: pointer; border-radius: 20px; margin-left: auto;
+        }
+        .more-btn:hover { color: #00d4ff; transform: translateX(3px); }
+
+        .tools-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .tools-grid.list-view {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .tools-grid.list-view .tool-card {
+            display: flex; align-items: center; text-align: left; padding: 16px 20px; gap: 20px;
+        }
+        .tools-grid.list-view .tool-icon { margin: 0; width: 56px; height: 56px; flex-shrink: 0; font-size: 28px; }
+        .tools-grid.list-view .tool-info { flex: 1; text-align: left; }
+        .tools-grid.list-view .tool-footer { flex-shrink: 0; border-top: none; padding-top: 0; min-width: 130px; }
+        .tools-grid.list-view .favorite-btn { position: relative; top: 0; right: 0; margin-left: 10px; }
+        
+        .tool-card {
+            background: rgba(18, 18, 32, 0.65); backdrop-filter: blur(12px);
+            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 20px 16px 16px 16px; transition: all 0.35s;
+            cursor: pointer; position: relative; text-align: center;
+            opacity: 0; transform: translateY(20px); animation: fadeInUp 0.4s ease forwards;
+        }
+        .tool-card:hover { transform: translateY(-6px); border-color: #00d4ff; box-shadow: 0 20px 30px -12px rgba(0, 212, 255, 0.25); background: rgba(28, 28, 48, 0.85); }
+        .tool-icon {
+            width: 72px; height: 56px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+            border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 14px auto; font-size: 28px; transition: all 0.3s; border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        .tool-card:hover .tool-icon { transform: scale(1.05); border-color: #00d4ff; }
+        .tool-name { font-size: 18px; font-weight: 700; color: #e0e0e0; margin-bottom: 6px; }
+        .tool-desc { font-size: 13px; color: #a0a0b0; line-height: 1.45; margin-bottom: 12px; padding: 0 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 38px; }
+        .tool-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .tool-tag { background: rgba(0, 212, 255, 0.1); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #80d4ff; }
+        .tool-footer { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #606080; border-top: 1px solid rgba(0, 212, 255, 0.1); padding-top: 10px; margin-top: 6px; }
+        .tool-link { color: #00d4ff; font-weight: 500; opacity: 0.7; transition: all 0.2s; font-size: 12px; }
+        .tool-card:hover .tool-link { opacity: 1; transform: translateX(3px); }
+        
+        .favorite-btn {
+            position: absolute; top: 14px; right: 14px;
+            background: rgba(0, 0, 0, 0.5); border: none; font-size: 16px;
+            cursor: pointer; opacity: 0.5; color: #ffd700;
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 2;
+        }
+        .favorite-btn:hover, .favorite-btn.active { opacity: 1; transform: scale(1.1); }
+        .free-badge {
+            display: inline-block; font-size: 10px; padding: 3px 10px;
+            border-radius: 20px; background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(168,85,247,0.2));
+            color: #00d4ff; margin-left: 8px; vertical-align: middle;
         }
 
-        /* ==================== 统计面板 - 精简数字版 ==================== */
+        .favorites-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 25px; padding-bottom: 18px; border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+        }
+        .favorites-header h2 { color: #00d4ff; font-size: 24px; display: flex; align-items: center; gap: 12px; }
+        .fav-actions { display: flex; gap: 12px; }
+        .fav-action-btn {
+            background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 8px 18px; border-radius: 30px; font-size: 13px; cursor: pointer; transition: all 0.2s; color: #a0a0b0;
+        }
+        .fav-action-btn:hover { background: rgba(0,212,255,0.18); color: #00d4ff; transform: translateY(-2px); }
+        .fav-category-filter {
+            display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 212, 255, 0.12);
+        }
+        .fav-cat-btn {
+            background: none; border: none; padding: 6px 18px; font-size: 14px;
+            color: #a0a0b0; cursor: pointer; border-radius: 20px; transition: all 0.2s;
+        }
+        .fav-cat-btn:hover, .fav-cat-btn.active { background: rgba(0,212,255,0.15); color: #00d4ff; }
+        .empty-fav { text-align: center; padding: 80px 20px; color: #606080; font-size: 16px; }
+        .back-to-home {
+            display: inline-block; margin-top: 24px;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            padding: 10px 28px; border-radius: 30px; cursor: pointer; font-size: 14px; transition: all 0.3s;
+        }
+        
         .stats-panel {
-            background: rgba(15, 15, 25, 0.5);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            margin-bottom: 25px;
-            overflow: hidden;
+            background: rgba(15, 15, 25, 0.4); backdrop-filter: blur(12px);
+            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+            margin-bottom: 25px; overflow: hidden;
         }
         .stats-tabs {
-            display: flex;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex; border-bottom: 1px solid rgba(0, 212, 255, 0.12);
             background: rgba(0, 0, 0, 0.2);
         }
         .stats-tab {
-            padding: 12px 20px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #a0a0b0;
-            border-bottom: 2px solid transparent;
+            padding: 12px 22px; font-size: 14px; cursor: pointer; transition: all 0.2s;
+            color: #a0a0b0; border-bottom: 2px solid transparent;
         }
         .stats-tab:hover { color: #00d4ff; }
-        .stats-tab.active {
-            color: #00d4ff;
-            border-bottom-color: #00d4ff;
-        }
-        .stats-content {
-            padding: 20px;
-        }
-        
-        /* 精简数字样式 - 去除柱状图 */
+        .stats-tab.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+        .stats-content { padding: 18px 22px; }
         .trend-simple {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
+            display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
         }
         .trend-day {
-            text-align: center;
-            flex: 1;
-            min-width: 70px;
-            padding: 12px 8px;
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 12px;
-            transition: all 0.2s;
+            text-align: center; flex: 1; min-width: 65px;
+            padding: 10px 8px; background: rgba(0, 212, 255, 0.05); border-radius: 12px;
         }
-        .trend-day:hover {
-            background: rgba(0, 212, 255, 0.12);
-            transform: translateY(-2px);
-        }
-        .trend-day-name { 
-            font-size: 14px; 
-            color: #a0a0b0; 
-            margin-bottom: 6px;
-        }
-        .trend-day-value { 
-            font-size: 18px; 
-            font-weight: 700; 
-            color: #00d4ff; 
-        }
-        
-        .category-simple {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+        .trend-day-name { font-size: 13px; color: #a0a0b0; }
+        .trend-day-value { font-size: 15px; font-weight: 600; color: #00d4ff; }
+        .category-simple { display: flex; flex-wrap: wrap; gap: 12px; }
         .category-simple-item {
-            background: rgba(0, 212, 255, 0.08);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background: rgba(0, 212, 255, 0.08); padding: 8px 18px;
+            border-radius: 30px; font-size: 13px; display: flex; align-items: center; gap: 10px;
         }
-        .category-simple-count {
-            background: rgba(0, 212, 255, 0.2);
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #00d4ff;
-        }
-        
-        .price-simple {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .price-simple-item {
-            text-align: center;
-            padding: 12px 18px;
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 16px;
-            min-width: 100px;
-        }
-        .price-simple-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #00d4ff;
-        }
-        .price-simple-label {
-            font-size: 13px;
-            color: #8080a0;
-            margin-top: 6px;
-        }
-        
-        .tags-simple {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .price-simple { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+        .price-simple-item { text-align: center; padding: 10px 16px; background: rgba(0,212,255,0.05); border-radius: 16px; min-width: 100px; }
+        .price-simple-value { font-size: 24px; font-weight: 700; color: #00d4ff; }
+        .price-simple-label { font-size: 12px; color: #8080a0; margin-top: 5px; }
+        .tags-simple { display: flex; flex-wrap: wrap; gap: 10px; }
         .tags-simple-item {
-            background: rgba(0, 212, 255, 0.08);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
+            background: rgba(0, 212, 255, 0.08); padding: 8px 18px;
+            border-radius: 30px; font-size: 13px; cursor: pointer; transition: all 0.2s;
         }
-        .tags-simple-item:hover {
-            background: rgba(0, 212, 255, 0.2);
-            transform: scale(1.02);
-        }
-        
+        .tags-simple-item:hover { background: rgba(0,212,255,0.2); transform: scale(1.03); }
+
         .right-sidebar {
-            width: 280px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 85px;
-            height: calc(100vh - 110px);
-            overflow-y: auto;
+            width: 300px; flex-shrink: 0; position: sticky; top: 85px; height: calc(100vh - 110px); overflow-y: auto;
         }
         .widget {
-            background: rgba(15, 15, 25, 0.5);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 14px;
-            margin-bottom: 18px;
+            background: rgba(15, 15, 25, 0.4); backdrop-filter: blur(12px);
+            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 18px; margin-bottom: 20px;
         }
-        .widget-title { font-size: 15px; font-weight: 600; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(0,212,255,0.3); display: flex; justify-content: space-between; color: #00d4ff; }
-        .rank-tabs { display: flex; gap: 6px; }
-        .rank-tab { font-size: 12px; padding: 3px 10px; border-radius: 20px; cursor: pointer; background: rgba(0,212,255,0.1); }
+        .widget-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,212,255,0.15); display: flex; justify-content: space-between; color: #00d4ff; }
+        .rank-tabs { display: flex; gap: 8px; }
+        .rank-tab { font-size: 12px; padding: 4px 12px; border-radius: 20px; cursor: pointer; background: rgba(0,212,255,0.08); }
         .rank-tab.active { background: linear-gradient(135deg, #00d4ff, #a855f7); color: white; }
-        .rank-item { display: flex; justify-content: space-between; padding: 8px 0; cursor: pointer; font-size: 13px; border-bottom: 1px solid rgba(0,212,255,0.1); }
-        .rank-number { width: 28px; color: #00d4ff; font-weight: 600; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; text-align: center; }
-        .stat-card { background: rgba(0,212,255,0.08); border-radius: 10px; padding: 12px; }
+        .rank-item { display: flex; justify-content: space-between; padding: 10px 0; cursor: pointer; font-size: 14px; border-bottom: 1px solid rgba(0,212,255,0.08); }
+        .rank-item:hover { background: rgba(0,212,255,0.08); padding-left: 8px; transform: translateX(3px); }
+        .rank-number { width: 32px; color: #00d4ff; font-weight: 600; }
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: center; }
+        .stat-card { background: rgba(0,212,255,0.06); border-radius: 14px; padding: 14px; transition: all 0.2s; }
+        .stat-card:hover { background: rgba(0,212,255,0.12); transform: translateY(-2px); }
         .stat-number { font-size: 26px; font-weight: 800; color: #00d4ff; }
-        .stat-label { font-size: 12px; color: #a0a0b0; margin-top: 3px; }
-        .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-        .tag { background: rgba(0,212,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
-        .tag:hover { background: rgba(0,212,255,0.25); transform: translateY(-1px); }
+        .stat-label { font-size: 12px; color: #a0a0b0; margin-top: 5px; }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .tag { background: rgba(0,212,255,0.08); padding: 6px 14px; border-radius: 30px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+        .tag:hover { background: rgba(0,212,255,0.2); transform: translateY(-2px); }
         
-        /* 页脚样式 */
         .footer {
-            position: relative;
-            z-index: 2;
-            background: rgba(10, 10, 20, 0.85);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(0, 212, 255, 0.3);
-            margin-top: 40px;
-            padding: 40px 32px 25px;
+            position: relative; z-index: 2; background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(12px); border-top: 1px solid rgba(0, 212, 255, 0.15);
+            margin-top: 50px; padding: 45px 32px 30px;
         }
-        .footer-container {
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-        .footer-about {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
+        .footer-container { max-width: 1600px; margin: 0 auto; }
+        .footer-about { text-align: center; margin-bottom: 35px; padding-bottom: 25px; border-bottom: 1px solid rgba(0, 212, 255, 0.12); }
         .footer-logo {
-            font-size: 28px;
-            font-weight: 700;
+            font-size: 28px; font-weight: 700;
             background: linear-gradient(135deg, #00d4ff, #a855f7);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 12px;
+            background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 15px;
         }
-        .footer-desc {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 15px;
-            color: #a0a0b0;
-            line-height: 1.6;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 24px;
-            margin-bottom: 30px;
-        }
-        .footer-links a {
-            color: #c0c0d0;
-            text-decoration: none;
-            font-size: 15px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .footer-links a:hover {
-            color: #00d4ff;
-            transform: translateY(-1px);
-        }
-        .footer-friends {
-            margin-bottom: 30px;
-            padding: 20px 0;
-            border-top: 1px solid rgba(0, 212, 255, 0.15);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
-        }
-        .friends-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #00d4ff;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .friends-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .friends-list a {
-            color: #9090a0;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .friends-list a:hover {
-            color: #00d4ff;
-        }
-        .footer-copyright {
-            text-align: center;
-            font-size: 13px;
-            color: #606080;
-            line-height: 1.6;
-        }
+        .footer-desc { max-width: 800px; margin: 0 auto; font-size: 14px; color: #a0a0b0; line-height: 1.6; }
+        .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-bottom: 35px; }
+        .footer-links a { color: #c0c0d0; text-decoration: none; font-size: 14px; transition: all 0.2s; cursor: pointer; }
+        .footer-links a:hover { color: #00d4ff; transform: translateY(-2px); }
+        .footer-friends { margin-bottom: 35px; padding: 25px 0; border-top: 1px solid rgba(0, 212, 255, 0.1); border-bottom: 1px solid rgba(0, 212, 255, 0.1); }
+        .friends-title { font-size: 15px; font-weight: 600; color: #00d4ff; margin-bottom: 18px; text-align: center; }
+        .friends-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+        .friends-list a { color: #9090a0; text-decoration: none; font-size: 13px; transition: all 0.2s; cursor: pointer; }
+        .friends-list a:hover { color: #00d4ff; transform: translateY(-2px); }
+        .footer-copyright { text-align: center; font-size: 12px; color: #606080; line-height: 1.6; }
         
-        /* 详情弹窗样式 */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+            z-index: 2000; align-items: center; justify-content: center;
         }
         .modal.active { display: flex; }
         .modal-content {
-            background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
-            border-radius: 24px;
-            max-width: 580px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 1px solid #00d4ff;
+            background: linear-gradient(135deg, #141428, #0a0a18);
+            border-radius: 28px; max-width: 700px; width: 90%; max-height: 85vh;
+            overflow-y: auto; border: 1px solid rgba(0, 212, 255, 0.3);
         }
-        .modal-header { padding: 14px 18px; border-bottom: 1px solid rgba(0,212,255,0.3); display: flex; justify-content: space-between; }
+        .modal-header { padding: 18px 24px; border-bottom: 1px solid rgba(0,212,255,0.15); display: flex; justify-content: space-between; }
         .modal-header h3 { color: #00d4ff; font-size: 20px; }
-        .modal-body { padding: 20px; }
-        .close-modal { background: none; border: none; font-size: 24px; color: #9090a0; cursor: pointer; }
-        .detail-link { display: inline-block; background: linear-gradient(135deg, #00d4ff, #a855f7); padding: 10px 24px; border-radius: 30px; color: white; text-decoration: none; margin-top: 16px; font-size: 14px; }
-        
-        .detail-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-        }
-        .detail-icon {
-            width: 72px;
-            height: 72px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-        .detail-title-section { flex: 1; }
-        .detail-title-section h2 { font-size: 26px; color: #00d4ff; margin-bottom: 6px; }
-        .detail-meta { display: flex; gap: 20px; font-size: 14px; color: #8080a0; }
-        .detail-stats {
-            display: flex;
-            gap: 24px;
-            background: rgba(0, 212, 255, 0.08);
-            border-radius: 16px;
-            padding: 14px 18px;
-            margin-bottom: 20px;
-        }
-        .detail-stat { text-align: center; flex: 1; }
-        .detail-stat-value { font-size: 24px; font-weight: 700; color: #00d4ff; }
-        .detail-stat-label { font-size: 12px; color: #8080a0; margin-top: 4px; }
-        .detail-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-        .detail-tag { background: rgba(0, 212, 255, 0.12); padding: 6px 16px; border-radius: 30px; font-size: 13px; color: #80d4ff; }
-        .detail-buttons { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
-        .detail-btn { padding: 10px 24px; border-radius: 40px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .modal-body { padding: 24px; }
+        .close-modal { background: none; border: none; font-size: 24px; color: #9090a0; cursor: pointer; transition: all 0.2s; }
+        .close-modal:hover { color: #ff6b6b; transform: rotate(90deg); }
+        .detail-btn { padding: 10px 24px; border-radius: 40px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
         .detail-btn-primary { background: linear-gradient(135deg, #00d4ff, #a855f7); color: white; border: none; }
-        .detail-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3); }
-        .detail-btn-secondary { background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3); color: #00d4ff; }
-        .detail-btn-secondary:hover { background: rgba(0, 212, 255, 0.2); transform: translateY(-2px); }
-        .rating-stars { display: flex; align-items: center; gap: 4px; cursor: pointer; }
-        .star { font-size: 22px; color: #606080; transition: all 0.1s; cursor: pointer; }
-        .star.active { color: #ffd700; }
-        .star:hover { transform: scale(1.1); }
-        .similar-section { margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(0, 212, 255, 0.2); }
-        .similar-title { font-size: 15px; font-weight: 600; color: #00d4ff; margin-bottom: 12px; }
-        .similar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-        .similar-item { background: rgba(0, 212, 255, 0.05); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: all 0.2s; text-align: center; }
-        .similar-item:hover { background: rgba(0, 212, 255, 0.15); transform: translateY(-2px); }
-        .similar-item-icon { font-size: 24px; margin-bottom: 6px; }
-        .similar-item-name { font-size: 13px; font-weight: 500; color: #e0e0e0; }
+        .detail-btn-secondary { background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.25); color: #00d4ff; }
         
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            position: fixed; bottom: 30px; right: 30px;
             background: linear-gradient(135deg, #00d4ff, #a855f7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            z-index: 1000;
-            animation: fadeOut 2s ease;
+            color: white; padding: 12px 24px; border-radius: 40px;
+            font-size: 14px; z-index: 1000;
+            animation: slideInToast 0.3s ease, fadeOutToast 0.3s ease 1.7s forwards;
         }
-        @keyframes fadeOut {
-            0% { opacity: 0; transform: translateY(20px); }
-            15% { opacity: 1; transform: translateY(0); }
-            85% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
+        @keyframes slideInToast { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOutToast { to { opacity: 0; transform: translateX(100px); } }
+        
+        .comments-section { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(0,212,255,0.12); }
+        .comments-title { font-size: 15px; font-weight: 600; color: #00d4ff; margin-bottom: 15px; }
+        .comment-input { display: flex; gap: 15px; margin-bottom: 20px; }
+        .comment-input textarea { flex: 1; background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; padding: 14px; color: #e0e0e0; font-size: 14px; resize: vertical; font-family: inherit; outline: none; }
+        .comment-input textarea:focus { border-color: #00d4ff; }
+        .comment-btn { background: linear-gradient(135deg, #00d4ff, #a855f7); border: none; border-radius: 30px; padding: 0 24px; color: white; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+        .comment-list { max-height: 300px; overflow-y: auto; }
+        .comment-item { background: rgba(0,212,255,0.03); border-radius: 12px; padding: 12px 15px; margin-bottom: 12px; }
+        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
+        .comment-author { color: #00d4ff; font-weight: 600; font-size: 13px; }
+        .comment-time { color: #606080; font-size: 11px; }
+        .comment-text { font-size: 14px; color: #c0c0d0; line-height: 1.4; }
+        
         @media (max-width: 1200px) { .right-sidebar { display: none; } }
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .hero-container { padding: 16px; }
             .hero-title h1 { font-size: 2rem; }
-            .tools-grid { grid-template-columns: 1fr; gap: 12px; }
+            .tools-grid { grid-template-columns: 1fr; gap: 15px; }
             .main-container { padding: 0 16px 16px; }
-            .tool-icon { width: 60px; height: 45px; font-size: 22px; border-radius: 12px; }
-            .tool-name { font-size: 16px; }
-            .tool-card { padding: 14px 10px 10px 10px; }
-            .hero-search-section { max-width: 100%; }
-            .fav-actions { flex-wrap: wrap; }
-            .footer { padding: 30px 16px 20px; }
+            .lang-switch { right: 100px; top: 12px; }
+            .user-bar { right: 16px; top: 12px; }
+            .user-name { display: none; }
+            .daily-content { flex-direction: column; text-align: center; }
             .filter-bar { flex-direction: column; align-items: stretch; }
             .filter-group { justify-content: center; }
+            .tool-icon { width: 64px; height: 50px; font-size: 24px; }
+            .tool-name { font-size: 16px; }
+            .category-title { font-size: 18px; }
+            .subcategory-btn { font-size: 11px; padding: 4px 12px; }
         }
     </style>
 </head>
@@ -969,21 +536,27 @@
 <div class="content-wrapper">
     <div class="hero-section">
         <div class="hero-container">
-            <div class="hero-title">
-                <h1>✨ 灵犀AI导航</h1>
-                <p>发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广</p>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">English</button>
             </div>
+            <div class="hero-title">
+                <h1 data-i18n="site_title">✨ 灵犀AI导航</h1>
+                <p data-i18n="site_desc">发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广</p>
+            </div>
+            <div class="user-bar" id="userBar"></div>
+            
             <div class="hero-search-section">
                 <div class="hero-search-box">
                     <span class="hero-search-icon">🔍</span>
                     <input type="text" class="hero-search-input" id="heroSearchInput" placeholder="输入关键字搜索工具..." onkeyup="handleSearchInput()">
                     <button class="hero-search-clear" id="clearSearchBtn" onclick="clearSearch()">✕</button>
-                    <button class="hero-search-btn" onclick="performSearch()">搜索</button>
+                    <button class="hero-search-btn" onclick="performSearch()" data-i18n="search_btn">搜索</button>
                 </div>
                 <div class="search-stats" id="searchStats"></div>
                 <div class="search-history" id="searchHistory"></div>
                 <div class="hero-search-tags">
-                    <span>热门搜索：</span>
+                    <span data-i18n="hot_search">热门搜索：</span>
                     <a onclick="searchByKeyword('DeepSeek')">DeepSeek</a>
                     <a onclick="searchByKeyword('文心一言')">文心一言</a>
                     <a onclick="searchByKeyword('Kimi')">Kimi</a>
@@ -992,19 +565,19 @@
                 </div>
             </div>
             <div class="quick-nav">
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-model')"><span>🔥</span> AI大模型</div>
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-writing')"><span>✍️</span> AI写作</div>
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-video')"><span>🎬</span> AI视频</div>
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-image')"><span>🎨</span> AI图像</div>
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-office')"><span>💼</span> AI办公</div>
-                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-code')"><span>💻</span> AI编程</div>
-                <div class="quick-nav-item" onclick="showSubmitTip()"><span>📢</span> 立即上榜</div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-model')"><span>🔥</span> <span data-i18n="nav_model">AI大模型</span></div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-writing')"><span>✍️</span> <span data-i18n="nav_writing">AI写作</span></div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-video')"><span>🎬</span> <span data-i18n="nav_video">AI视频</span></div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-image')"><span>🎨</span> <span data-i18n="nav_image">AI图像</span></div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-office')"><span>💼</span> <span data-i18n="nav_office">AI办公</span></div>
+                <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-code')"><span>💻</span> <span data-i18n="nav_code">AI编程</span></div>
+                <div class="quick-nav-item" onclick="showSubmitTip()"><span>📢</span> <span data-i18n="nav_submit">立即上榜</span></div>
             </div>
             <div class="featured-section" id="featuredSection">
-                <div class="featured-title"><span>🔥</span> 精选推荐 · 热度飙升</div>
+                <div class="featured-title"><span>🔥</span> <span data-i18n="featured_title">精选推荐 · 热度飙升</span></div>
                 <div class="featured-grid" id="featuredGrid"></div>
             </div>
-            <div class="tip-banner">💡 欢迎投稿和提交AI应用，<a onclick="showSubmitTip()">灵犀AI导航将免费提供推广曝光！</a></div>
+            <div class="tip-banner">💡 <span data-i18n="tip_banner">欢迎投稿和提交AI应用</span>，<a onclick="showSubmitTip()"><span data-i18n="tip_link">灵犀AI导航将免费提供推广曝光！</span></a></div>
         </div>
     </div>
 
@@ -1013,38 +586,34 @@
         <main class="content-area" id="contentArea"></main>
         <aside class="right-sidebar">
             <div class="widget">
-                <div class="widget-title">📊 数据看板</div>
+                <div class="widget-title"><span data-i18n="dashboard">📊 数据看板</span></div>
                 <div class="stats-grid" id="statsGrid"></div>
             </div>
             <div class="widget">
-                <div class="widget-title"><span>🔥 热门工具榜</span><div class="rank-tabs" id="rankTabs"><span class="rank-tab active" data-rank="day">日榜</span><span class="rank-tab" data-rank="week">周榜</span><span class="rank-tab" data-rank="month">月榜</span></div></div>
+                <div class="widget-title"><span data-i18n="hot_rank">🔥 热门工具榜</span><div class="rank-tabs" id="rankTabs"><span class="rank-tab active" data-rank="day" data-i18n="day_rank">日榜</span><span class="rank-tab" data-rank="week" data-i18n="week_rank">周榜</span><span class="rank-tab" data-rank="month" data-i18n="month_rank">月榜</span></div></div>
                 <div id="rankList"></div>
             </div>
-            <div class="widget"><div class="widget-title">📰 热点资讯</div><div id="hotNewsList"></div></div>
-            <div class="widget"><div class="widget-title">🏷️ 热门标签</div><div class="tag-cloud" id="tagCloud"></div></div>
+            <div class="widget"><div class="widget-title"><span data-i18n="hot_news">📰 热点资讯</span></div><div id="hotNewsList"></div></div>
+            <div class="widget"><div class="widget-title"><span data-i18n="hot_tags">🏷️ 热门标签</span></div><div class="tag-cloud" id="tagCloud"></div></div>
         </aside>
     </div>
 </div>
 
-<!-- 页脚区域 -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-about">
             <div class="footer-logo">✨ 灵犀AI导航</div>
-            <div class="footer-desc">
-                灵犀AI导航—全球专业的AI工具榜单、AI工具导航平台，是AI导航领域用户信赖的平台，覆盖100+细分领域1500+AI工具！<br>
-                严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！
-            </div>
+            <div class="footer-desc" data-i18n="footer_desc">灵犀AI导航—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！</div>
         </div>
         <div class="footer-links">
-            <a onclick="showSubmitTip()">📝 AI工具提交入口</a>
-            <a onclick="showFriendlyLink()">🔗 友链申请</a>
-            <a onclick="showDisclaimer()">⚖️ 免责声明</a>
-            <a onclick="showAdvertise()">📢 广告合作</a>
-            <a onclick="showAbout()">ℹ️ 关于我们</a>
+            <a onclick="showSubmitTip()"><span data-i18n="footer_submit">📝 AI工具提交入口</span></a>
+            <a onclick="showFriendlyLink()"><span data-i18n="footer_link">🔗 友链申请</span></a>
+            <a onclick="showDisclaimer()"><span data-i18n="footer_disclaimer">⚖️ 免责声明</span></a>
+            <a onclick="showAdvertise()"><span data-i18n="footer_ad">📢 广告合作</span></a>
+            <a onclick="showAbout()"><span data-i18n="footer_about">ℹ️ 关于我们</span></a>
         </div>
         <div class="footer-friends">
-            <div class="friends-title">🤝 友情链接</div>
+            <div class="friends-title" data-i18n="friends_title">🤝 友情链接</div>
             <div class="friends-list">
                 <a onclick="openLink('https://www.deepseek.com')">DeepSeek</a>
                 <a onclick="openLink('https://yiyan.baidu.com')">文心一言</a>
@@ -1054,12 +623,11 @@
                 <a onclick="openLink('https://chatglm.cn')">智谱清言</a>
                 <a onclick="openLink('https://kling.kuaishou.com')">可灵AI</a>
                 <a onclick="openLink('https://www.midjourney.com')">Midjourney</a>
-                <a onclick="openLink('#')">更多链接</a>
             </div>
         </div>
         <div class="footer-copyright">
-            <p>欢迎大家踊跃提交各个垂直领域优质AI工具，获取收录和曝光推广（有原创好内容可以加运营微信获得平台免费发布）。</p>
-            <p>本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。</p>
+            <p data-i18n="copyright1">欢迎大家踊跃提交各个垂直领域优质AI工具，获取收录和曝光推广（有原创好内容可以加运营微信获得平台免费发布）。</p>
+            <p data-i18n="copyright2">本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。</p>
             <p>© 2025 灵犀AI导航 | <a onclick="showIcp()">京ICP备2025001号</a></p>
         </div>
     </div>
@@ -1076,6 +644,69 @@
 </div>
 
 <script>
+    // ==================== 双语词库 ====================
+    const translations = {
+        'zh': {
+            'site_title': '✨ 灵犀AI导航', 'site_desc': '发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广',
+            'search_btn': '搜索', 'hot_search': '热门搜索：',
+            'nav_model': 'AI大模型', 'nav_writing': 'AI写作', 'nav_video': 'AI视频', 'nav_image': 'AI图像', 'nav_office': 'AI办公', 'nav_code': 'AI编程', 'nav_submit': '立即上榜',
+            'featured_title': '精选推荐 · 热度飙升', 'tip_banner': '欢迎投稿和提交AI应用', 'tip_link': '灵犀AI导航将免费提供推广曝光！',
+            'dashboard': '📊 数据看板', 'hot_rank': '🔥 热门工具榜', 'day_rank': '日榜', 'week_rank': '周榜', 'month_rank': '月榜',
+            'hot_news': '📰 热点资讯', 'hot_tags': '🏷️ 热门标签',
+            'footer_desc': '灵犀AI导航—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！',
+            'footer_submit': '📝 AI工具提交入口', 'footer_link': '🔗 友链申请', 'footer_disclaimer': '⚖️ 免责声明', 'footer_ad': '📢 广告合作', 'footer_about': 'ℹ️ 关于我们',
+            'friends_title': '🤝 友情链接', 'copyright1': '欢迎大家踊跃提交各个垂直领域优质AI工具，获取收录和曝光推广（有原创好内容可以加运营微信获得平台免费发布）。',
+            'copyright2': '本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。',
+            'free': '免费', 'paid': '付费', 'both': '部分免费', 'view_detail': '查看详情 →'
+        },
+        'en': {
+            'site_title': '✨ Lingxi AI Navigation', 'site_desc': 'Discover the smartest AI tools | Daily Updates | Real-time Hotlist | Free Promotion',
+            'search_btn': 'Search', 'hot_search': 'Hot Searches:',
+            'nav_model': 'AI Models', 'nav_writing': 'AI Writing', 'nav_video': 'AI Video', 'nav_image': 'AI Image', 'nav_office': 'AI Office', 'nav_code': 'AI Code', 'nav_submit': 'Submit Tool',
+            'featured_title': 'Featured · Trending', 'tip_banner': 'Welcome to submit AI applications', 'tip_link': 'Lingxi AI Navigation offers free promotion!',
+            'dashboard': '📊 Dashboard', 'hot_rank': '🔥 Hot Tools', 'day_rank': 'Daily', 'week_rank': 'Weekly', 'month_rank': 'Monthly',
+            'hot_news': '📰 News', 'hot_tags': '🏷️ Tags',
+            'footer_desc': 'Lingxi AI Navigation - Professional AI Tools Directory, covering 100+ sub-fields and 1500+ AI tools! Strictly selected high-quality AI tools.',
+            'footer_submit': '📝 Submit Tool', 'footer_link': '🔗 Friend Link', 'footer_disclaimer': '⚖️ Disclaimer', 'footer_ad': '📢 Advertise', 'footer_about': 'ℹ️ About',
+            'friends_title': '🤝 Friends Links', 'copyright1': 'Welcome to submit high-quality AI tools in various vertical fields for inclusion and exposure.',
+            'copyright2': 'Most tools are collected from the internet for reference only. If any infringement occurs, please contact us to remove it.',
+            'free': 'Free', 'paid': 'Paid', 'both': 'Freemium', 'view_detail': 'View Details →'
+        }
+    };
+    
+    let currentLang = localStorage.getItem('lang') || 'zh';
+    
+    function switchLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (translations[lang][key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translations[lang][key];
+                } else {
+                    el.innerHTML = translations[lang][key];
+                }
+            }
+        });
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.dataset.lang === lang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        if (typeof renderAll === 'function') renderAll();
+    }
+    
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchLanguage(btn.dataset.lang));
+    });
+    
     // ==================== Canvas背景 ====================
     const canvas = document.getElementById('cyber-bg');
     let ctx = canvas.getContext('2d');
@@ -1094,10 +725,10 @@
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.size = Math.random() * 1.2 + 0.3;
-            this.speedX = (Math.random() - 0.5) * 0.3;
-            this.speedY = (Math.random() - 0.5) * 0.2;
-            this.color = Math.random() > 0.7 ? '#00d4ff' : '#a855f7';
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.4;
+            this.speedY = (Math.random() - 0.5) * 0.3;
+            this.color = `rgba(0, 212, 255, ${Math.random() * 0.3 + 0.1})`;
         }
         update() {
             this.x += this.speedX;
@@ -1109,28 +740,28 @@
         }
         draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.color; ctx.fill(); }
     }
-    function initParticles() { particles = []; for (let i = 0; i < 100; i++) particles.push(new Particle()); }
+    function initParticles() { particles = []; for (let i = 0; i < 150; i++) particles.push(new Particle()); }
     function drawGrid() {
         const gridSize = 50;
         const offset = gridOffset % gridSize;
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(0, 212, 255, 0.08)';
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(0, 212, 255, 0.05)';
+        ctx.lineWidth = 0.5;
         for (let x = offset; x < width; x += gridSize) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke(); }
         for (let y = offset; y < height; y += gridSize) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke(); }
     }
     function drawScanline() {
-        scanlinePos = (scanlinePos + 1.2) % height;
+        scanlinePos = (scanlinePos + 1.5) % height;
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(0, 212, 255, 0.2)';
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(0, 212, 255, 0.15)';
+        ctx.lineWidth = 1;
         ctx.moveTo(0, scanlinePos);
         ctx.lineTo(width, scanlinePos);
         ctx.stroke();
     }
     function animate() {
         ctx.clearRect(0, 0, width, height);
-        gridOffset += 0.2;
+        gridOffset += 0.3;
         drawGrid();
         particles.forEach(p => { p.update(); p.draw(); });
         drawScanline();
@@ -1141,15 +772,99 @@
     initParticles();
     animate();
 
-    // ==================== 页脚弹窗函数 ====================
+    // ==================== 页脚函数 ====================
     function showFriendlyLink() { showToast('📧 友链申请请联系邮箱：link@lingxi.ai'); }
-    function showDisclaimer() { alert('免责声明：\n\n本站部分工具来源于网络，仅供用户参考使用。如发现侵权内容，请联系我们删除。使用本站工具产生的后果由用户自行承担。'); }
+    function showDisclaimer() { alert(currentLang === 'zh' ? '免责声明：\n\n本站部分工具来源于网络，仅供用户参考使用。如发现侵权内容，请联系我们删除。使用本站工具产生的后果由用户自行承担。' : 'Disclaimer:\n\nSome tools are from the internet for reference. If infringement occurs, please contact us to remove it.'); }
     function showAdvertise() { showToast('📢 广告合作请联系微信：lingxi_ad'); }
-    function showAbout() { alert('关于灵犀AI导航\n\n灵犀AI导航致力于为用户提供最优质的AI工具导航服务。我们严格筛选每个细分领域的AI工具，确保收录的工具真实可用。\n\n运营时间：2024年至今\n\n联系方式：lingxi@lingxi.ai'); }
+    function showAbout() { alert(currentLang === 'zh' ? '关于灵犀AI导航\n\n灵犀AI导航致力于为用户提供最优质的AI工具导航服务。我们严格筛选每个细分领域的AI工具，确保收录的工具真实可用。\n\n运营时间：2024年至今\n\n联系方式：lingxi@lingxi.ai' : 'About Lingxi AI Navigation\n\nLingxi AI Navigation is committed to providing users with the best AI tool directory service.\n\nContact: lingxi@lingxi.ai'); }
     function showIcp() { showToast('京ICP备2025001号'); }
     function openLink(url) { window.open(url, '_blank'); }
-
-    // ==================== 搜索历史功能 ====================
+    
+    // ==================== 用户系统 ====================
+    let currentUser = JSON.parse(localStorage.getItem('lingxi_current_user') || 'null');
+    let users = JSON.parse(localStorage.getItem('lingxi_users') || '{"test@lingxi.com":{"password":"123456","name":"测试用户","avatar":"🧙","favorites":[]}}');
+    
+    function saveUsers() { localStorage.setItem('lingxi_users', JSON.stringify(users)); }
+    function saveCurrentUser() { localStorage.setItem('lingxi_current_user', JSON.stringify(currentUser)); }
+    
+    function renderUserBar() {
+        const container = document.getElementById('userBar');
+        if (!container) return;
+        if (currentUser) {
+            container.innerHTML = `<div class="user-avatar" onclick="showUserProfile()">${currentUser.avatar || '👤'}</div><span class="user-name" onclick="showUserProfile()">${currentUser.name || currentUser.email}</span>`;
+        } else {
+            container.innerHTML = `<div class="login-btn" onclick="showAuthModal()">🔐 ${currentLang === 'zh' ? '登录/注册' : 'Login/Sign Up'}</div>`;
+        }
+    }
+    
+    function showAuthModal() {
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width:400px;">
+                <div class="modal-header"><h3>✨ ${currentLang === 'zh' ? '灵犀账号' : 'Lingxi Account'}</h3><button class="close-modal" onclick="this.closest('.modal').remove()">✕</button></div>
+                <div class="modal-body">
+                    <div style="display:flex; gap:20px; margin-bottom:24px; border-bottom:1px solid rgba(0,212,255,0.15); padding-bottom:10px;"><div id="tabLogin" style="cursor:pointer; color:#00d4ff; font-size:16px;">${currentLang === 'zh' ? '登录' : 'Login'}</div><div id="tabRegister" style="cursor:pointer; color:#a0a0b0; font-size:16px;">${currentLang === 'zh' ? '注册' : 'Register'}</div></div>
+                    <div id="loginForm"><input type="email" id="loginEmail" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '邮箱' : 'Email'}" value="test@lingxi.com"><input type="password" id="loginPassword" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '密码' : 'Password'}" value="123456"><button style="width:100%; background:linear-gradient(135deg,#00d4ff,#a855f7); border:none; border-radius:40px; padding:14px; color:white; font-size:15px; cursor:pointer;" onclick="handleLogin()">${currentLang === 'zh' ? '登录' : 'Login'}</button></div>
+                    <div id="registerForm" style="display:none;"><input type="text" id="regName" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '昵称' : 'Nickname'}"><input type="email" id="regEmail" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '邮箱' : 'Email'}"><input type="password" id="regPassword" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '密码' : 'Password'}"><button style="width:100%; background:linear-gradient(135deg,#00d4ff,#a855f7); border:none; border-radius:40px; padding:14px; color:white; font-size:15px; cursor:pointer;" onclick="handleRegister()">${currentLang === 'zh' ? '注册' : 'Register'}</button></div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        document.getElementById('tabLogin').onclick = () => { document.getElementById('tabLogin').style.color='#00d4ff'; document.getElementById('tabRegister').style.color='#a0a0b0'; document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; };
+        document.getElementById('tabRegister').onclick = () => { document.getElementById('tabRegister').style.color='#00d4ff'; document.getElementById('tabLogin').style.color='#a0a0b0'; document.getElementById('registerForm').style.display='block'; document.getElementById('loginForm').style.display='none'; };
+    }
+    
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        if (!email || !password) { showToast(currentLang === 'zh' ? '请填写完整信息' : 'Please fill in all fields'); return; }
+        const user = users[email];
+        if (user && user.password === password) {
+            currentUser = { email: email, name: user.name, avatar: user.avatar };
+            saveCurrentUser();
+            const localFav = JSON.parse(localStorage.getItem('lingxi_favorites') || '[]');
+            const userFav = user.favorites || [];
+            const mergedFav = [...new Set([...localFav, ...userFav])];
+            localStorage.setItem('lingxi_favorites', JSON.stringify(mergedFav));
+            favorites = mergedFav;
+            saveFavorites();
+            renderAll();
+            renderUserBar();
+            showToast(`${currentLang === 'zh' ? '欢迎回来' : 'Welcome back'}，${user.name || email}！`);
+            document.querySelector('.modal.active')?.remove();
+        } else { showToast(currentLang === 'zh' ? '邮箱或密码错误' : 'Invalid email or password'); }
+    }
+    
+    function handleRegister() {
+        const name = document.getElementById('regName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        if (!name || !email || !password) { showToast(currentLang === 'zh' ? '请填写完整信息' : 'Please fill in all fields'); return; }
+        if (users[email]) { showToast(currentLang === 'zh' ? '邮箱已注册' : 'Email already registered'); return; }
+        users[email] = { password: password, name: name, avatar: '✨', favorites: [] };
+        saveUsers();
+        showToast(currentLang === 'zh' ? '注册成功，请登录' : 'Registration successful, please login');
+        document.querySelector('.modal.active')?.remove();
+    }
+    
+    function showUserProfile() {
+        const modal = document.createElement('div');
+        modal.className = 'modal active';
+        modal.innerHTML = `<div class="modal-content" style="max-width:400px;"><div class="modal-header"><h3>👤 ${currentLang === 'zh' ? '个人中心' : 'Profile'}</h3><button class="close-modal" onclick="this.closest('.modal').remove()">✕</button></div><div class="modal-body"><div style="text-align:center;"><div style="width:80px; height:80px; background:linear-gradient(135deg,#00d4ff,#a855f7); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:44px; margin:0 auto 16px;">${currentUser.avatar || '👤'}</div><div style="font-size:20px; margin-bottom:10px;">${currentUser.name || currentUser.email}</div><div style="font-size:14px; color:#8080a0; margin-bottom:18px;">${currentUser.email}</div><div style="margin:20px 0; padding:15px; background:rgba(0,212,255,0.05); border-radius:16px;"><div style="font-size:15px;">⭐ ${currentLang === 'zh' ? '收藏工具' : 'Favorite Tools'}: ${favorites.length} ${currentLang === 'zh' ? '个' : ''}</div></div><button style="background:rgba(255,107,107,0.15); border:1px solid rgba(255,107,107,0.3); padding:10px 24px; border-radius:30px; color:#ff6b6b; cursor:pointer; font-size:14px;" onclick="handleLogout()">${currentLang === 'zh' ? '退出登录' : 'Logout'}</button></div></div></div>`;
+        document.body.appendChild(modal);
+    }
+    
+    function handleLogout() {
+        if (currentUser && users[currentUser.email]) { users[currentUser.email].favorites = favorites; saveUsers(); }
+        currentUser = null; saveCurrentUser();
+        favorites = []; saveFavorites();
+        renderAll(); renderUserBar();
+        showToast(currentLang === 'zh' ? '已退出登录' : 'Logged out');
+        document.querySelector('.modal.active')?.remove();
+    }
+    
+    // ==================== 搜索历史 ====================
     let searchHistory = JSON.parse(localStorage.getItem('lingxi_search_history') || '[]');
     let currentSearchKeyword = '';
     
@@ -1165,18 +880,14 @@
     function renderSearchHistory() {
         const container = document.getElementById('searchHistory');
         if (searchHistory.length === 0) { container.innerHTML = ''; return; }
-        container.innerHTML = `
-            <span style="font-size:12px; color:#606080;">最近搜索：</span>
-            ${searchHistory.map(k => `<span class="history-tag" onclick="searchByKeyword('${k.replace(/'/g, "\\'")}')">${escapeHtml(k)}</span>`).join('')}
-            <span class="history-tag clear-history" onclick="clearSearchHistory()">清空</span>
-        `;
+        container.innerHTML = `<span style="font-size:12px; color:#606080;">${currentLang === 'zh' ? '最近搜索：' : 'Recent:'}</span>${searchHistory.map(k => `<span class="history-tag" onclick="searchByKeyword('${k.replace(/'/g, "\\'")}')">${escapeHtml(k)}</span>`).join('')}<span class="history-tag clear-history" onclick="clearSearchHistory()" style="color:#ff6b6b;">${currentLang === 'zh' ? '清空' : 'Clear'}</span>`;
     }
     
     function clearSearchHistory() {
         searchHistory = [];
         localStorage.setItem('lingxi_search_history', JSON.stringify(searchHistory));
         renderSearchHistory();
-        showToast('搜索历史已清空');
+        showToast(currentLang === 'zh' ? '搜索历史已清空' : 'Search history cleared');
     }
     
     function escapeHtml(str) { return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;'); }
@@ -1185,7 +896,6 @@
         const input = document.getElementById('heroSearchInput');
         const keyword = input.value.trim().toLowerCase();
         currentSearchKeyword = keyword;
-        
         if (keyword) {
             saveSearchHistory(keyword);
             document.getElementById('clearSearchBtn').style.display = 'block';
@@ -1194,12 +904,9 @@
             clearSearch();
             return;
         }
-        
-        updateSearchStats(keyword);
-        
+        const statsDiv = document.getElementById('searchStats');
         const categoryBlocks = document.querySelectorAll('.category-block');
         let totalResults = 0;
-        
         categoryBlocks.forEach(block => {
             const cards = block.querySelectorAll('.tool-card');
             let blockHasResults = false;
@@ -1212,33 +919,21 @@
             block.style.display = blockHasResults ? '' : 'none';
             if (blockHasResults) totalResults += block.querySelectorAll('.tool-card:not([style*="display: none"])').length;
         });
-        
-        if (totalResults === 0) showNoResultsMessage(keyword);
-        else removeNoResultsMessage();
-    }
-    
-    function updateSearchStats(keyword) {
-        const statsDiv = document.getElementById('searchStats');
-        const visibleCards = document.querySelectorAll('.tool-card:not([style*="display: none"])').length;
+        if (totalResults === 0) {
+            const noResultsDiv = document.getElementById('noResultsMsg') || document.createElement('div');
+            noResultsDiv.id = 'noResultsMsg';
+            noResultsDiv.className = 'no-results';
+            noResultsDiv.innerHTML = `<div style="text-align:center; padding:60px;">🔍 ${currentLang === 'zh' ? '没有找到与' : 'No results found for'} “<span style="color:#00d4ff;">${escapeHtml(keyword)}</span>” ${currentLang === 'zh' ? '相关的工具' : ''}</div>`;
+            if (!document.getElementById('noResultsMsg')) document.getElementById('contentArea').appendChild(noResultsDiv);
+        } else {
+            const msg = document.getElementById('noResultsMsg');
+            if (msg) msg.remove();
+        }
         if (keyword) {
             statsDiv.style.display = 'block';
-            statsDiv.innerHTML = `🔍 找到 <span>${visibleCards}</span> 个与 “<span>${escapeHtml(keyword)}</span>” 相关的工具`;
-        } else {
-            statsDiv.style.display = 'none';
-        }
+            statsDiv.innerHTML = `🔍 ${currentLang === 'zh' ? '找到' : 'Found'} <span style="color:#00d4ff;">${totalResults}</span> ${currentLang === 'zh' ? '个与' : 'results for'} “<span style="color:#00d4ff;">${escapeHtml(keyword)}</span>” ${currentLang === 'zh' ? '相关的工具' : ''}`;
+        } else { statsDiv.style.display = 'none'; }
     }
-    
-    function showNoResultsMessage(keyword) {
-        removeNoResultsMessage();
-        const contentArea = document.getElementById('contentArea');
-        const noResultsDiv = document.createElement('div');
-        noResultsDiv.id = 'noResultsMsg';
-        noResultsDiv.className = 'no-results';
-        noResultsDiv.innerHTML = `<div>🔍 没有找到与 “<span class="keyword">${escapeHtml(keyword)}</span>” 相关的工具</div><div style="margin-top: 12px; font-size: 14px;">💡 试试搜索：DeepSeek、文心一言、Kimi、AI写作、视频生成...</div>`;
-        contentArea.appendChild(noResultsDiv);
-    }
-    
-    function removeNoResultsMessage() { const msg = document.getElementById('noResultsMsg'); if (msg) msg.remove(); }
     
     function handleSearchInput() {
         const input = document.getElementById('heroSearchInput');
@@ -1258,7 +953,8 @@
             cards.forEach(card => { card.style.display = ''; });
         });
         document.getElementById('searchStats').style.display = 'none';
-        removeNoResultsMessage();
+        const msg = document.getElementById('noResultsMsg');
+        if (msg) msg.remove();
     }
     
     function clearSearchAndScroll(categoryId) { clearSearch(); scrollToCategory(categoryId); }
@@ -1274,8 +970,8 @@
     
     function toggleFavorite(id) {
         const idx = favorites.indexOf(id);
-        if (idx === -1) { favorites.push(id); showToast('❤️ 已添加到收藏'); }
-        else { favorites.splice(idx, 1); showToast('💔 已取消收藏'); }
+        if (idx === -1) { favorites.push(id); showToast('❤️ ' + (currentLang === 'zh' ? '已添加到收藏' : 'Added to favorites')); }
+        else { favorites.splice(idx, 1); showToast('💔 ' + (currentLang === 'zh' ? '已取消收藏' : 'Removed from favorites')); }
         saveFavorites();
         if (showFavoritesPage) renderFavoritesPage();
         else renderAll();
@@ -1287,15 +983,15 @@
     function filterFavByCategory(category) { favCategoryFilter = category; renderFavoritesPage(); }
     
     function clearAllFavorites() {
-        if (confirm('确定要清空所有收藏吗？此操作不可撤销。')) {
+        if (confirm(currentLang === 'zh' ? '确定要清空所有收藏吗？此操作不可撤销。' : 'Are you sure you want to clear all favorites? This action cannot be undone.')) {
             favorites = []; saveFavorites();
             if (showFavoritesPage) renderFavoritesPage(); else renderAll();
-            showToast('已清空所有收藏');
+            showToast(currentLang === 'zh' ? '已清空所有收藏' : 'All favorites cleared');
         }
     }
     
     function exportFavorites() {
-        if (favorites.length === 0) { showToast('暂无收藏可导出'); return; }
+        if (favorites.length === 0) { showToast(currentLang === 'zh' ? '暂无收藏可导出' : 'No favorites to export'); return; }
         const favTools = favorites.map(id => toolsData.find(t => t.id === id)).filter(t => t);
         const exportData = { version: '1.0', exportTime: new Date().toISOString(), count: favTools.length, tools: favTools.map(t => ({ id: t.id, name: t.name, url: t.url })) };
         const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
@@ -1305,7 +1001,7 @@
         a.download = `lingxi_favorites_${new Date().toISOString().slice(0,19)}.json`;
         a.click();
         URL.revokeObjectURL(url);
-        showToast('收藏已导出');
+        showToast(currentLang === 'zh' ? '收藏已导出' : 'Favorites exported');
     }
     
     function importFavorites() {
@@ -1324,9 +1020,9 @@
                         favorites = [...new Set([...favorites, ...newFavIds])];
                         saveFavorites();
                         if (showFavoritesPage) renderFavoritesPage(); else renderAll();
-                        showToast(`导入成功，新增 ${newFavIds.length} 个收藏`);
-                    } else showToast('文件格式不正确');
-                } catch(err) { showToast('解析失败'); }
+                        showToast(`${currentLang === 'zh' ? '导入成功，新增' : 'Imported'} ${newFavIds.length} ${currentLang === 'zh' ? '个收藏' : 'favorites'}`);
+                    } else showToast(currentLang === 'zh' ? '文件格式不正确' : 'Invalid file format');
+                } catch(err) { showToast(currentLang === 'zh' ? '解析失败' : 'Parse failed'); }
             };
             reader.readAsText(file);
         };
@@ -1338,47 +1034,20 @@
         const favTools = favorites.map(id => toolsData.find(t => t.id === id)).filter(t => t);
         let filteredFavs = favCategoryFilter !== 'all' ? favTools.filter(t => t.category === favCategoryFilter) : favTools;
         const categoriesWithFav = [...new Set(favTools.map(t => t.category))];
-        
-        let html = `
-            <div class="favorites-header">
-                <h2><span>⭐</span> 我的收藏 <span style="font-size: 14px; background: rgba(0,212,255,0.2); padding: 2px 10px; border-radius: 20px;">${favTools.length} 个工具</span></h2>
-                <div class="fav-actions">
-                    <button class="fav-action-btn" onclick="exportFavorites()">📤 导出收藏</button>
-                    <button class="fav-action-btn" onclick="importFavorites()">📥 导入收藏</button>
-                    <button class="fav-action-btn" onclick="clearAllFavorites()">🗑️ 清空全部</button>
-                    <button class="fav-action-btn" onclick="showHome()">← 返回首页</button>
-                </div>
-            </div>
-            <div class="fav-category-filter">
-                <button class="fav-cat-btn ${favCategoryFilter === 'all' ? 'active' : ''}" onclick="filterFavByCategory('all')">全部 (${favTools.length})</button>
-                ${categoriesWithFav.map(catId => {
-                    const cat = categories.find(c => c.id === catId);
-                    const count = favTools.filter(t => t.category === catId).length;
-                    return `<button class="fav-cat-btn ${favCategoryFilter === catId ? 'active' : ''}" onclick="filterFavByCategory('${catId}')">${cat?.icon || '📁'} ${cat?.name || catId} (${count})</button>`;
-                }).join('')}
-            </div>
-        `;
-        
+        let html = `<div class="favorites-header"><h2><span>⭐</span> ${currentLang === 'zh' ? '我的收藏' : 'My Favorites'} <span style="font-size:15px; background:rgba(0,212,255,0.2); padding:3px 12px; border-radius:20px;">${favTools.length} ${currentLang === 'zh' ? '个工具' : 'tools'}</span></h2><div class="fav-actions"><button class="fav-action-btn" onclick="exportFavorites()">📤 ${currentLang === 'zh' ? '导出收藏' : 'Export'}</button><button class="fav-action-btn" onclick="importFavorites()">📥 ${currentLang === 'zh' ? '导入收藏' : 'Import'}</button><button class="fav-action-btn" onclick="clearAllFavorites()">🗑️ ${currentLang === 'zh' ? '清空全部' : 'Clear All'}</button><button class="fav-action-btn" onclick="showHome()">← ${currentLang === 'zh' ? '返回首页' : 'Back to Home'}</button></div></div><div class="fav-category-filter"><button class="fav-cat-btn ${favCategoryFilter === 'all' ? 'active' : ''}" onclick="filterFavByCategory('all')">${currentLang === 'zh' ? '全部' : 'All'} (${favTools.length})</button>${categoriesWithFav.map(catId => { const cat = categories.find(c => c.id === catId); const count = favTools.filter(t => t.category === catId).length; return `<button class="fav-cat-btn ${favCategoryFilter === catId ? 'active' : ''}" onclick="filterFavByCategory('${catId}')">${cat?.icon || '📁'} ${cat?.name || catId} (${count})</button>`; }).join('')}</div>`;
         if (filteredFavs.length === 0) {
-            html += `<div class="empty-fav"><div class="empty-icon">⭐</div><div>暂无收藏工具</div><div style="font-size: 14px; margin-top: 8px;">点击工具卡片上的星星按钮添加收藏</div><div class="back-to-home" onclick="showHome()">去首页看看</div></div>`;
+            html += `<div class="empty-fav"><div class="empty-icon" style="font-size:56px;">⭐</div><div>${currentLang === 'zh' ? '暂无收藏工具' : 'No favorite tools yet'}</div><div style="font-size:14px; margin-top:10px;">${currentLang === 'zh' ? '点击工具卡片上的星星按钮添加收藏' : 'Click the star button on tool cards to add favorites'}</div><div class="back-to-home" onclick="showHome()">${currentLang === 'zh' ? '去首页看看' : 'Go to Homepage'}</div></div>`;
         } else {
             html += `<div class="tools-grid">`;
             filteredFavs.forEach(t => {
-                html += `<div class="tool-card" onclick="showDetail(${t.id})">
-                    <button class="favorite-btn active" onclick="toggleFavoriteFromCard(${t.id}, event)">★</button>
-                    <div class="tool-icon">${getToolIcon(t.name)}</div>
-                    <div class="tool-name">${t.name}<span class="free-badge">${t.price === 'free' ? '免费' : '部分免费'}</span></div>
-                    <div class="tool-desc">${t.desc}</div>
-                    <div class="tool-tags">${t.tags.map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div>
-                    <div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">查看详情 →</span></div>
-                </div>`;
+                html += `<div class="tool-card" onclick="showDetail(${t.id})"><button class="favorite-btn active" onclick="toggleFavoriteFromCard(${t.id}, event)">★</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`;
             });
             html += `</div>`;
         }
         container.innerHTML = html;
     }
     
-    // ==================== 筛选排序功能 ====================
+    // ==================== 筛选排序 ====================
     let currentSort = 'hot';
     let currentPriceFilter = 'all';
     let currentView = 'grid';
@@ -1408,7 +1077,7 @@
             if (btn.getAttribute('data-sort') === sortType) btn.classList.add('active');
         });
         applyFiltersAndSort();
-        showToast(`已按${sortType === 'hot' ? '热度' : sortType === 'views' ? '浏览量' : '名称'}排序`);
+        showToast(`${currentLang === 'zh' ? '已按' : 'Sorted by'} ${sortType === 'hot' ? (currentLang === 'zh' ? '热度' : 'hot') : sortType === 'views' ? (currentLang === 'zh' ? '浏览量' : 'views') : (currentLang === 'zh' ? '名称' : 'name')} ${currentLang === 'zh' ? '排序' : ''}`);
     }
     
     function setPriceFilter(priceType) {
@@ -1420,12 +1089,12 @@
         const cards = document.querySelectorAll('.tool-card');
         cards.forEach(card => {
             const badge = card.querySelector('.free-badge');
-            const isFree = badge && badge.innerText === '免费';
+            const isFree = badge && badge.innerText.includes('免费') || badge && badge.innerText.includes('Free');
             if (priceType === 'all') card.style.display = '';
             else if (priceType === 'free') card.style.display = isFree ? '' : 'none';
             else if (priceType === 'paid') card.style.display = !isFree ? '' : 'none';
         });
-        showToast(priceType === 'all' ? '显示全部工具' : priceType === 'free' ? '只显示免费工具' : '只显示付费工具');
+        showToast(priceType === 'all' ? (currentLang === 'zh' ? '显示全部工具' : 'Show all tools') : priceType === 'free' ? (currentLang === 'zh' ? '只显示免费工具' : 'Show only free tools') : (currentLang === 'zh' ? '只显示付费工具' : 'Show only paid tools'));
     }
     
     function setView(viewType) {
@@ -1439,10 +1108,9 @@
             if (viewType === 'list') grid.classList.add('list-view');
             else grid.classList.remove('list-view');
         });
-        showToast(viewType === 'grid' ? '网格视图' : '列表视图');
+        showToast(viewType === 'grid' ? (currentLang === 'zh' ? '网格视图' : 'Grid view') : (currentLang === 'zh' ? '列表视图' : 'List view'));
     }
     
-    // ==================== 详情页增强 ====================
     let toolRatings = JSON.parse(localStorage.getItem('lingxi_tool_ratings') || '{}');
     
     function saveRating(toolId, rating) {
@@ -1450,81 +1118,44 @@
         localStorage.setItem('lingxi_tool_ratings', JSON.stringify(toolRatings));
     }
     
-    function getRating(toolId) {
-        return toolRatings[toolId] || 0;
-    }
+    function getRating(toolId) { return toolRatings[toolId] || 0; }
     
     function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            showToast('🔗 链接已复制到剪贴板');
-        }).catch(() => {
-            showToast('复制失败，请手动复制');
-        });
+        navigator.clipboard.writeText(text).then(() => showToast('🔗 ' + (currentLang === 'zh' ? '链接已复制到剪贴板' : 'Link copied to clipboard'))).catch(() => showToast(currentLang === 'zh' ? '复制失败，请手动复制' : 'Copy failed, please copy manually'));
     }
     
     function showDetail(id) {
         const t = toolsData.find(t => t.id === id);
         if (!t) return;
         incrementViews(id);
-        
-        const similarTools = toolsData
-            .filter(tool => tool.id !== id && (tool.category === t.category || tool.tags.some(tag => t.tags.includes(tag))))
-            .slice(0, 4);
-        
+        const similarTools = toolsData.filter(tool => tool.id !== id && tool.category === t.category).slice(0, 4);
         const currentRating = getRating(id);
         
         document.getElementById("detailTitle").innerHTML = t.name;
         document.getElementById("detailBody").innerHTML = `
-            <div class="detail-header">
-                <div class="detail-icon">${getToolIcon(t.name)}</div>
-                <div class="detail-title-section">
-                    <h2>${t.name}</h2>
-                    <div class="detail-meta">
-                        <span>📁 ${categories.find(c => c.id === t.category)?.name || t.category}</span>
-                        <span>📅 收录于 ${new Date().toLocaleDateString()}</span>
-                    </div>
-                </div>
+            <div style="display:flex; align-items:center; gap:18px; margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid rgba(0,212,255,0.15);">
+                <div style="width:72px; height:72px; background:linear-gradient(135deg, rgba(0,212,255,0.15), rgba(168,85,247,0.15)); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:40px; border:1px solid rgba(0,212,255,0.2);">${getToolIcon(t.name)}</div>
+                <div style="flex:1;"><h2 style="font-size:26px; color:#00d4ff; margin-bottom:8px;">${t.name}</h2><div style="display:flex; gap:24px; font-size:14px; color:#8080a0;"><span>📁 ${getCategoryNameById(t.category)}</span><span>📅 ${currentLang === 'zh' ? '收录于' : 'Added'} ${new Date().toLocaleDateString()}</span></div></div>
             </div>
-            <div class="detail-stats">
-                <div class="detail-stat">
-                    <div class="detail-stat-value">👁️ ${formatNumber(t.views)}</div>
-                    <div class="detail-stat-label">总浏览量</div>
-                </div>
-                <div class="detail-stat">
-                    <div class="detail-stat-value">⭐ ${t.hot}</div>
-                    <div class="detail-stat-label">热度指数</div>
-                </div>
-                <div class="detail-stat">
-                    <div class="detail-stat-value" id="ratingValue">${currentRating > 0 ? currentRating.toFixed(1) : '暂无'}</div>
-                    <div class="detail-stat-label">
-                        <div class="rating-stars" id="ratingStars">
-                            ${[1,2,3,4,5].map(star => `<span class="star ${star <= currentRating ? 'active' : ''}" data-star="${star}">★</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
+            <div style="display:flex; gap:28px; background:rgba(0,212,255,0.06); border-radius:16px; padding:16px 20px; margin-bottom:24px;">
+                <div style="text-align:center; flex:1;"><div style="font-size:24px; font-weight:700; color:#00d4ff;">👁️ ${formatNumber(t.views)}</div><div style="font-size:12px; color:#8080a0; margin-top:5px;">${currentLang === 'zh' ? '总浏览量' : 'Total Views'}</div></div>
+                <div style="text-align:center; flex:1;"><div style="font-size:24px; font-weight:700; color:#00d4ff;">⭐ ${t.hot}</div><div style="font-size:12px; color:#8080a0; margin-top:5px;">${currentLang === 'zh' ? '热度指数' : 'Popularity'}</div></div>
+                <div style="text-align:center; flex:1;"><div id="ratingValue" style="font-size:24px; font-weight:700; color:#00d4ff;">${currentRating > 0 ? currentRating.toFixed(1) : (currentLang === 'zh' ? '暂无' : 'N/A')}</div><div style="font-size:12px; color:#8080a0; margin-top:5px;"><div id="ratingStars" style="display:flex; align-items:center; gap:6px; justify-content:center; cursor:pointer;">${[1,2,3,4,5].map(star => `<span class="star" style="font-size:22px; color:${star <= currentRating ? '#ffd700' : '#606080'}; cursor:pointer;" data-star="${star}">★</span>`).join('')}</div></div></div>
             </div>
-            <div class="detail-tags">
-                ${t.tags.map(tag => `<span class="detail-tag">#${tag}</span>`).join('')}
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px;">${t.tags.slice(0,3).map(tag => `<span style="background:rgba(0,212,255,0.1); padding:6px 18px; border-radius:30px; font-size:13px; color:#80d4ff;">#${tag}</span>`).join('')}</div>
+            <div style="display:flex; gap:15px; margin-bottom:28px; flex-wrap:wrap;">
+                <a href="${t.url}" target="_blank" class="detail-btn detail-btn-primary">🌐 ${currentLang === 'zh' ? '访问官网 →' : 'Visit Website →'}</a>
+                <button class="detail-btn detail-btn-secondary" onclick="copyToClipboard('${t.url}')">📋 ${currentLang === 'zh' ? '复制链接' : 'Copy Link'}</button>
+                <button class="detail-btn detail-btn-secondary" onclick="toggleFavorite(${t.id}); closeModal();">${isFavorite(t.id) ? '⭐ ' + (currentLang === 'zh' ? '已收藏' : 'Favorited') : '☆ ' + (currentLang === 'zh' ? '收藏工具' : 'Favorite')}</button>
             </div>
-            <div class="detail-buttons">
-                <a href="${t.url}" target="_blank" class="detail-btn detail-btn-primary">🌐 访问官网 →</a>
-                <button class="detail-btn detail-btn-secondary" onclick="copyToClipboard('${t.url}')">📋 复制链接</button>
-                <button class="detail-btn detail-btn-secondary" onclick="toggleFavorite(${t.id}); closeModal();">${isFavorite(t.id) ? '⭐ 已收藏' : '☆ 收藏工具'}</button>
-            </div>
-            <div class="similar-section">
-                <div class="similar-title">🔗 相似工具推荐</div>
-                <div class="similar-grid">
-                    ${similarTools.map(tool => `
-                        <div class="similar-item" onclick="showDetail(${tool.id});">
-                            <div class="similar-item-icon">${getToolIcon(tool.name)}</div>
-                            <div class="similar-item-name">${tool.name}</div>
-                        </div>
-                    `).join('')}
-                    ${similarTools.length === 0 ? '<div style="text-align:center; padding:20px; color:#606080;">暂无推荐</div>' : ''}
+            <div style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(0,212,255,0.12);">
+                <div style="font-size:15px; font-weight:600; color:#00d4ff; margin-bottom:15px;">🔗 ${currentLang === 'zh' ? '相似工具推荐' : 'Similar Tools'}</div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:14px;">
+                    ${similarTools.map(tool => `<div style="background:rgba(0,212,255,0.05); border-radius:14px; padding:12px 14px; cursor:pointer; transition:all 0.2s; text-align:center;" onclick="showDetail(${tool.id});"><div style="font-size:28px; margin-bottom:8px;">${getToolIcon(tool.name)}</div><div style="font-size:14px; font-weight:500; color:#e0e0e0;">${tool.name}</div></div>`).join('')}
+                    ${similarTools.length === 0 ? '<div style="text-align:center; padding:25px; color:#606080;">' + (currentLang === 'zh' ? '暂无推荐' : 'No recommendations') + '</div>' : ''}
                 </div>
             </div>
         `;
-        
         document.getElementById("detailModal").classList.add("active");
         
         const stars = document.querySelectorAll('#ratingStars .star');
@@ -1534,23 +1165,15 @@
                 const rating = parseInt(star.dataset.star);
                 saveRating(id, rating);
                 document.getElementById('ratingValue').innerHTML = rating.toFixed(1);
-                stars.forEach(s => {
-                    const starVal = parseInt(s.dataset.star);
-                    if (starVal <= rating) s.classList.add('active');
-                    else s.classList.remove('active');
-                });
-                showToast(`您给 ${t.name} 打了 ${rating} 星 ⭐`);
+                stars.forEach(s => { if (parseInt(s.dataset.star) <= rating) s.style.color = '#ffd700'; else s.style.color = '#606080'; });
+                showToast(`${currentLang === 'zh' ? '您给' : 'You rated'} ${t.name} ${rating} ${currentLang === 'zh' ? '星' : 'stars'} ⭐`);
             });
         });
     }
     
-    // ==================== 数据统计功能 - 精简数字版 ====================
     let siteStats = JSON.parse(localStorage.getItem('lingxi_site_stats') || '{"totalVisits":0,"todayVisits":0,"lastVisitDate":""}');
     const today = new Date().toISOString().slice(0,10);
-    if (siteStats.lastVisitDate !== today) {
-        siteStats.todayVisits = 0;
-        siteStats.lastVisitDate = today;
-    }
+    if (siteStats.lastVisitDate !== today) { siteStats.todayVisits = 0; siteStats.lastVisitDate = today; }
     siteStats.totalVisits = (siteStats.totalVisits || 0) + 1;
     siteStats.todayVisits = (siteStats.todayVisits || 0) + 1;
     localStorage.setItem('lingxi_site_stats', JSON.stringify(siteStats));
@@ -1558,43 +1181,21 @@
     function renderStatsPanel() {
         const container = document.getElementById('statsGrid');
         if (!container) return;
-        
-        // 分类统计
-        const categoryCount = {};
-        const priceCount = { free: 0, paid: 0, both: 0 };
-        const tagCount = {};
-        
+        const categoryCount = {}; const priceCount = { free: 0, paid: 0, both: 0 }; const tagCount = {};
         toolsData.forEach(tool => {
             categoryCount[tool.category] = (categoryCount[tool.category] || 0) + 1;
             if (tool.price === 'free') priceCount.free++;
             else if (tool.price === 'paid') priceCount.paid++;
             else priceCount.both++;
-            tool.tags.forEach(tag => {
-                tagCount[tag] = (tagCount[tag] || 0) + 1;
-            });
+            tool.tags.forEach(tag => { tagCount[tag] = (tagCount[tag] || 0) + 1; });
         });
-        
-        // 总浏览量
+        const topTags = Object.entries(tagCount).sort((a,b) => b[1] - a[1]).slice(0, 8);
+        const weekDays = [currentLang === 'zh' ? '周一' : 'Mon', currentLang === 'zh' ? '周二' : 'Tue', currentLang === 'zh' ? '周三' : 'Wed', currentLang === 'zh' ? '周四' : 'Thu', currentLang === 'zh' ? '周五' : 'Fri', currentLang === 'zh' ? '周六' : 'Sat', currentLang === 'zh' ? '周日' : 'Sun'];
+        const weekViews = [1280, 1450, 1320, 1680, 2100, 2560, 1890];
         const totalViews = toolsData.reduce((sum, t) => sum + t.views, 0);
         
-        // 热门标签排行
-        const topTags = Object.entries(tagCount).sort((a,b) => b[1] - a[1]).slice(0, 6);
+        container.innerHTML = `<div class="stat-card"><div class="stat-number">${toolsData.length}</div><div class="stat-label">${currentLang === 'zh' ? '收录工具' : 'Tools'}</div></div><div class="stat-card"><div class="stat-number">${toolsData.filter(t => t.price === 'free').length}</div><div class="stat-label">${currentLang === 'zh' ? '免费工具' : 'Free'}</div></div><div class="stat-card"><div class="stat-number">${formatNumber(totalViews)}</div><div class="stat-label">${currentLang === 'zh' ? '总浏览量' : 'Total Views'}</div></div><div class="stat-card"><div class="stat-number">${siteStats.todayVisits || 0}</div><div class="stat-label">${currentLang === 'zh' ? '今日访问' : 'Today'}</div></div>`;
         
-        // 7天访问趋势数据（纯数字）
-        const weekDays = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-        const weekViews = [1280, 1450, 1320, 1680, 2100, 2560, 1890];
-        
-        // 分类占比
-        const topCategories = Object.entries(categoryCount).sort((a,b) => b[1] - a[1]).slice(0, 6);
-        
-        container.innerHTML = `
-            <div class="stat-card"><div class="stat-number">${toolsData.length}</div><div class="stat-label">收录工具</div></div>
-            <div class="stat-card"><div class="stat-number">${toolsData.filter(t => t.price === 'free').length}</div><div class="stat-label">免费工具</div></div>
-            <div class="stat-card"><div class="stat-number">${formatNumber(totalViews)}</div><div class="stat-label">总浏览量</div></div>
-            <div class="stat-card"><div class="stat-number">${siteStats.todayVisits || 0}</div><div class="stat-label">今日访问</div></div>
-        `;
-        
-        // 在内容区域添加详细统计面板（精简数字版，无柱状图）
         const contentArea = document.getElementById('contentArea');
         const existingPanel = document.getElementById('statsDetailPanel');
         if (existingPanel) existingPanel.remove();
@@ -1602,392 +1203,223 @@
         const statsPanel = document.createElement('div');
         statsPanel.id = 'statsDetailPanel';
         statsPanel.className = 'stats-panel';
-        statsPanel.innerHTML = `
-            <div class="stats-tabs">
-                <div class="stats-tab active" data-tab="trend">📈 访问趋势</div>
-                <div class="stats-tab" data-tab="category">📊 分类分布</div>
-                <div class="stats-tab" data-tab="price">💰 价格分布</div>
-                <div class="stats-tab" data-tab="tags">🏷️ 热门标签</div>
-            </div>
-            <div class="stats-content" id="statsContent">
-                <div id="trendContent">
-                    <div class="trend-simple">
-                        ${weekDays.map((day, i) => `
-                            <div class="trend-day">
-                                <div class="trend-day-name">${day}</div>
-                                <div class="trend-day-value">${weekViews[i]}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                <div id="categoryContent" style="display:none;">
-                    <div class="category-simple">
-                        ${topCategories.map(([cat, count]) => `
-                            <div class="category-simple-item">
-                                ${categories.find(c => c.id === cat)?.name || cat}
-                                <span class="category-simple-count">${count}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                <div id="priceContent" style="display:none;">
-                    <div class="price-simple">
-                        <div class="price-simple-item"><div class="price-simple-value">${priceCount.free}</div><div class="price-simple-label">免费工具</div></div>
-                        <div class="price-simple-item"><div class="price-simple-value">${priceCount.paid}</div><div class="price-simple-label">付费工具</div></div>
-                        <div class="price-simple-item"><div class="price-simple-value">${priceCount.both}</div><div class="price-simple-label">部分免费</div></div>
-                        <div class="price-simple-item"><div class="price-simple-value">${Math.round(priceCount.free / toolsData.length * 100)}%</div><div class="price-simple-label">免费占比</div></div>
-                    </div>
-                </div>
-                <div id="tagsContent" style="display:none;">
-                    <div class="tags-simple">
-                        ${topTags.map(([tag, count]) => `<div class="tags-simple-item" onclick="searchByTag('${tag}')">#${tag} (${count})</div>`).join('')}
-                    </div>
-                </div>
-            </div>
-        `;
+        statsPanel.innerHTML = `<div class="stats-tabs"><div class="stats-tab active" data-tab="trend">📈 ${currentLang === 'zh' ? '访问趋势' : 'Trends'}</div><div class="stats-tab" data-tab="category">📊 ${currentLang === 'zh' ? '分类分布' : 'Categories'}</div><div class="stats-tab" data-tab="price">💰 ${currentLang === 'zh' ? '价格分布' : 'Pricing'}</div><div class="stats-tab" data-tab="tags">🏷️ ${currentLang === 'zh' ? '热门标签' : 'Tags'}</div></div><div class="stats-content"><div id="trendContent"><div class="trend-simple">${weekDays.map((day, i) => `<div class="trend-day"><div class="trend-day-name">${day}</div><div class="trend-day-value">${weekViews[i]}</div></div>`).join('')}</div></div><div id="categoryContent" style="display:none;"><div class="category-simple">${Object.entries(categoryCount).slice(0,6).map(([cat, count]) => `<div class="category-simple-item">${getCategoryNameById(cat)}<span class="category-simple-count">${count}</span></div>`).join('')}</div></div><div id="priceContent" style="display:none;"><div class="price-simple"><div class="price-simple-item"><div class="price-simple-value">${priceCount.free}</div><div class="price-simple-label">${currentLang === 'zh' ? '免费' : 'Free'}</div></div><div class="price-simple-item"><div class="price-simple-value">${priceCount.paid}</div><div class="price-simple-label">${currentLang === 'zh' ? '付费' : 'Paid'}</div></div><div class="price-simple-item"><div class="price-simple-value">${priceCount.both}</div><div class="price-simple-label">${currentLang === 'zh' ? '部分免费' : 'Freemium'}</div></div><div class="price-simple-item"><div class="price-simple-value">${Math.round(priceCount.free / toolsData.length * 100)}%</div><div class="price-simple-label">${currentLang === 'zh' ? '免费占比' : 'Free %'}</div></div></div></div><div id="tagsContent" style="display:none;"><div class="tags-simple">${topTags.map(([tag, count]) => `<div class="tags-simple-item" onclick="searchByTag('${tag}')">#${tag} (${count})</div>`).join('')}</div></div></div>`;
         
-        // 插入到筛选栏之前
         const filterBar = document.querySelector('.filter-bar');
-        if (filterBar && contentArea) {
-            contentArea.insertBefore(statsPanel, filterBar);
-        } else if (contentArea) {
-            contentArea.insertBefore(statsPanel, contentArea.firstChild);
-        }
+        if (filterBar && contentArea) contentArea.insertBefore(statsPanel, filterBar);
+        else if (contentArea) contentArea.insertBefore(statsPanel, contentArea.firstChild);
         
-        // 绑定tab切换事件
         const tabs = statsPanel.querySelectorAll('.stats-tab');
+        const trendContent = document.getElementById('trendContent');
+        const categoryContent = document.getElementById('categoryContent');
+        const priceContent = document.getElementById('priceContent');
+        const tagsContent = document.getElementById('tagsContent');
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 const tabName = tab.dataset.tab;
-                document.getElementById('trendContent').style.display = tabName === 'trend' ? 'block' : 'none';
-                document.getElementById('categoryContent').style.display = tabName === 'category' ? 'block' : 'none';
-                document.getElementById('priceContent').style.display = tabName === 'price' ? 'block' : 'none';
-                document.getElementById('tagsContent').style.display = tabName === 'tags' ? 'block' : 'none';
+                trendContent.style.display = tabName === 'trend' ? 'block' : 'none';
+                categoryContent.style.display = tabName === 'category' ? 'block' : 'none';
+                priceContent.style.display = tabName === 'price' ? 'block' : 'none';
+                tagsContent.style.display = tabName === 'tags' ? 'block' : 'none';
             });
         });
     }
     
-    // 分类配置
+    // ==================== 完整22个分类 ====================
     const categories = [
-        { id: "ai-model", name: "AI大模型", icon: "🤖", sub: ["AI大语言模型", "AI视频大模型", "AI行业大模型", "AI多模态大模型"] },
-        { id: "ai-search", name: "AI搜索应用", icon: "🔍", sub: ["AI搜索引擎", "AI问答搜索"] },
-        { id: "ai-writing", name: "AI写作平台", icon: "✍️", sub: ["AI论文写作", "AI写作工具", "AIGC检测", "降AIGC率", "AI小红书文案", "AI写小说", "AI写标书"] },
-        { id: "ai-video", name: "AI视频创作", icon: "🎬", sub: ["AI视频生成", "AI数字人", "AI换脸", "AI视频编辑", "AI视频去水印"] },
-        { id: "ai-image", name: "AI图像工具", icon: "🎨", sub: ["AI绘画", "AI LOGO设计", "AI绘本", "AI图片背景移除", "AI证件照", "设计素材"] },
-        { id: "ai-office", name: "AI办公效率", icon: "💼", sub: ["AIPPT", "AI会议记录", "产品设计协作", "思维导图", "AI图表", "AI翻译"] },
-        { id: "ai-job", name: "AI求职招聘", icon: "📄", sub: ["AI简历制作", "AI招聘"] },
-        { id: "ai-code", name: "AI编程开发", icon: "💻", sub: ["AI编程助手", "AI代码生成", "AI开发工具"] },
-        { id: "ai-audio", name: "AI音频音乐", icon: "🎵", sub: ["AI音乐生成", "AI变声", "AI配音", "AI音频处理"] },
-        { id: "ai-design", name: "AI创意设计", icon: "✨", sub: ["AI LOGO设计", "AI包装设计", "AI服装设计", "AI商品图生成"] },
-        { id: "ai-chat", name: "AI对话聊天", icon: "💬", sub: ["AI聊天机器人", "AI虚拟助手"] },
-        { id: "ai-medical", name: "AI医疗健康", icon: "🏥", sub: ["AI问诊", "AI健康助手", "AI医学影像"] },
-        { id: "ai-finance", name: "AI金融理财", icon: "💰", sub: ["AI投顾", "AI记账", "AI金融分析"] },
-        { id: "ai-prompt", name: "AI提示指令", icon: "⚡", sub: ["提示词库", "提示词优化"] },
-        { id: "ai-marketing", name: "AI营销推广", icon: "📢", sub: ["AI营销工具", "AI文案生成"] },
-        { id: "ai-hardware", name: "AI智能硬件", icon: "🔧", sub: ["具身智能机器人", "AI眼镜", "AI芯片"] },
-        { id: "ai-gadget", name: "AI产品猎奇", icon: "🎮", sub: ["AI辅助思维训练", "AI应用大众点评", "猫咪语音翻译", "易经命理预测"] },
-        { id: "ai-game", name: "AI软件游戏", icon: "🎲", sub: ["AI游戏开发", "AI游戏伙伴", "AI虚拟世界"] },
-        { id: "ai-compute", name: "AI算力服务", icon: "☁️", sub: ["AI云计算", "AI算力平台"] },
-        { id: "ai-nav", name: "AI导航平台", icon: "🧭", sub: ["AI工具导航", "AI资源导航"] },
-        { id: "ai-book", name: "AI书籍杂志", icon: "📚", sub: ["AI技术书籍", "AI行业杂志"] },
-        { id: "ai-news", name: "AI资讯知识", icon: "📰", sub: ["AI产品排行", "AI行业资讯", "AI公司动态"] }
+        { id: "ai-model", name_zh: "AI大模型", name_en: "AI Models", icon: "🤖", sub: ["AI大语言模型", "AI视频大模型", "AI行业大模型", "AI多模态大模型"] },
+        { id: "ai-search", name_zh: "AI搜索应用", name_en: "AI Search", icon: "🔍", sub: ["AI搜索引擎", "AI问答搜索"] },
+        { id: "ai-writing", name_zh: "AI写作平台", name_en: "AI Writing", icon: "✍️", sub: ["AI论文写作", "AI写作工具", "AIGC检测", "降AIGC率", "AI小红书文案", "AI写小说", "AI写标书"] },
+        { id: "ai-video", name_zh: "AI视频创作", name_en: "AI Video", icon: "🎬", sub: ["AI视频生成", "AI数字人", "AI换脸", "AI视频编辑", "AI视频去水印"] },
+        { id: "ai-image", name_zh: "AI图像工具", name_en: "AI Image", icon: "🎨", sub: ["AI绘画", "AI LOGO设计", "AI绘本", "AI图片背景移除", "AI证件照", "设计素材"] },
+        { id: "ai-office", name_zh: "AI办公效率", name_en: "AI Office", icon: "💼", sub: ["AIPPT", "AI会议记录", "产品设计协作", "思维导图", "AI图表", "AI翻译"] },
+        { id: "ai-job", name_zh: "AI求职招聘", name_en: "AI Job", icon: "📄", sub: ["AI简历制作", "AI招聘"] },
+        { id: "ai-code", name_zh: "AI编程开发", name_en: "AI Code", icon: "💻", sub: ["AI编程助手", "AI代码生成", "AI开发工具"] },
+        { id: "ai-audio", name_zh: "AI音频音乐", name_en: "AI Audio", icon: "🎵", sub: ["AI音乐生成", "AI变声", "AI配音", "AI音频处理"] },
+        { id: "ai-design", name_zh: "AI创意设计", name_en: "AI Design", icon: "✨", sub: ["AI LOGO设计", "AI包装设计", "AI服装设计", "AI商品图生成"] },
+        { id: "ai-chat", name_zh: "AI对话聊天", name_en: "AI Chat", icon: "💬", sub: ["AI聊天机器人", "AI虚拟助手"] },
+        { id: "ai-medical", name_zh: "AI医疗健康", name_en: "AI Medical", icon: "🏥", sub: ["AI问诊", "AI健康助手", "AI医学影像"] },
+        { id: "ai-finance", name_zh: "AI金融理财", name_en: "AI Finance", icon: "💰", sub: ["AI投顾", "AI记账", "AI金融分析"] },
+        { id: "ai-prompt", name_zh: "AI提示指令", name_en: "AI Prompt", icon: "⚡", sub: ["提示词库", "提示词优化"] },
+        { id: "ai-marketing", name_zh: "AI营销推广", name_en: "AI Marketing", icon: "📢", sub: ["AI营销工具", "AI文案生成"] },
+        { id: "ai-hardware", name_zh: "AI智能硬件", name_en: "AI Hardware", icon: "🔧", sub: ["具身智能机器人", "AI眼镜", "AI芯片"] },
+        { id: "ai-gadget", name_zh: "AI产品猎奇", name_en: "AI Gadget", icon: "🎮", sub: ["AI辅助思维训练", "AI应用大众点评", "猫咪语音翻译", "易经命理预测"] },
+        { id: "ai-game", name_zh: "AI软件游戏", name_en: "AI Game", icon: "🎲", sub: ["AI游戏开发", "AI游戏伙伴", "AI虚拟世界"] },
+        { id: "ai-compute", name_zh: "AI算力服务", name_en: "AI Compute", icon: "☁️", sub: ["AI云计算", "AI算力平台"] },
+        { id: "ai-nav", name_zh: "AI导航平台", name_en: "AI Directory", icon: "🧭", sub: ["AI工具导航", "AI资源导航"] },
+        { id: "ai-book", name_zh: "AI书籍杂志", name_en: "AI Books", icon: "📚", sub: ["AI技术书籍", "AI行业杂志"] },
+        { id: "ai-news", name_zh: "AI资讯知识", name_en: "AI News", icon: "📰", sub: ["AI产品排行", "AI行业资讯", "AI公司动态"] }
     ];
-
-    // 工具数据
+    
+    function getCategoryNameById(catId) {
+        const cat = categories.find(c => c.id === catId);
+        if (!cat) return catId;
+        return currentLang === 'zh' ? cat.name_zh : cat.name_en;
+    }
+    
+    function getCategoryName(cat) {
+        return currentLang === 'zh' ? cat.name_zh : cat.name_en;
+    }
+    
+    // ==================== 工具数据 ====================
     const toolsData = [
-        { id: 1, name: "DeepSeek", category: "ai-model", sub: "AI大语言模型", desc: "DeepSeek专注于研究世界领先的人工智能技术", url: "https://chat.deepseek.com", tags: ["国产","免费","大模型"], views: 13280, dayViews: 380, weekViews: 2350, monthViews: 9200, price: "free", hot: 98 },
-        { id: 2, name: "文心一言", category: "ai-model", sub: "AI大语言模型", desc: "百度研发的知识增强大语言模型", url: "https://yiyan.baidu.com", tags: ["国产","免费"], views: 10060, dayViews: 290, weekViews: 1980, monthViews: 7400, price: "free", hot: 95 },
-        { id: 3, name: "Kimi", category: "ai-model", sub: "AI大语言模型", desc: "月之暗面超长上下文，200万字处理", url: "https://kimi.moonshot.cn", tags: ["国产","免费"], views: 11800, dayViews: 370, weekViews: 2450, monthViews: 9800, price: "free", hot: 97 },
-        { id: 4, name: "通义千问", category: "ai-model", sub: "AI大语言模型", desc: "阿里云超大规模语言模型", url: "https://tongyi.aliyun.com", tags: ["国产","免费"], views: 8950, dayViews: 210, weekViews: 1520, monthViews: 6400, price: "free", hot: 93 },
-        { id: 5, name: "豆包", category: "ai-model", sub: "AI大语言模型", desc: "字节跳动AI对话助手，你的AI聊天智能对话问答", url: "https://www.doubao.com", tags: ["聊天","免费"], views: 6740, dayViews: 160, weekViews: 1120, monthViews: 5300, price: "free", hot: 90 },
-        { id: 6, name: "智谱清言", category: "ai-model", sub: "AI大语言模型", desc: "智谱AI大语言模型", url: "https://chatglm.cn", tags: ["国产","免费"], views: 5630, dayViews: 130, weekViews: 920, monthViews: 4300, price: "free", hot: 88 },
-        { id: 7, name: "天工Skywork", category: "ai-model", sub: "AI大语言模型", desc: "昆仑万维大语言模型", url: "https://tiangong.cn", tags: ["国产","免费"], views: 4320, dayViews: 100, weekViews: 700, monthViews: 3500, price: "free", hot: 86 },
-        { id: 8, name: "ChatGPT", category: "ai-model", sub: "AI大语言模型", desc: "OpenAI大语言模型", url: "https://chat.openai.com", tags: ["国际","付费"], views: 15420, dayViews: 450, weekViews: 3100, monthViews: 12500, price: "paid", hot: 99 },
-        { id: 9, name: "讯飞星火", category: "ai-model", sub: "AI大语言模型", desc: "科大讯飞大语言模型", url: "https://xinghuo.xfyun.cn", tags: ["国产","免费"], views: 4980, dayViews: 110, weekViews: 780, monthViews: 3800, price: "free", hot: 87 },
-        { id: 10, name: "腾讯混元", category: "ai-model", sub: "AI大语言模型", desc: "腾讯混元大模型", url: "https://hunyuan.tencent.com", tags: ["国产","免费"], views: 3980, dayViews: 90, weekViews: 630, monthViews: 3100, price: "free", hot: 84 },
-        { id: 11, name: "腾讯元宝", category: "ai-model", sub: "AI大语言模型", desc: "腾讯AI助手", url: "https://yuanbao.tencent.com", tags: ["国产","免费"], views: 3650, dayViews: 85, weekViews: 590, monthViews: 2900, price: "free", hot: 82 },
-        { id: 12, name: "秒哒", category: "ai-model", sub: "AI大语言模型", desc: "百度推出的第一款无代码开发工具，支持AI大模型与PPT生成", url: "#", tags: ["国产","无代码"], views: 3210, dayViews: 70, weekViews: 520, monthViews: 2600, price: "free", hot: 79 },
-        { id: 13, name: "百川大模型", category: "ai-model", sub: "AI大语言模型", desc: "百川智能大语言模型", url: "#", tags: ["国产","免费"], views: 3450, dayViews: 75, weekViews: 520, monthViews: 2600, price: "free", hot: 80 },
-        { id: 14, name: "Claude", category: "ai-model", sub: "AI大语言模型", desc: "Anthropic大语言模型", url: "https://claude.ai", tags: ["国际","付费"], views: 8760, dayViews: 200, weekViews: 1400, monthViews: 6500, price: "both", hot: 92 },
-        { id: 15, name: "Gemini", category: "ai-model", sub: "AI大语言模型", desc: "Google大语言模型", url: "https://gemini.google.com", tags: ["国际","免费"], views: 7650, dayViews: 180, weekViews: 1200, monthViews: 5800, price: "free", hot: 90 },
-        { id: 16, name: "Grok", category: "ai-model", sub: "AI大语言模型", desc: "xAI大语言模型", url: "https://grok.x.ai", tags: ["国际","付费"], views: 4320, dayViews: 100, weekViews: 700, monthViews: 3500, price: "paid", hot: 85 },
-        { id: 17, name: "MiniMax", category: "ai-model", sub: "AI大语言模型", desc: "MiniMax大语言模型", url: "https://www.minimax.com", tags: ["国产","免费"], views: 3870, dayViews: 85, weekViews: 600, monthViews: 2900, price: "free", hot: 83 },
-        { id: 26, name: "锐智AI", category: "ai-writing", sub: "AI论文写作", desc: "全方位AI论文写作平台，锐智AI是", url: "#", tags: ["论文","写作"], views: 5430, dayViews: 120, weekViews: 890, monthViews: 4100, price: "paid", hot: 88 },
-        { id: 27, name: "降迹灵AI", category: "ai-writing", sub: "降AIGC率", desc: "降迹与降AIGC的专业服务平台，降迹灵AI", url: "#", tags: ["降重","AIGC"], views: 4320, dayViews: 95, weekViews: 720, monthViews: 3500, price: "paid", hot: 85 },
-        { id: 28, name: "职达AI简历", category: "ai-job", sub: "AI简历制作", desc: "职达AI简历是专业的个人简历AI优化平台", url: "#", tags: ["简历","求职"], views: 9870, dayViews: 300, weekViews: 2100, monthViews: 8300, price: "both", hot: 92 },
-        { id: 29, name: "UP简历", category: "ai-job", sub: "AI简历制作", desc: "UP简历是一款基于AI技术的免费在线简历制作工具", url: "#", tags: ["简历","免费"], views: 5430, dayViews: 120, weekViews: 850, monthViews: 4100, price: "free", hot: 84 },
-        { id: 30, name: "全民简历", category: "ai-job", sub: "AI简历制作", desc: "全民简历网是专业的在线简历制作平台", url: "#", tags: ["简历","企业"], views: 4320, dayViews: 95, weekViews: 680, monthViews: 3300, price: "free", hot: 80 },
-        { id: 31, name: "AiPPT", category: "ai-office", sub: "AIPPT", desc: "AiPPT是一款将AI大模型与PPT结合的一键生成工具", url: "#", tags: ["PPT","办公"], views: 5430, dayViews: 130, weekViews: 890, monthViews: 4200, price: "both", hot: 86 },
-        { id: 32, name: "牛学长变声精灵", category: "ai-audio", sub: "AI变声", desc: "AI实时变声软件，牛学长变声精灵", url: "#", tags: ["变声","音频"], views: 4320, dayViews: 90, weekViews: 650, monthViews: 3200, price: "free", hot: 82 },
-        { id: 41, name: "可灵AI", category: "ai-video", sub: "AI视频生成", desc: "快手AI视频生成工具", url: "https://kling.kuaishou.com", tags: ["视频","生成"], views: 8900, dayViews: 180, weekViews: 1250, monthViews: 5600, price: "free", hot: 96 },
-        { id: 42, name: "即梦AI", category: "ai-video", sub: "AI视频生成", desc: "字节跳动AI视频创作平台", url: "https://jimeng.jianying.com", tags: ["视频","创作"], views: 7650, dayViews: 150, weekViews: 1050, monthViews: 5200, price: "free", hot: 91 },
-        { id: 56, name: "Midjourney", category: "ai-image", sub: "AI绘画", desc: "顶级AI绘画工具", url: "https://www.midjourney.com", tags: ["国际","付费"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "paid", hot: 98 },
-        { id: 57, name: "Stable Diffusion", category: "ai-image", sub: "AI绘画", desc: "开源AI绘画模型", url: "https://stability.ai", tags: ["开源","免费"], views: 12340, dayViews: 280, weekViews: 1950, monthViews: 8500, price: "free", hot: 95 },
-        { id: 66, name: "WPS AI", category: "ai-office", sub: "AIPPT", desc: "WPS办公套件AI助手", url: "https://ai.wps.cn", tags: ["办公","AI"], views: 12340, dayViews: 420, weekViews: 2800, monthViews: 10200, price: "both", hot: 94 },
-        { id: 67, name: "朱雀AI检测", category: "ai-writing", sub: "AIGC检测", desc: "朱雀AI文本检测基于多种先进技术", url: "#", tags: ["检测","AIGC"], views: 3210, dayViews: 80, weekViews: 550, monthViews: 2800, price: "free", hot: 78 },
-        { id: 68, name: "灵犀AI导航", category: "ai-nav", sub: "AI工具导航", desc: "发现最聪明的AI工具，智能导航平台", url: "#", tags: ["导航","精选"], views: 5600, dayViews: 150, weekViews: 980, monthViews: 4500, price: "free", hot: 89 }
+        { id: 1, name: "DeepSeek", category: "ai-model", sub: "AI大语言模型", desc_zh: "深度求索大语言模型，中文理解能力强", desc_en: "DeepSeek LLM with strong Chinese understanding", url: "https://chat.deepseek.com", tags: ["国产","免费","大模型"], views: 13280, dayViews: 380, weekViews: 2350, monthViews: 9200, price: "free", hot: 98 },
+        { id: 2, name: "文心一言", category: "ai-model", sub: "AI大语言模型", desc_zh: "百度研发的知识增强大语言模型", desc_en: "Baidu's knowledge-enhanced LLM", url: "https://yiyan.baidu.com", tags: ["国产","免费"], views: 10060, dayViews: 290, weekViews: 1980, monthViews: 7400, price: "free", hot: 95 },
+        { id: 3, name: "Kimi", category: "ai-model", sub: "AI大语言模型", desc_zh: "月之暗面超长上下文，200万字处理", desc_en: "Moonshot AI with 2M token context", url: "https://kimi.moonshot.cn", tags: ["国产","免费"], views: 11800, dayViews: 370, weekViews: 2450, monthViews: 9800, price: "free", hot: 97 },
+        { id: 4, name: "通义千问", category: "ai-model", sub: "AI大语言模型", desc_zh: "阿里云超大规模语言模型", desc_en: "Alibaba Cloud's large-scale LLM", url: "https://tongyi.aliyun.com", tags: ["国产","免费"], views: 8950, dayViews: 210, weekViews: 1520, monthViews: 6400, price: "free", hot: 93 },
+        { id: 5, name: "豆包", category: "ai-model", sub: "AI大语言模型", desc_zh: "字节跳动AI对话助手", desc_en: "ByteDance AI assistant", url: "https://www.doubao.com", tags: ["国产","免费"], views: 6740, dayViews: 160, weekViews: 1120, monthViews: 5300, price: "free", hot: 90 },
+        { id: 6, name: "智谱清言", category: "ai-model", sub: "AI大语言模型", desc_zh: "智谱AI大语言模型", desc_en: "Zhipu AI LLM", url: "https://chatglm.cn", tags: ["国产","免费"], views: 5630, dayViews: 130, weekViews: 920, monthViews: 4300, price: "free", hot: 88 },
+        { id: 7, name: "天工Skywork", category: "ai-model", sub: "AI大语言模型", desc_zh: "昆仑万维大语言模型", desc_en: "Kunlun Wanwei LLM", url: "https://tiangong.cn", tags: ["国产","免费"], views: 4320, dayViews: 100, weekViews: 700, monthViews: 3500, price: "free", hot: 86 },
+        { id: 8, name: "ChatGPT", category: "ai-model", sub: "AI大语言模型", desc_zh: "OpenAI大语言模型", desc_en: "OpenAI's flagship LLM", url: "https://chat.openai.com", tags: ["国际","付费"], views: 15420, dayViews: 450, weekViews: 3100, monthViews: 12500, price: "paid", hot: 99 },
+        { id: 9, name: "讯飞星火", category: "ai-model", sub: "AI大语言模型", desc_zh: "科大讯飞大语言模型", desc_en: "iFlytek Spark LLM", url: "https://xinghuo.xfyun.cn", tags: ["国产","免费"], views: 4980, dayViews: 110, weekViews: 780, monthViews: 3800, price: "free", hot: 87 },
+        { id: 10, name: "腾讯混元", category: "ai-model", sub: "AI大语言模型", desc_zh: "腾讯混元大模型", desc_en: "Tencent Hunyuan LLM", url: "https://hunyuan.tencent.com", tags: ["国产","免费"], views: 3980, dayViews: 90, weekViews: 630, monthViews: 3100, price: "free", hot: 84 },
+        { id: 11, name: "腾讯元宝", category: "ai-model", sub: "AI大语言模型", desc_zh: "腾讯AI助手", desc_en: "Tencent AI Assistant", url: "https://yuanbao.tencent.com", tags: ["国产","免费"], views: 3650, dayViews: 85, weekViews: 590, monthViews: 2900, price: "free", hot: 82 },
+        { id: 12, name: "百川大模型", category: "ai-model", sub: "AI大语言模型", desc_zh: "百川智能大语言模型", desc_en: "Baichuan Intelligent LLM", url: "https://www.baichuan-ai.com", tags: ["国产","免费"], views: 3450, dayViews: 75, weekViews: 520, monthViews: 2600, price: "free", hot: 80 },
+        { id: 13, name: "Claude", category: "ai-model", sub: "AI大语言模型", desc_zh: "Anthropic大语言模型", desc_en: "Anthropic's helpful LLM", url: "https://claude.ai", tags: ["国际","付费"], views: 8760, dayViews: 200, weekViews: 1400, monthViews: 6500, price: "both", hot: 92 },
+        { id: 14, name: "Gemini", category: "ai-model", sub: "AI大语言模型", desc_zh: "Google大语言模型", desc_en: "Google's multimodal LLM", url: "https://gemini.google.com", tags: ["国际","免费"], views: 7650, dayViews: 180, weekViews: 1200, monthViews: 5800, price: "free", hot: 90 },
+        { id: 15, name: "Grok", category: "ai-model", sub: "AI大语言模型", desc_zh: "xAI大语言模型", desc_en: "xAI's witty LLM", url: "https://grok.x.ai", tags: ["国际","付费"], views: 4320, dayViews: 100, weekViews: 700, monthViews: 3500, price: "paid", hot: 85 },
+        { id: 16, name: "MiniMax", category: "ai-model", sub: "AI大语言模型", desc_zh: "MiniMax大语言模型", desc_en: "MiniMax LLM", url: "https://www.minimax.com", tags: ["国产","免费"], views: 3870, dayViews: 85, weekViews: 600, monthViews: 2900, price: "free", hot: 83 },
+        { id: 17, name: "可灵AI", category: "ai-video", sub: "AI视频生成", desc_zh: "快手AI视频生成工具", desc_en: "Kuaishou AI video generation", url: "https://kling.kuaishou.com", tags: ["视频","生成"], views: 8900, dayViews: 180, weekViews: 1250, monthViews: 5600, price: "free", hot: 96 },
+        { id: 18, name: "即梦AI", category: "ai-video", sub: "AI视频生成", desc_zh: "字节跳动AI视频创作平台", desc_en: "ByteDance AI video creation", url: "https://jimeng.jianying.com", tags: ["视频","创作"], views: 7650, dayViews: 150, weekViews: 1050, monthViews: 5200, price: "free", hot: 91 },
+        { id: 19, name: "Midjourney", category: "ai-image", sub: "AI绘画", desc_zh: "顶级AI绘画工具", desc_en: "Top-tier AI image generation", url: "https://www.midjourney.com", tags: ["绘画","国际"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "paid", hot: 98 },
+        { id: 20, name: "Stable Diffusion", category: "ai-image", sub: "AI绘画", desc_zh: "开源AI绘画模型", desc_en: "Open-source AI image model", url: "https://stability.ai", tags: ["开源","绘画"], views: 12340, dayViews: 280, weekViews: 1950, monthViews: 8500, price: "free", hot: 95 },
+        { id: 21, name: "WPS AI", category: "ai-office", sub: "AIPPT", desc_zh: "WPS办公套件AI助手", desc_en: "WPS Office AI assistant", url: "https://ai.wps.cn", tags: ["办公","AI"], views: 12340, dayViews: 420, weekViews: 2800, monthViews: 10200, price: "both", hot: 94 },
+        { id: 22, name: "CodeGeeX", category: "ai-code", sub: "AI编程助手", desc_zh: "智谱AI编程助手", desc_en: "Zhipu AI coding assistant", url: "https://codegeex.cn", tags: ["编程","AI"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 23, name: "灵犀AI导航", category: "ai-nav", sub: "AI工具导航", desc_zh: "发现最聪明的AI工具，智能导航平台", desc_en: "Discover smartest AI tools, intelligent directory", url: "https://yw5ndgdykj.github.io/lingxi-ai-nav/", tags: ["导航","精选"], views: 5600, dayViews: 150, weekViews: 980, monthViews: 4500, price: "free", hot: 89 }
     ];
-
-    let currentRankType = "day";
-    let currentSubFilter = {};
-
+    
+    function getToolDesc(tool) {
+        return currentLang === 'zh' ? (tool.desc_zh || tool.desc_en) : (tool.desc_en || tool.desc_zh);
+    }
+    
     function getToolIcon(name) {
         const iconMap = {
             "DeepSeek": "🐋", "文心一言": "📚", "Kimi": "🌙", "通义千问": "☁️", "豆包": "🫘", 
             "智谱清言": "🐉", "天工Skywork": "⚙️", "ChatGPT": "🤖", "讯飞星火": "🔥", 
-            "腾讯混元": "💧", "腾讯元宝": "💰", "秒哒": "⚡", "百川大模型": "🌊",
-            "锐智AI": "📝", "降迹灵AI": "📉", "职达AI简历": "📄", "UP简历": "⬆️", 
-            "全民简历": "👥", "AiPPT": "📊", "牛学长变声精灵": "🎤", "可灵AI": "🎥",
-            "即梦AI": "✨", "Midjourney": "🎨", "Stable Diffusion": "🖼️", "WPS AI": "📑",
-            "朱雀AI检测": "🔍", "灵犀AI导航": "🦊"
+            "腾讯混元": "💧", "腾讯元宝": "💰", "百川大模型": "🌊", "Claude": "👨‍🎓",
+            "Gemini": "⭐", "Grok": "🎭", "MiniMax": "🎵", "可灵AI": "🎥", "即梦AI": "✨",
+            "Midjourney": "🎨", "Stable Diffusion": "🖼️", "WPS AI": "📑", "CodeGeeX": "💻",
+            "灵犀AI导航": "🦊"
         };
         return iconMap[name] || "🤖";
     }
-
+    
     function showToast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2000); }
     function formatNumber(n) { return n > 9999 ? (n/10000).toFixed(1)+'w' : n; }
     function incrementViews(id) { const t = toolsData.find(t => t.id === id); if (t) t.views++; renderAll(); }
-
     function closeModal() { document.getElementById("detailModal").classList.remove("active"); }
-    function showSubmitTip() { showToast('📝 提交功能开发中，请联系微信: lingxi2026'); }
-
+    function showSubmitTip() { showToast('📝 ' + (currentLang === 'zh' ? '提交功能开发中，请联系微信: lingxi2026' : 'Submission in development, contact WeChat: lingxi2026')); }
+    
     function scrollToCategory(categoryId) {
         if (showFavoritesPage) showHome();
         setTimeout(() => {
             const target = document.getElementById(`cat-${categoryId}`);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                target.style.transition = 'background 0.3s';
-                target.style.background = 'rgba(0, 212, 255, 0.1)';
-                setTimeout(() => { target.style.background = ''; }, 800);
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
     }
-
+    
     function filterBySub(categoryId, subCategory) {
         currentSubFilter[categoryId] = subCategory;
         const grid = document.getElementById(`grid-${categoryId}`);
         if (!grid) return;
-        
         let filtered = toolsData.filter(t => t.category === categoryId);
         if (subCategory) filtered = filtered.filter(t => t.sub === subCategory);
-        
         if (filtered.length === 0) {
-            grid.innerHTML = '<div style="text-align:center; padding:40px; color:#606070;">暂无工具</div>';
+            grid.innerHTML = '<div style="text-align:center; padding:50px; color:#606070; font-size:15px;">' + (currentLang === 'zh' ? '暂无工具' : 'No tools found') + '</div>';
         } else {
-            grid.innerHTML = filtered.map(t => `
-                <div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}">
-                    <button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button>
-                    <div class="tool-icon">${getToolIcon(t.name)}</div>
-                    <div class="tool-info" style="flex:1">
-                        <div class="tool-name">${t.name}<span class="free-badge">${t.price === 'free' ? '免费' : '部分免费'}</span></div>
-                        <div class="tool-desc">${t.desc}</div>
-                        <div class="tool-tags">${t.tags.map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div>
-                    </div>
-                    <div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">查看详情 →</span></div>
-                </div>
-            `).join('');
+            grid.innerHTML = filtered.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-info"><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div></div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('');
         }
-        
         const bar = grid.parentElement.querySelector('.subcategory-bar');
         if (bar) {
             bar.querySelectorAll('.subcategory-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent === (subCategory || '全部')) btn.classList.add('active');
+                if (btn.textContent === (subCategory || (currentLang === 'zh' ? '全部' : 'All'))) btn.classList.add('active');
             });
         }
         applyFiltersAndSort();
         setPriceFilter(currentPriceFilter);
     }
-
+    
+    let currentSubFilter = {};
+    let currentRankType = "day";
+    
     function renderSidebar() {
         const sidebar = document.getElementById("sidebar");
-        sidebar.innerHTML = `
-            <div class="sidebar-item" onclick="showHome()"><span>🏠</span> 首页</div>
-            <div class="sidebar-item" onclick="showFavorites()"><span>⭐</span> 我的收藏<span class="fav-count" id="favCountSpan">${favorites.length}</span></div>
-            <div class="sidebar-fav-section">
-                ${categories.map(cat => `<div class="sidebar-item" onclick="clearSearchAndScroll('${cat.id}')"><span>${cat.icon}</span> ${cat.name}</div>`).join('')}
-            </div>
-        `;
+        sidebar.innerHTML = `<div class="sidebar-item" onclick="showHome()"><span>🏠</span> ${currentLang === 'zh' ? '首页' : 'Home'}</div><div class="sidebar-item" onclick="showFavorites()"><span>⭐</span> ${currentLang === 'zh' ? '我的收藏' : 'My Favorites'}<span class="fav-count" id="favCountSpan">${favorites.length}</span></div><div class="sidebar-fav-section">${categories.map(cat => `<div class="sidebar-item" onclick="clearSearchAndScroll('${cat.id}')"><span>${cat.icon}</span> ${getCategoryName(cat)}</div>`).join('')}</div>`;
         updateFavCountInSidebar();
     }
-
+    
     function renderContent() {
         const container = document.getElementById("contentArea");
-        let html = '';
-        html += `
-            <div class="filter-bar">
-                <div class="filter-group">
-                    <span class="filter-label">📊 排序：</span>
-                    <button class="filter-btn sort-btn ${currentSort === 'hot' ? 'active' : ''}" data-sort="hot" onclick="setSort('hot')">🔥 热度</button>
-                    <button class="filter-btn sort-btn ${currentSort === 'views' ? 'active' : ''}" data-sort="views" onclick="setSort('views')">👁️ 浏览量</button>
-                    <button class="filter-btn sort-btn ${currentSort === 'name' ? 'active' : ''}" data-sort="name" onclick="setSort('name')">📝 名称</button>
-                </div>
-                <div class="filter-group">
-                    <span class="filter-label">💰 价格：</span>
-                    <button class="filter-btn price-btn ${currentPriceFilter === 'all' ? 'active' : ''}" data-price="all" onclick="setPriceFilter('all')">全部</button>
-                    <button class="filter-btn price-btn ${currentPriceFilter === 'free' ? 'active' : ''}" data-price="free" onclick="setPriceFilter('free')">免费</button>
-                    <button class="filter-btn price-btn ${currentPriceFilter === 'paid' ? 'active' : ''}" data-price="paid" onclick="setPriceFilter('paid')">付费/部分免费</button>
-                </div>
-                <div class="filter-group">
-                    <span class="filter-label">👁️ 视图：</span>
-                    <div class="view-toggle">
-                        <button class="view-btn ${currentView === 'grid' ? 'active' : ''}" data-view="grid" onclick="setView('grid')">📱 网格</button>
-                        <button class="view-btn ${currentView === 'list' ? 'active' : ''}" data-view="list" onclick="setView('list')">📄 列表</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
+        let html = `<div class="filter-bar"><div class="filter-group"><span class="filter-label">📊 ${currentLang === 'zh' ? '排序：' : 'Sort:'}</span><button class="filter-btn sort-btn ${currentSort === 'hot' ? 'active' : ''}" data-sort="hot" onclick="setSort('hot')">🔥 ${currentLang === 'zh' ? '热度' : 'Hot'}</button><button class="filter-btn sort-btn ${currentSort === 'views' ? 'active' : ''}" data-sort="views" onclick="setSort('views')">👁️ ${currentLang === 'zh' ? '浏览量' : 'Views'}</button><button class="filter-btn sort-btn ${currentSort === 'name' ? 'active' : ''}" data-sort="name" onclick="setSort('name')">📝 ${currentLang === 'zh' ? '名称' : 'Name'}</button></div><div class="filter-group"><span class="filter-label">💰 ${currentLang === 'zh' ? '价格：' : 'Price:'}</span><button class="filter-btn price-btn ${currentPriceFilter === 'all' ? 'active' : ''}" data-price="all" onclick="setPriceFilter('all')">${currentLang === 'zh' ? '全部' : 'All'}</button><button class="filter-btn price-btn ${currentPriceFilter === 'free' ? 'active' : ''}" data-price="free" onclick="setPriceFilter('free')">${currentLang === 'zh' ? '免费' : 'Free'}</button><button class="filter-btn price-btn ${currentPriceFilter === 'paid' ? 'active' : ''}" data-price="paid" onclick="setPriceFilter('paid')">${currentLang === 'zh' ? '付费/部分免费' : 'Paid/Freemium'}</button></div><div class="filter-group"><span class="filter-label">👁️ ${currentLang === 'zh' ? '视图：' : 'View:'}</span><div class="view-toggle"><button class="view-btn ${currentView === 'grid' ? 'active' : ''}" data-view="grid" onclick="setView('grid')">📱 ${currentLang === 'zh' ? '网格' : 'Grid'}</button><button class="view-btn ${currentView === 'list' ? 'active' : ''}" data-view="list" onclick="setView('list')">📄 ${currentLang === 'zh' ? '列表' : 'List'}</button></div></div></div>`;
         for (const cat of categories) {
             const tools = toolsData.filter(t => t.category === cat.id);
             if (tools.length === 0) continue;
-            html += `
-                <div class="category-block" id="cat-${cat.id}">
-                    <div class="category-header">
-                        <div class="category-title"><span>${cat.icon}</span> ${cat.name}</div>
-                    </div>
-                    <div class="subcategory-bar">
-                        <button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">全部</button>
-                        ${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}
-                        <button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button>
-                    </div>
-                    <div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">
-                        ${tools.map(t => `
-                            <div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}">
-                                <button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button>
-                                <div class="tool-icon">${getToolIcon(t.name)}</div>
-                                <div class="tool-info" style="flex:1">
-                                    <div class="tool-name">${t.name}<span class="free-badge">${t.price === 'free' ? '免费' : '部分免费'}</span></div>
-                                    <div class="tool-desc">${t.desc}</div>
-                                    <div class="tool-tags">${t.tags.map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div>
-                                </div>
-                                <div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">查看详情 →</span></div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
+            html += `<div class="category-block" id="cat-${cat.id}"><div class="category-header"><div class="category-title"><span>${cat.icon}</span> ${getCategoryName(cat)}</div></div><div class="subcategory-bar"><button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">${currentLang === 'zh' ? '全部' : 'All'}</button>${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}<button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button></div><div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">${tools.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-info"><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div></div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('')}</div></div>`;
         }
         container.innerHTML = html;
         if (currentSearchKeyword) performSearch();
         applyFiltersAndSort();
         setPriceFilter(currentPriceFilter);
-        // 渲染统计面板
         renderStatsPanel();
     }
-
+    
     function renderFeatured() {
         const sorted = [...toolsData].sort((a,b) => b.hot - a.hot).slice(0, 4);
-        document.getElementById("featuredGrid").innerHTML = sorted.map(t => `
-            <div class="featured-card" onclick="showDetail(${t.id})">
-                <div class="featured-name">${t.name}<span class="featured-hot">🔥 ${t.hot}</span></div>
-                <div class="featured-desc">${t.desc.substring(0, 45)}...</div>
-            </div>
-        `).join('');
+        document.getElementById("featuredGrid").innerHTML = sorted.map(t => `<div class="featured-card" onclick="showDetail(${t.id})"><div class="featured-name">${t.name}<span class="featured-hot">🔥 ${t.hot}</span></div><div class="featured-desc">${(getToolDesc(t) || '').substring(0, 45)}...</div></div>`).join('');
     }
-
+    
     function renderRank() {
         let sorted = [...toolsData];
         if (currentRankType === 'day') sorted.sort((a,b) => b.dayViews - a.dayViews);
         else if (currentRankType === 'week') sorted.sort((a,b) => b.weekViews - a.weekViews);
         else sorted.sort((a,b) => b.monthViews - a.monthViews);
-        document.getElementById("rankList").innerHTML = sorted.slice(0, 8).map((t, i) => `
-            <div class="rank-item" onclick="showDetail(${t.id})">
-                <span class="rank-number">${i+1}</span>
-                <span class="rank-name">${t.name}</span>
-                <span class="rank-views">${formatNumber(currentRankType === 'day' ? t.dayViews : (currentRankType === 'week' ? t.weekViews : t.monthViews))}</span>
-            </div>
-        `).join('');
-    }
-
-    function switchRank(type) {
-        currentRankType = type;
-        document.querySelectorAll('.rank-tab').forEach(tab => {
-            tab.classList.remove('active');
-            if (tab.dataset.rank === type) tab.classList.add('active');
-        });
-        renderRank();
-    }
-
-    function renderHotNews() {
-        const news = [
-            { title: "DeepSeek-V3发布，性能超越GPT-4", date: "05-20" },
-            { title: "腾讯混元大模型全面开源", date: "05-18" },
-            { title: "Kimi支持200万字超长上下文", date: "05-15" },
-            { title: "Midjourney V7即将发布", date: "05-12" }
-        ];
-        document.getElementById("hotNewsList").innerHTML = news.map(n => `<div class="rank-item"><span>📰</span><span style="flex:1; margin-left:8px">${n.title}</span><span>${n.date}</span></div>`).join('');
-    }
-
-    function renderTagCloud() {
-        const allTags = [...new Set(toolsData.flatMap(t => t.tags))].slice(0, 25);
-        document.getElementById("tagCloud").innerHTML = allTags.map(tag => `<span class="tag" onclick="searchByTag('${tag}')">${tag}</span>`).join('');
-    }
-
-    function searchByKeyword(kw) { 
-        if (showFavoritesPage) showHome();
-        setTimeout(() => { document.getElementById("heroSearchInput").value = kw; performSearch(); }, 100);
+        document.getElementById("rankList").innerHTML = sorted.slice(0, 8).map((t, i) => `<div class="rank-item" onclick="showDetail(${t.id})"><span class="rank-number">${i+1}</span><span class="rank-name">${t.name}</span><span class="rank-views">${formatNumber(currentRankType === 'day' ? t.dayViews : (currentRankType === 'week' ? t.weekViews : t.monthViews))}</span></div>`).join('');
     }
     
-    function searchByTag(tag) { 
-        if (showFavoritesPage) showHome();
-        setTimeout(() => { document.getElementById("heroSearchInput").value = tag; performSearch(); }, 100);
+    function switchRank(type) {
+        currentRankType = type;
+        document.querySelectorAll('.rank-tab').forEach(tab => { tab.classList.remove('active'); if (tab.dataset.rank === type) tab.classList.add('active'); });
+        renderRank();
     }
-
+    
+    function renderHotNews() {
+        const news = [{ title: "DeepSeek-V3发布，性能超越GPT-4", date: "05-20" }, { title: "腾讯混元大模型全面开源", date: "05-18" }, { title: "Kimi支持200万字超长上下文", date: "05-15" }, { title: "Midjourney V7即将发布", date: "05-12" }];
+        document.getElementById("hotNewsList").innerHTML = news.map(n => `<div class="rank-item"><span>📰</span><span style="flex:1; margin-left:10px">${n.title}</span><span>${n.date}</span></div>`).join('');
+    }
+    
+    function renderTagCloud() {
+        const allTags = [...new Set(toolsData.flatMap(t => t.tags))].slice(0, 20);
+        document.getElementById("tagCloud").innerHTML = allTags.map(tag => `<span class="tag" onclick="searchByTag('${tag}')">${tag}</span>`).join('');
+    }
+    
+    function searchByKeyword(kw) { if (showFavoritesPage) showHome(); setTimeout(() => { document.getElementById("heroSearchInput").value = kw; performSearch(); }, 100); }
+    function searchByTag(tag) { if (showFavoritesPage) showHome(); setTimeout(() => { document.getElementById("heroSearchInput").value = tag; performSearch(); }, 100); }
+    
     function renderAll() {
-        if (showFavoritesPage) {
-            renderFavoritesPage();
-        } else {
-            renderSidebar();
-            renderContent();
-            renderFeatured();
-            renderRank();
-            renderHotNews();
-            renderTagCloud();
-        }
-        renderSearchHistory();
-        updateFavCountInSidebar();
+        if (showFavoritesPage) renderFavoritesPage();
+        else { renderSidebar(); renderContent(); renderFeatured(); renderRank(); renderHotNews(); renderTagCloud(); }
+        renderSearchHistory(); updateFavCountInSidebar(); renderUserBar();
     }
-
+    
     function init() {
         renderAll();
-        document.querySelectorAll('.rank-tab').forEach(tab => {
-            tab.addEventListener('click', () => switchRank(tab.dataset.rank));
-        });
-        // 挂载全局函数
-        window.filterBySub = filterBySub;
-        window.scrollToCategory = scrollToCategory;
-        window.performSearch = performSearch;
-        window.clearSearch = clearSearch;
-        window.handleSearchInput = handleSearchInput;
-        window.searchByKeyword = searchByKeyword;
-        window.searchByTag = searchByTag;
-        window.clearSearchAndScroll = clearSearchAndScroll;
-        window.clearSearchHistory = clearSearchHistory;
-        window.toggleFavorite = toggleFavorite;
-        window.toggleFavoriteFromCard = toggleFavoriteFromCard;
-        window.showFavorites = showFavorites;
-        window.showHome = showHome;
-        window.filterFavByCategory = filterFavByCategory;
-        window.clearAllFavorites = clearAllFavorites;
-        window.exportFavorites = exportFavorites;
-        window.importFavorites = importFavorites;
-        window.showDetail = showDetail;
-        window.closeModal = closeModal;
-        window.showSubmitTip = showSubmitTip;
-        window.showFriendlyLink = showFriendlyLink;
-        window.showDisclaimer = showDisclaimer;
-        window.showAdvertise = showAdvertise;
-        window.showAbout = showAbout;
-        window.showIcp = showIcp;
-        window.openLink = openLink;
-        window.setSort = setSort;
-        window.setPriceFilter = setPriceFilter;
-        window.setView = setView;
-        window.copyToClipboard = copyToClipboard;
+        switchLanguage(currentLang);
+        document.querySelectorAll('.rank-tab').forEach(tab => tab.addEventListener('click', () => switchRank(tab.dataset.rank)));
+        window.filterBySub = filterBySub; window.scrollToCategory = scrollToCategory; window.performSearch = performSearch;
+        window.clearSearch = clearSearch; window.handleSearchInput = handleSearchInput; window.searchByKeyword = searchByKeyword;
+        window.searchByTag = searchByTag; window.clearSearchAndScroll = clearSearchAndScroll; window.clearSearchHistory = clearSearchHistory;
+        window.toggleFavorite = toggleFavorite; window.toggleFavoriteFromCard = toggleFavoriteFromCard; window.showFavorites = showFavorites;
+        window.showHome = showHome; window.filterFavByCategory = filterFavByCategory; window.clearAllFavorites = clearAllFavorites;
+        window.exportFavorites = exportFavorites; window.importFavorites = importFavorites; window.showDetail = showDetail;
+        window.closeModal = closeModal; window.showSubmitTip = showSubmitTip; window.showFriendlyLink = showFriendlyLink;
+        window.showDisclaimer = showDisclaimer; window.showAdvertise = showAdvertise; window.showAbout = showAbout;
+        window.showIcp = showIcp; window.openLink = openLink; window.setSort = setSort; window.setPriceFilter = setPriceFilter;
+        window.setView = setView; window.copyToClipboard = copyToClipboard; window.handleLogin = handleLogin;
+        window.handleRegister = handleRegister; window.handleLogout = handleLogout; window.showUserProfile = showUserProfile;
+        window.showAuthModal = showAuthModal;
     }
     init();
 </script>
