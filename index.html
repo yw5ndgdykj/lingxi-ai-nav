@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>灵犀AI导航 - 发现最聪明的AI工具</title>
+    <title id="siteTitle">灵犀AI导航 - 发现最聪明的AI工具</title>
+    <meta name="description" id="siteDesc" content="灵犀AI导航是专业的AI工具导航平台，收录100+细分领域1500+AI工具">
+    <meta name="keywords" content="AI工具,AI导航,人工智能,灵犀AI导航">
+    <meta name="author" content="灵犀AI导航">
+    <meta property="og:title" id="ogTitle" content="灵犀AI导航 - 发现最聪明的AI工具">
+    <meta property="og:description" id="ogDesc" content="专业的AI工具导航平台，收录100+细分领域1500+AI工具">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
+    <meta property="og:image" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -81,7 +93,7 @@
         .lang-switch {
             position: absolute;
             top: 20px;
-            right: 140px;
+            left: 32px;
             display: flex;
             gap: 8px;
             z-index: 10;
@@ -287,10 +299,10 @@
         }
         .more-btn:hover { color: #00d4ff; transform: translateX(3px); }
 
-        /* ==================== 全新小巧卡片样式 ==================== */
+        /* ==================== 修改后的卡片样式（紧凑小巧，无大图标） ==================== */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 20px;
         }
         
@@ -299,7 +311,7 @@
             backdrop-filter: blur(12px);
             border-radius: 20px;
             border: 1px solid rgba(0, 212, 255, 0.15);
-            padding: 16px 14px 14px 14px;
+            padding: 16px 16px 14px 16px;
             transition: all 0.35s;
             cursor: pointer;
             position: relative;
@@ -315,20 +327,19 @@
             background: rgba(28, 28, 48, 0.85);
         }
         
-        /* 卡片头部：名称和价格标签在同一行 */
+        /* 工具名称和价格标签在同一行 */
         .tool-header {
             display: flex;
             align-items: baseline;
             justify-content: space-between;
-            margin-bottom: 8px;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
         .tool-name {
             font-size: 18px;
             font-weight: 700;
             color: #e0e0e0;
-            letter-spacing: -0.2px;
         }
         .free-badge {
             display: inline-block;
@@ -340,9 +351,9 @@
             flex-shrink: 0;
         }
         
-        /* 卡片描述：只显示一行简介，鼠标悬浮时显示完整 */
+        /* 描述文字 */
         .tool-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: #a0a0b0;
             line-height: 1.45;
             margin-bottom: 12px;
@@ -350,7 +361,6 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 38px;
         }
         
         /* 标签区域 */
@@ -369,7 +379,7 @@
             font-weight: 500;
         }
         
-        /* 底部信息：浏览量 + 查看详情 */
+        /* 底部：浏览量和查看详情 */
         .tool-footer {
             display: flex;
             justify-content: space-between;
@@ -387,9 +397,12 @@
             transition: all 0.2s;
             font-size: 11px;
         }
-        .tool-card:hover .tool-link { opacity: 1; transform: translateX(3px); }
+        .tool-card:hover .tool-link {
+            opacity: 1;
+            transform: translateX(3px);
+        }
         
-        /* 收藏按钮保持不变 */
+        /* 收藏按钮位置保持不变 */
         .favorite-btn {
             position: absolute;
             top: 12px;
@@ -432,7 +445,6 @@
         }
         .tools-grid.list-view .tool-desc {
             margin-bottom: 0;
-            min-height: auto;
         }
         .tools-grid.list-view .tool-tags {
             margin-bottom: 0;
@@ -450,8 +462,8 @@
             right: 0;
             margin-left: 10px;
         }
-        
-        /* 其他原有样式保持不变 */
+
+        /* 以下所有样式保持不变（收藏页面、统计面板、右侧栏、页脚、弹窗等） */
         .favorites-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 25px; padding-bottom: 18px; border-bottom: 2px solid rgba(0, 212, 255, 0.2);
@@ -623,7 +635,7 @@
             .filter-bar { flex-direction: column; align-items: stretch; }
             .filter-group { justify-content: center; }
             .tool-name { font-size: 16px; }
-            .tool-desc { font-size: 12px; }
+            .tool-desc { font-size: 11px; }
         }
     </style>
 </head>
