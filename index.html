@@ -3,19 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title id="siteTitle">灵犀AI导航 - 发现最聪明的AI工具</title>
-    <meta name="description" id="siteDesc" content="灵犀AI导航是专业的AI工具导航平台，收录100+细分领域1500+AI工具">
-    <meta name="keywords" content="AI工具,AI导航,人工智能,灵犀AI导航">
-    <meta name="author" content="灵犀AI导航">
-    <meta property="og:title" id="ogTitle" content="灵犀AI导航 - 发现最聪明的AI工具">
-    <meta property="og:description" id="ogDesc" content="专业的AI工具导航平台，收录100+细分领域1500+AI工具">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
-    <meta property="og:image" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>灵犀AI导航 - 发现最聪明的AI工具</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -93,7 +81,7 @@
         .lang-switch {
             position: absolute;
             top: 20px;
-            left: 32px;
+            right: 140px;
             display: flex;
             gap: 8px;
             z-index: 10;
@@ -299,57 +287,171 @@
         }
         .more-btn:hover { color: #00d4ff; transform: translateX(3px); }
 
+        /* ==================== 全新小巧卡片样式 ==================== */
         .tools-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
         }
-        .tools-grid.list-view {
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .tools-grid.list-view .tool-card {
-            display: flex; align-items: center; text-align: left; padding: 16px 20px; gap: 20px;
-        }
-        .tools-grid.list-view .tool-icon { margin: 0; width: 56px; height: 56px; flex-shrink: 0; font-size: 28px; }
-        .tools-grid.list-view .tool-info { flex: 1; text-align: left; }
-        .tools-grid.list-view .tool-footer { flex-shrink: 0; border-top: none; padding-top: 0; min-width: 130px; }
-        .tools-grid.list-view .favorite-btn { position: relative; top: 0; right: 0; margin-left: 10px; }
         
         .tool-card {
-            background: rgba(18, 18, 32, 0.65); backdrop-filter: blur(12px);
-            border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
-            padding: 20px 16px 16px 16px; transition: all 0.35s;
-            cursor: pointer; position: relative; text-align: center;
-            opacity: 0; transform: translateY(20px); animation: fadeInUp 0.4s ease forwards;
+            background: rgba(18, 18, 32, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 16px 14px 14px 14px;
+            transition: all 0.35s;
+            cursor: pointer;
+            position: relative;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.4s ease forwards;
         }
-        .tool-card:hover { transform: translateY(-6px); border-color: #00d4ff; box-shadow: 0 20px 30px -12px rgba(0, 212, 255, 0.25); background: rgba(28, 28, 48, 0.85); }
-        .tool-icon {
-            width: 72px; height: 56px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
-            border-radius: 16px; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 14px auto; font-size: 28px; transition: all 0.3s; border: 1px solid rgba(0, 212, 255, 0.2);
+        .tool-card:hover {
+            transform: translateY(-6px);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 30px -12px rgba(0, 212, 255, 0.25);
+            background: rgba(28, 28, 48, 0.85);
         }
-        .tool-card:hover .tool-icon { transform: scale(1.05); border-color: #00d4ff; }
-        .tool-name { font-size: 18px; font-weight: 700; color: #e0e0e0; margin-bottom: 6px; }
-        .tool-desc { font-size: 13px; color: #a0a0b0; line-height: 1.45; margin-bottom: 12px; padding: 0 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 38px; }
-        .tool-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .tool-tag { background: rgba(0, 212, 255, 0.1); padding: 4px 12px; border-radius: 20px; font-size: 11px; color: #80d4ff; }
-        .tool-footer { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #606080; border-top: 1px solid rgba(0, 212, 255, 0.1); padding-top: 10px; margin-top: 6px; }
-        .tool-link { color: #00d4ff; font-weight: 500; opacity: 0.7; transition: all 0.2s; font-size: 12px; }
+        
+        /* 卡片头部：名称和价格标签在同一行 */
+        .tool-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .tool-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #e0e0e0;
+            letter-spacing: -0.2px;
+        }
+        .free-badge {
+            display: inline-block;
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(168,85,247,0.2));
+            color: #00d4ff;
+            flex-shrink: 0;
+        }
+        
+        /* 卡片描述：只显示一行简介，鼠标悬浮时显示完整 */
+        .tool-desc {
+            font-size: 13px;
+            color: #a0a0b0;
+            line-height: 1.45;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 38px;
+        }
+        
+        /* 标签区域 */
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .tool-tag {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            color: #80d4ff;
+            font-weight: 500;
+        }
+        
+        /* 底部信息：浏览量 + 查看详情 */
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #606080;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+        .tool-link {
+            color: #00d4ff;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: all 0.2s;
+            font-size: 11px;
+        }
         .tool-card:hover .tool-link { opacity: 1; transform: translateX(3px); }
         
+        /* 收藏按钮保持不变 */
         .favorite-btn {
-            position: absolute; top: 14px; right: 14px;
-            background: rgba(0, 0, 0, 0.5); border: none; font-size: 16px;
-            cursor: pointer; opacity: 0.5; color: #ffd700;
-            width: 32px; height: 32px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; transition: all 0.25s; z-index: 2;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0.5;
+            color: #ffd700;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s;
+            z-index: 2;
         }
         .favorite-btn:hover, .favorite-btn.active { opacity: 1; transform: scale(1.1); }
-        .free-badge {
-            display: inline-block; font-size: 10px; padding: 3px 10px;
-            border-radius: 20px; background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(168,85,247,0.2));
-            color: #00d4ff; margin-left: 8px; vertical-align: middle;
+        
+        /* 列表视图适配 */
+        .tools-grid.list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-
+        .tools-grid.list-view .tool-card {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 12px 16px;
+            gap: 16px;
+        }
+        .tools-grid.list-view .tool-header {
+            margin-bottom: 4px;
+        }
+        .tools-grid.list-view .tool-name {
+            font-size: 16px;
+        }
+        .tools-grid.list-view .tool-desc {
+            margin-bottom: 0;
+            min-height: auto;
+        }
+        .tools-grid.list-view .tool-tags {
+            margin-bottom: 0;
+        }
+        .tools-grid.list-view .tool-footer {
+            flex-shrink: 0;
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+            min-width: 120px;
+        }
+        .tools-grid.list-view .favorite-btn {
+            position: relative;
+            top: 0;
+            right: 0;
+            margin-left: 10px;
+        }
+        
+        /* 其他原有样式保持不变 */
         .favorites-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 25px; padding-bottom: 18px; border-bottom: 2px solid rgba(0, 212, 255, 0.2);
@@ -520,10 +622,8 @@
             .daily-content { flex-direction: column; text-align: center; }
             .filter-bar { flex-direction: column; align-items: stretch; }
             .filter-group { justify-content: center; }
-            .tool-icon { width: 64px; height: 50px; font-size: 24px; }
             .tool-name { font-size: 16px; }
-            .category-title { font-size: 18px; }
-            .subcategory-btn { font-size: 11px; padding: 4px 12px; }
+            .tool-desc { font-size: 12px; }
         }
     </style>
 </head>
@@ -1040,7 +1140,7 @@
         } else {
             html += `<div class="tools-grid">`;
             filteredFavs.forEach(t => {
-                html += `<div class="tool-card" onclick="showDetail(${t.id})"><button class="favorite-btn active" onclick="toggleFavoriteFromCard(${t.id}, event)">★</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`;
+                html += `<div class="tool-card" onclick="showDetail(${t.id})"><button class="favorite-btn active" onclick="toggleFavoriteFromCard(${t.id}, event)">★</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`;
             });
             html += `</div>`;
         }
@@ -1329,7 +1429,7 @@
         if (filtered.length === 0) {
             grid.innerHTML = '<div style="text-align:center; padding:50px; color:#606070; font-size:15px;">' + (currentLang === 'zh' ? '暂无工具' : 'No tools found') + '</div>';
         } else {
-            grid.innerHTML = filtered.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-info"><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div></div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('');
+            grid.innerHTML = filtered.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('');
         }
         const bar = grid.parentElement.querySelector('.subcategory-bar');
         if (bar) {
@@ -1357,7 +1457,7 @@
         for (const cat of categories) {
             const tools = toolsData.filter(t => t.category === cat.id);
             if (tools.length === 0) continue;
-            html += `<div class="category-block" id="cat-${cat.id}"><div class="category-header"><div class="category-title"><span>${cat.icon}</span> ${getCategoryName(cat)}</div></div><div class="subcategory-bar"><button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">${currentLang === 'zh' ? '全部' : 'All'}</button>${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}<button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button></div><div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">${tools.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-icon">${getToolIcon(t.name)}</div><div class="tool-info"><div class="tool-name">${t.name}<span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div></div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('')}</div></div>`;
+            html += `<div class="category-block" id="cat-${cat.id}"><div class="category-header"><div class="category-title"><span>${cat.icon}</span> ${getCategoryName(cat)}</div></div><div class="subcategory-bar"><button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">${currentLang === 'zh' ? '全部' : 'All'}</button>${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}<button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button></div><div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">${tools.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('')}</div></div>`;
         }
         container.innerHTML = html;
         if (currentSearchKeyword) performSearch();
