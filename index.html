@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title id="siteTitle">灵犀AI导航 - 发现最聪明的AI工具</title>
-    <meta name="description" id="siteDesc" content="灵犀AI导航是专业的AI工具导航平台，收录100+细分领域1500+AI工具">
-    <meta name="keywords" content="AI工具,AI导航,人工智能,灵犀AI导航">
-    <meta name="author" content="灵犀AI导航">
-    <meta property="og:title" id="ogTitle" content="灵犀AI导航 - 发现最聪明的AI工具">
+    <title id="siteTitle">灵犀AI - 发现最聪明的AI工具</title>
+    <meta name="description" id="siteDesc" content="灵犀AI是专业的AI工具导航平台，收录100+细分领域1500+AI工具">
+    <meta name="keywords" content="AI工具,AI导航,人工智能,灵犀AI">
+    <meta name="author" content="灵犀AI">
+    <meta property="og:title" id="ogTitle" content="灵犀AI - 发现最聪明的AI工具">
     <meta property="og:description" id="ogDesc" content="专业的AI工具导航平台，收录100+细分领域1500+AI工具">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yw5ndgdykj.github.io/lingxi-ai-nav/">
@@ -116,39 +116,6 @@
         }
         .lang-btn:hover { background: rgba(0,212,255,0.25); transform: translateY(-1px); }
         
-        .user-bar {
-            position: absolute;
-            top: 20px;
-            right: 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 10;
-        }
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .user-avatar:hover { transform: scale(1.08); box-shadow: 0 0 20px rgba(0,212,255,0.5); }
-        .login-btn {
-            background: rgba(0, 212, 255, 0.12);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .login-btn:hover { background: rgba(0, 212, 255, 0.25); transform: translateY(-2px); }
-        
         .hero-search-section { max-width: 650px; margin: 15px auto; }
         .hero-search-box {
             display: flex;
@@ -191,29 +158,6 @@
             border: 1px solid rgba(0, 212, 255, 0.2); font-size: 13px; transition: all 0.3s;
         }
         .quick-nav-item:hover { background: rgba(0, 212, 255, 0.2); transform: translateY(-3px); }
-        
-        .daily-card {
-            background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(168,85,247,0.08));
-            border-radius: 20px; padding: 24px; margin: 20px 0; border: 1px solid rgba(0,212,255,0.2);
-            position: relative; overflow: hidden;
-        }
-        .daily-card::before {
-            content: "✨ 今日推荐";
-            position: absolute; top: 0; left: 0;
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            padding: 6px 18px; font-size: 12px; border-radius: 0 0 12px 0; font-weight: 600;
-        }
-        .daily-content { margin-top: 24px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-        .daily-icon { font-size: 56px; }
-        .daily-info { flex: 1; }
-        .daily-name { font-size: 24px; font-weight: 700; color: #00d4ff; margin-bottom: 10px; }
-        .daily-desc { color: #a0a0b0; font-size: 14px; margin-bottom: 14px; line-height: 1.5; }
-        .daily-btn {
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            border: none; border-radius: 30px; padding: 10px 28px;
-            color: white; font-size: 14px; cursor: pointer; transition: all 0.3s;
-        }
-        .daily-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,212,255,0.3); }
         
         .filter-bar {
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
@@ -277,8 +221,6 @@
             border-radius: 12px; margin: 3px 10px;
         }
         .sidebar-item:hover { background: rgba(0,212,255,0.12); color: #00d4ff; padding-left: 28px; transform: translateX(4px); }
-        .sidebar-fav-section { border-top: 1px solid rgba(0, 212, 255, 0.15); margin-top: 12px; padding-top: 12px; }
-        .fav-count { background: rgba(0, 212, 255, 0.2); padding: 3px 10px; border-radius: 20px; font-size: 12px; margin-left: auto; }
         
         .content-area { flex: 1; min-width: 0; }
         .category-block { margin-bottom: 50px; scroll-margin-top: 85px; }
@@ -398,27 +340,6 @@
             transform: translateX(3px);
         }
         
-        .favorite-btn {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            opacity: 0.5;
-            color: #ffd700;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.25s;
-            z-index: 2;
-        }
-        .favorite-btn:hover, .favorite-btn.active { opacity: 1; transform: scale(1.1); }
-        
         .tools-grid.list-view {
             display: flex;
             flex-direction: column;
@@ -450,39 +371,7 @@
             margin-top: 0;
             min-width: 120px;
         }
-        .tools-grid.list-view .favorite-btn {
-            position: relative;
-            top: 0;
-            right: 0;
-            margin-left: 10px;
-        }
 
-        .favorites-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 25px; padding-bottom: 18px; border-bottom: 2px solid rgba(0, 212, 255, 0.2);
-        }
-        .favorites-header h2 { color: #00d4ff; font-size: 24px; display: flex; align-items: center; gap: 12px; }
-        .fav-actions { display: flex; gap: 12px; }
-        .fav-action-btn {
-            background: rgba(0, 212, 255, 0.08); border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 8px 18px; border-radius: 30px; font-size: 13px; cursor: pointer; transition: all 0.2s; color: #a0a0b0;
-        }
-        .fav-action-btn:hover { background: rgba(0,212,255,0.18); color: #00d4ff; transform: translateY(-2px); }
-        .fav-category-filter {
-            display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 212, 255, 0.12);
-        }
-        .fav-cat-btn {
-            background: none; border: none; padding: 6px 18px; font-size: 14px;
-            color: #a0a0b0; cursor: pointer; border-radius: 20px; transition: all 0.2s;
-        }
-        .fav-cat-btn:hover, .fav-cat-btn.active { background: rgba(0,212,255,0.15); color: #00d4ff; }
-        .empty-fav { text-align: center; padding: 80px 20px; color: #606080; font-size: 16px; }
-        .back-to-home {
-            display: inline-block; margin-top: 24px;
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            padding: 10px 28px; border-radius: 30px; cursor: pointer; font-size: 14px; transition: all 0.3s;
-        }
-        
         .stats-panel {
             background: rgba(15, 15, 25, 0.4); backdrop-filter: blur(12px);
             border-radius: 20px; border: 1px solid rgba(0, 212, 255, 0.15);
@@ -601,19 +490,6 @@
         @keyframes slideInToast { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOutToast { to { opacity: 0; transform: translateX(100px); } }
         
-        .comments-section { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(0,212,255,0.12); }
-        .comments-title { font-size: 15px; font-weight: 600; color: #00d4ff; margin-bottom: 15px; }
-        .comment-input { display: flex; gap: 15px; margin-bottom: 20px; }
-        .comment-input textarea { flex: 1; background: rgba(0,212,255,0.05); border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; padding: 14px; color: #e0e0e0; font-size: 14px; resize: vertical; font-family: inherit; outline: none; }
-        .comment-input textarea:focus { border-color: #00d4ff; }
-        .comment-btn { background: linear-gradient(135deg, #00d4ff, #a855f7); border: none; border-radius: 30px; padding: 0 24px; color: white; font-size: 14px; cursor: pointer; transition: all 0.2s; }
-        .comment-list { max-height: 300px; overflow-y: auto; }
-        .comment-item { background: rgba(0,212,255,0.03); border-radius: 12px; padding: 12px 15px; margin-bottom: 12px; }
-        .comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
-        .comment-author { color: #00d4ff; font-weight: 600; font-size: 13px; }
-        .comment-time { color: #606080; font-size: 11px; }
-        .comment-text { font-size: 14px; color: #c0c0d0; line-height: 1.4; }
-        
         @media (max-width: 1200px) { .right-sidebar { display: none; } }
         @media (max-width: 768px) {
             .sidebar { display: none; }
@@ -622,8 +498,6 @@
             .tools-grid { grid-template-columns: 1fr; gap: 15px; }
             .main-container { padding: 0 16px 16px; }
             .lang-switch { right: 100px; top: 12px; }
-            .user-bar { right: 16px; top: 12px; }
-            .user-name { display: none; }
             .daily-content { flex-direction: column; text-align: center; }
             .filter-bar { flex-direction: column; align-items: stretch; }
             .filter-group { justify-content: center; }
@@ -646,10 +520,9 @@
                 <button class="lang-btn" data-lang="en">English</button>
             </div>
             <div class="hero-title">
-                <h1 data-i18n="site_title">✨ 灵犀AI导航</h1>
+                <h1 data-i18n="site_title">✨ 灵犀AI</h1>
                 <p data-i18n="site_desc">发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广</p>
             </div>
-            <div class="user-bar" id="userBar"></div>
             
             <div class="hero-search-section">
                 <div class="hero-search-box">
@@ -676,13 +549,12 @@
                 <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-image')"><span>🎨</span> <span data-i18n="nav_image">AI图像</span></div>
                 <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-office')"><span>💼</span> <span data-i18n="nav_office">AI办公</span></div>
                 <div class="quick-nav-item" onclick="clearSearchAndScroll('ai-code')"><span>💻</span> <span data-i18n="nav_code">AI编程</span></div>
-                <div class="quick-nav-item" onclick="showSubmitTip()"><span>📢</span> <span data-i18n="nav_submit">立即上榜</span></div>
             </div>
             <div class="featured-section" id="featuredSection">
                 <div class="featured-title"><span>🔥</span> <span data-i18n="featured_title">精选推荐 · 热度飙升</span></div>
                 <div class="featured-grid" id="featuredGrid"></div>
             </div>
-            <div class="tip-banner">💡 <span data-i18n="tip_banner">欢迎投稿和提交AI应用</span>，<a onclick="showSubmitTip()"><span data-i18n="tip_link">灵犀AI导航将免费提供推广曝光！</span></a></div>
+            <div class="tip-banner">💡 <span data-i18n="tip_banner">欢迎投稿和提交AI应用</span>，<a onclick="showSubmitTip()"><span data-i18n="tip_link">灵犀AI将免费提供推广曝光！</span></a></div>
         </div>
     </div>
 
@@ -707,33 +579,24 @@
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-about">
-            <div class="footer-logo">✨ 灵犀AI导航</div>
-            <div class="footer-desc" data-i18n="footer_desc">灵犀AI导航—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！</div>
+            <div class="footer-logo">✨ 灵犀AI</div>
+            <div class="footer-desc" data-i18n="footer_desc">灵犀AI—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！</div>
         </div>
         <div class="footer-links">
             <a onclick="showSubmitTip()"><span data-i18n="footer_submit">📝 AI工具提交入口</span></a>
             <a onclick="showFriendlyLink()"><span data-i18n="footer_link">🔗 友链申请</span></a>
             <a onclick="showDisclaimer()"><span data-i18n="footer_disclaimer">⚖️ 免责声明</span></a>
-            <a onclick="showAdvertise()"><span data-i18n="footer_ad">📢 广告合作</span></a>
             <a onclick="showAbout()"><span data-i18n="footer_about">ℹ️ 关于我们</span></a>
         </div>
         <div class="footer-friends">
             <div class="friends-title" data-i18n="friends_title">🤝 友情链接</div>
-            <div class="friends-list">
-                <a onclick="openLink('https://www.deepseek.com')">DeepSeek</a>
-                <a onclick="openLink('https://yiyan.baidu.com')">文心一言</a>
-                <a onclick="openLink('https://kimi.moonshot.cn')">Kimi</a>
-                <a onclick="openLink('https://tongyi.aliyun.com')">通义千问</a>
-                <a onclick="openLink('https://www.doubao.com')">豆包</a>
-                <a onclick="openLink('https://chatglm.cn')">智谱清言</a>
-                <a onclick="openLink('https://kling.kuaishou.com')">可灵AI</a>
-                <a onclick="openLink('https://www.midjourney.com')">Midjourney</a>
+            <div class="friends-list" id="friendsList">
+                <!-- 友情链接预留位置，后续可动态添加 -->
             </div>
         </div>
         <div class="footer-copyright">
-            <p data-i18n="copyright1">欢迎大家踊跃提交各个垂直领域优质AI工具，获取收录和曝光推广（有原创好内容可以加运营微信获得平台免费发布）。</p>
-            <p data-i18n="copyright2">本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。</p>
-            <p>© 2025 灵犀AI导航 | <a onclick="showIcp()">京ICP备2025001号</a></p>
+            <p data-i18n="copyright1">欢迎大家踊跃提交各个垂直领域优质AI工具，有原创好内容也可以分享学习，本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。</p>
+            <p>© 2026 灵犀AI</p>
         </div>
     </div>
 </footer>
@@ -752,29 +615,29 @@
     // ==================== 双语词库 ====================
     const translations = {
         'zh': {
-            'site_title': '✨ 灵犀AI导航', 'site_desc': '发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广',
+            'site_title': '✨ 灵犀AI', 'site_desc': '发现最聪明的AI工具，每日更新 · 真实热度 · 免费推广',
             'search_btn': '搜索', 'hot_search': '热门搜索：',
-            'nav_model': 'AI大模型', 'nav_writing': 'AI写作', 'nav_video': 'AI视频', 'nav_image': 'AI图像', 'nav_office': 'AI办公', 'nav_code': 'AI编程', 'nav_submit': '立即上榜',
-            'featured_title': '精选推荐 · 热度飙升', 'tip_banner': '欢迎投稿和提交AI应用', 'tip_link': '灵犀AI导航将免费提供推广曝光！',
+            'nav_model': 'AI大模型', 'nav_writing': 'AI写作', 'nav_video': 'AI视频', 'nav_image': 'AI图像', 'nav_office': 'AI办公', 'nav_code': 'AI编程',
+            'featured_title': '精选推荐 · 热度飙升', 'tip_banner': '欢迎投稿和提交AI应用', 'tip_link': '灵犀AI将免费提供推广曝光！',
             'dashboard': '📊 数据看板', 'hot_rank': '🔥 热门工具榜', 'day_rank': '日榜', 'week_rank': '周榜', 'month_rank': '月榜',
             'hot_news': '📰 热点资讯', 'hot_tags': '🏷️ 热门标签',
-            'footer_desc': '灵犀AI导航—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！',
-            'footer_submit': '📝 AI工具提交入口', 'footer_link': '🔗 友链申请', 'footer_disclaimer': '⚖️ 免责声明', 'footer_ad': '📢 广告合作', 'footer_about': 'ℹ️ 关于我们',
-            'friends_title': '🤝 友情链接', 'copyright1': '欢迎大家踊跃提交各个垂直领域优质AI工具，获取收录和曝光推广（有原创好内容可以加运营微信获得平台免费发布）。',
-            'copyright2': '本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。',
+            'footer_desc': '灵犀AI—全球专业的AI工具榜单、AI工具导航平台，覆盖100+细分领域1500+AI工具！严格筛选优质AI工具，也是AI公司争相入驻的首选AI产品推广平台。AI工具哪家强？灵犀见真章！',
+            'footer_submit': '📝 AI工具提交入口', 'footer_link': '🔗 友链申请', 'footer_disclaimer': '⚖️ 免责声明', 'footer_about': 'ℹ️ 关于我们',
+            'friends_title': '🤝 友情链接', 'copyright1': '欢迎大家踊跃提交各个垂直领域优质AI工具，有原创好内容也可以分享学习，本站大部分工具资源收集于网络，仅供参考使用，版权归原作者所有。本站发布的内容若侵犯到您的权益，请联系站长删除，我们将及时处理。',
+            'copyright2': '© 2026 灵犀AI',
             'free': '免费', 'paid': '付费', 'both': '部分免费', 'view_detail': '查看详情 →'
         },
         'en': {
-            'site_title': '✨ Lingxi AI Navigation', 'site_desc': 'Discover the smartest AI tools | Daily Updates | Real-time Hotlist | Free Promotion',
+            'site_title': '✨ Lingxi AI', 'site_desc': 'Discover the smartest AI tools | Daily Updates | Real-time Hotlist | Free Promotion',
             'search_btn': 'Search', 'hot_search': 'Hot Searches:',
-            'nav_model': 'AI Models', 'nav_writing': 'AI Writing', 'nav_video': 'AI Video', 'nav_image': 'AI Image', 'nav_office': 'AI Office', 'nav_code': 'AI Code', 'nav_submit': 'Submit Tool',
-            'featured_title': 'Featured · Trending', 'tip_banner': 'Welcome to submit AI applications', 'tip_link': 'Lingxi AI Navigation offers free promotion!',
+            'nav_model': 'AI Models', 'nav_writing': 'AI Writing', 'nav_video': 'AI Video', 'nav_image': 'AI Image', 'nav_office': 'AI Office', 'nav_code': 'AI Code',
+            'featured_title': 'Featured · Trending', 'tip_banner': 'Welcome to submit AI applications', 'tip_link': 'Lingxi AI offers free promotion!',
             'dashboard': '📊 Dashboard', 'hot_rank': '🔥 Hot Tools', 'day_rank': 'Daily', 'week_rank': 'Weekly', 'month_rank': 'Monthly',
             'hot_news': '📰 News', 'hot_tags': '🏷️ Tags',
-            'footer_desc': 'Lingxi AI Navigation - Professional AI Tools Directory, covering 100+ sub-fields and 1500+ AI tools! Strictly selected high-quality AI tools.',
-            'footer_submit': '📝 Submit Tool', 'footer_link': '🔗 Friend Link', 'footer_disclaimer': '⚖️ Disclaimer', 'footer_ad': '📢 Advertise', 'footer_about': 'ℹ️ About',
+            'footer_desc': 'Lingxi AI - Professional AI Tools Directory, covering 100+ sub-fields and 1500+ AI tools! Strictly selected high-quality AI tools.',
+            'footer_submit': '📝 Submit Tool', 'footer_link': '🔗 Friend Link', 'footer_disclaimer': '⚖️ Disclaimer', 'footer_about': 'ℹ️ About',
             'friends_title': '🤝 Friends Links', 'copyright1': 'Welcome to submit high-quality AI tools in various vertical fields for inclusion and exposure.',
-            'copyright2': 'Most tools are collected from the internet for reference only. If any infringement occurs, please contact us to remove it.',
+            'copyright2': '© 2026 Lingxi AI',
             'free': 'Free', 'paid': 'Paid', 'both': 'Freemium', 'view_detail': 'View Details →'
         }
     };
@@ -877,97 +740,20 @@
     initParticles();
     animate();
 
-    // ==================== 页脚函数 ====================
-    function showFriendlyLink() { showToast('📧 友链申请请联系邮箱：link@lingxi.ai'); }
-    function showDisclaimer() { alert(currentLang === 'zh' ? '免责声明：\n\n本站部分工具来源于网络，仅供用户参考使用。如发现侵权内容，请联系我们删除。使用本站工具产生的后果由用户自行承担。' : 'Disclaimer:\n\nSome tools are from the internet for reference. If infringement occurs, please contact us to remove it.'); }
-    function showAdvertise() { showToast('📢 广告合作请联系微信：lingxi_ad'); }
-    function showAbout() { alert(currentLang === 'zh' ? '关于灵犀AI导航\n\n灵犀AI导航致力于为用户提供最优质的AI工具导航服务。我们严格筛选每个细分领域的AI工具，确保收录的工具真实可用。\n\n运营时间：2024年至今\n\n联系方式：lingxi@lingxi.ai' : 'About Lingxi AI Navigation\n\nLingxi AI Navigation is committed to providing users with the best AI tool directory service.\n\nContact: lingxi@lingxi.ai'); }
-    function showIcp() { showToast('京ICP备2025001号'); }
+    // ==================== 页脚函数（已按要求修改） ====================
+    function showFriendlyLink() { 
+        showToast('📧 请联系邮箱：Ai-lingxi@qq.com'); 
+    }
+    function showDisclaimer() { 
+        alert(currentLang === 'zh' ? '免责声明：\n\n本站部分工具来源于网络，仅供用户参考使用。如发现侵权内容，请联系我们删除。使用本站工具产生的后果由用户自行承担。' : 'Disclaimer:\n\nSome tools are from the internet for reference. If infringement occurs, please contact us to remove it.'); 
+    }
+    function showAbout() { 
+        alert(currentLang === 'zh' ? '灵犀AI致力于分享最优质的AI工具及学习方法。我们严格筛选每个细分领域的AI工具，确保收录的工具真实可用。\n\n联系方式：Ai-lingxi@qq.com' : 'Lingxi AI is committed to sharing the best AI tools and learning methods. We strictly select AI tools in each sub-field to ensure they are authentic and usable.\n\nContact: Ai-lingxi@qq.com'); 
+    }
+    function showSubmitTip() { 
+        showToast('📝 请联系邮箱：Ai-lingxi@qq.com'); 
+    }
     function openLink(url) { window.open(url, '_blank'); }
-    
-    // ==================== 用户系统 ====================
-    let currentUser = JSON.parse(localStorage.getItem('lingxi_current_user') || 'null');
-    let users = JSON.parse(localStorage.getItem('lingxi_users') || '{"test@lingxi.com":{"password":"123456","name":"测试用户","avatar":"🧙","favorites":[]}}');
-    
-    function saveUsers() { localStorage.setItem('lingxi_users', JSON.stringify(users)); }
-    function saveCurrentUser() { localStorage.setItem('lingxi_current_user', JSON.stringify(currentUser)); }
-    
-    function renderUserBar() {
-        const container = document.getElementById('userBar');
-        if (!container) return;
-        if (currentUser) {
-            container.innerHTML = `<div class="user-avatar" onclick="showUserProfile()">${currentUser.avatar || '👤'}</div><span class="user-name" onclick="showUserProfile()">${currentUser.name || currentUser.email}</span>`;
-        } else {
-            container.innerHTML = `<div class="login-btn" onclick="showAuthModal()">🔐 ${currentLang === 'zh' ? '登录/注册' : 'Login/Sign Up'}</div>`;
-        }
-    }
-    
-    function showAuthModal() {
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.innerHTML = `
-            <div class="modal-content" style="max-width:400px;">
-                <div class="modal-header"><h3>✨ ${currentLang === 'zh' ? '灵犀账号' : 'Lingxi Account'}</h3><button class="close-modal" onclick="this.closest('.modal').remove()">✕</button></div>
-                <div class="modal-body">
-                    <div style="display:flex; gap:20px; margin-bottom:24px; border-bottom:1px solid rgba(0,212,255,0.15); padding-bottom:10px;"><div id="tabLogin" style="cursor:pointer; color:#00d4ff; font-size:16px;">${currentLang === 'zh' ? '登录' : 'Login'}</div><div id="tabRegister" style="cursor:pointer; color:#a0a0b0; font-size:16px;">${currentLang === 'zh' ? '注册' : 'Register'}</div></div>
-                    <div id="loginForm"><input type="email" id="loginEmail" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '邮箱' : 'Email'}" value="test@lingxi.com"><input type="password" id="loginPassword" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '密码' : 'Password'}" value="123456"><button style="width:100%; background:linear-gradient(135deg,#00d4ff,#a855f7); border:none; border-radius:40px; padding:14px; color:white; font-size:15px; cursor:pointer;" onclick="handleLogin()">${currentLang === 'zh' ? '登录' : 'Login'}</button></div>
-                    <div id="registerForm" style="display:none;"><input type="text" id="regName" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '昵称' : 'Nickname'}"><input type="email" id="regEmail" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '邮箱' : 'Email'}"><input type="password" id="regPassword" style="width:100%; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.15); border-radius:14px; padding:14px 18px; margin-bottom:18px; color:#e0e0e0; font-size:14px;" placeholder="${currentLang === 'zh' ? '密码' : 'Password'}"><button style="width:100%; background:linear-gradient(135deg,#00d4ff,#a855f7); border:none; border-radius:40px; padding:14px; color:white; font-size:15px; cursor:pointer;" onclick="handleRegister()">${currentLang === 'zh' ? '注册' : 'Register'}</button></div>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-        document.getElementById('tabLogin').onclick = () => { document.getElementById('tabLogin').style.color='#00d4ff'; document.getElementById('tabRegister').style.color='#a0a0b0'; document.getElementById('loginForm').style.display='block'; document.getElementById('registerForm').style.display='none'; };
-        document.getElementById('tabRegister').onclick = () => { document.getElementById('tabRegister').style.color='#00d4ff'; document.getElementById('tabLogin').style.color='#a0a0b0'; document.getElementById('registerForm').style.display='block'; document.getElementById('loginForm').style.display='none'; };
-    }
-    
-    function handleLogin() {
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value;
-        if (!email || !password) { showToast(currentLang === 'zh' ? '请填写完整信息' : 'Please fill in all fields'); return; }
-        const user = users[email];
-        if (user && user.password === password) {
-            currentUser = { email: email, name: user.name, avatar: user.avatar };
-            saveCurrentUser();
-            const localFav = JSON.parse(localStorage.getItem('lingxi_favorites') || '[]');
-            const userFav = user.favorites || [];
-            const mergedFav = [...new Set([...localFav, ...userFav])];
-            localStorage.setItem('lingxi_favorites', JSON.stringify(mergedFav));
-            favorites = mergedFav;
-            saveFavorites();
-            renderAll();
-            renderUserBar();
-            showToast(`${currentLang === 'zh' ? '欢迎回来' : 'Welcome back'}，${user.name || email}！`);
-            document.querySelector('.modal.active')?.remove();
-        } else { showToast(currentLang === 'zh' ? '邮箱或密码错误' : 'Invalid email or password'); }
-    }
-    
-    function handleRegister() {
-        const name = document.getElementById('regName').value.trim();
-        const email = document.getElementById('regEmail').value.trim();
-        const password = document.getElementById('regPassword').value;
-        if (!name || !email || !password) { showToast(currentLang === 'zh' ? '请填写完整信息' : 'Please fill in all fields'); return; }
-        if (users[email]) { showToast(currentLang === 'zh' ? '邮箱已注册' : 'Email already registered'); return; }
-        users[email] = { password: password, name: name, avatar: '✨', favorites: [] };
-        saveUsers();
-        showToast(currentLang === 'zh' ? '注册成功，请登录' : 'Registration successful, please login');
-        document.querySelector('.modal.active')?.remove();
-    }
-    
-    function showUserProfile() {
-        const modal = document.createElement('div');
-        modal.className = 'modal active';
-        modal.innerHTML = `<div class="modal-content" style="max-width:400px;"><div class="modal-header"><h3>👤 ${currentLang === 'zh' ? '个人中心' : 'Profile'}</h3><button class="close-modal" onclick="this.closest('.modal').remove()">✕</button></div><div class="modal-body"><div style="text-align:center;"><div style="width:80px; height:80px; background:linear-gradient(135deg,#00d4ff,#a855f7); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:44px; margin:0 auto 16px;">${currentUser.avatar || '👤'}</div><div style="font-size:20px; margin-bottom:10px;">${currentUser.name || currentUser.email}</div><div style="font-size:14px; color:#8080a0; margin-bottom:18px;">${currentUser.email}</div><div style="margin:20px 0; padding:15px; background:rgba(0,212,255,0.05); border-radius:16px;"><div style="font-size:15px;">⭐ ${currentLang === 'zh' ? '收藏工具' : 'Favorite Tools'}: ${favorites.length} ${currentLang === 'zh' ? '个' : ''}</div></div><button style="background:rgba(255,107,107,0.15); border:1px solid rgba(255,107,107,0.3); padding:10px 24px; border-radius:30px; color:#ff6b6b; cursor:pointer; font-size:14px;" onclick="handleLogout()">${currentLang === 'zh' ? '退出登录' : 'Logout'}</button></div></div></div>`;
-        document.body.appendChild(modal);
-    }
-    
-    function handleLogout() {
-        if (currentUser && users[currentUser.email]) { users[currentUser.email].favorites = favorites; saveUsers(); }
-        currentUser = null; saveCurrentUser();
-        favorites = []; saveFavorites();
-        renderAll(); renderUserBar();
-        showToast(currentLang === 'zh' ? '已退出登录' : 'Logged out');
-        document.querySelector('.modal.active')?.remove();
-    }
     
     // ==================== 搜索历史 ====================
     let searchHistory = JSON.parse(localStorage.getItem('lingxi_search_history') || '[]');
@@ -1063,94 +849,6 @@
     }
     
     function clearSearchAndScroll(categoryId) { clearSearch(); scrollToCategory(categoryId); }
-    
-    // ==================== 收藏功能 ====================
-    let favorites = JSON.parse(localStorage.getItem('lingxi_favorites') || '[]');
-    let showFavoritesPage = false;
-    let favCategoryFilter = 'all';
-    
-    function saveFavorites() { localStorage.setItem('lingxi_favorites', JSON.stringify(favorites)); updateFavCountInSidebar(); }
-    function updateFavCountInSidebar() { const span = document.getElementById('favCountSpan'); if (span) span.textContent = favorites.length; }
-    function isFavorite(id) { return favorites.includes(id); }
-    
-    function toggleFavorite(id) {
-        const idx = favorites.indexOf(id);
-        if (idx === -1) { favorites.push(id); showToast('❤️ ' + (currentLang === 'zh' ? '已添加到收藏' : 'Added to favorites')); }
-        else { favorites.splice(idx, 1); showToast('💔 ' + (currentLang === 'zh' ? '已取消收藏' : 'Removed from favorites')); }
-        saveFavorites();
-        if (showFavoritesPage) renderFavoritesPage();
-        else renderAll();
-    }
-    
-    function toggleFavoriteFromCard(id, event) { event.stopPropagation(); toggleFavorite(id); }
-    function showFavorites() { showFavoritesPage = true; favCategoryFilter = 'all'; renderFavoritesPage(); }
-    function showHome() { showFavoritesPage = false; renderAll(); }
-    function filterFavByCategory(category) { favCategoryFilter = category; renderFavoritesPage(); }
-    
-    function clearAllFavorites() {
-        if (confirm(currentLang === 'zh' ? '确定要清空所有收藏吗？此操作不可撤销。' : 'Are you sure you want to clear all favorites? This action cannot be undone.')) {
-            favorites = []; saveFavorites();
-            if (showFavoritesPage) renderFavoritesPage(); else renderAll();
-            showToast(currentLang === 'zh' ? '已清空所有收藏' : 'All favorites cleared');
-        }
-    }
-    
-    function exportFavorites() {
-        if (favorites.length === 0) { showToast(currentLang === 'zh' ? '暂无收藏可导出' : 'No favorites to export'); return; }
-        const favTools = favorites.map(id => toolsData.find(t => t.id === id)).filter(t => t);
-        const exportData = { version: '1.0', exportTime: new Date().toISOString(), count: favTools.length, tools: favTools.map(t => ({ id: t.id, name: t.name, url: t.url })) };
-        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `lingxi_favorites_${new Date().toISOString().slice(0,19)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast(currentLang === 'zh' ? '收藏已导出' : 'Favorites exported');
-    }
-    
-    function importFavorites() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'application/json';
-        input.onchange = function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                try {
-                    const data = JSON.parse(evt.target.result);
-                    if (data.tools && Array.isArray(data.tools)) {
-                        const newFavIds = data.tools.map(t => t.id).filter(id => toolsData.some(tool => tool.id === id));
-                        favorites = [...new Set([...favorites, ...newFavIds])];
-                        saveFavorites();
-                        if (showFavoritesPage) renderFavoritesPage(); else renderAll();
-                        showToast(`${currentLang === 'zh' ? '导入成功，新增' : 'Imported'} ${newFavIds.length} ${currentLang === 'zh' ? '个收藏' : 'favorites'}`);
-                    } else showToast(currentLang === 'zh' ? '文件格式不正确' : 'Invalid file format');
-                } catch(err) { showToast(currentLang === 'zh' ? '解析失败' : 'Parse failed'); }
-            };
-            reader.readAsText(file);
-        };
-        input.click();
-    }
-    
-    function renderFavoritesPage() {
-        const container = document.getElementById('contentArea');
-        const favTools = favorites.map(id => toolsData.find(t => t.id === id)).filter(t => t);
-        let filteredFavs = favCategoryFilter !== 'all' ? favTools.filter(t => t.category === favCategoryFilter) : favTools;
-        const categoriesWithFav = [...new Set(favTools.map(t => t.category))];
-        let html = `<div class="favorites-header"><h2><span>⭐</span> ${currentLang === 'zh' ? '我的收藏' : 'My Favorites'} <span style="font-size:15px; background:rgba(0,212,255,0.2); padding:3px 12px; border-radius:20px;">${favTools.length} ${currentLang === 'zh' ? '个工具' : 'tools'}</span></h2><div class="fav-actions"><button class="fav-action-btn" onclick="exportFavorites()">📤 ${currentLang === 'zh' ? '导出收藏' : 'Export'}</button><button class="fav-action-btn" onclick="importFavorites()">📥 ${currentLang === 'zh' ? '导入收藏' : 'Import'}</button><button class="fav-action-btn" onclick="clearAllFavorites()">🗑️ ${currentLang === 'zh' ? '清空全部' : 'Clear All'}</button><button class="fav-action-btn" onclick="showHome()">← ${currentLang === 'zh' ? '返回首页' : 'Back to Home'}</button></div></div><div class="fav-category-filter"><button class="fav-cat-btn ${favCategoryFilter === 'all' ? 'active' : ''}" onclick="filterFavByCategory('all')">${currentLang === 'zh' ? '全部' : 'All'} (${favTools.length})</button>${categoriesWithFav.map(catId => { const cat = categories.find(c => c.id === catId); const count = favTools.filter(t => t.category === catId).length; return `<button class="fav-cat-btn ${favCategoryFilter === catId ? 'active' : ''}" onclick="filterFavByCategory('${catId}')">${cat?.icon || '📁'} ${cat?.name || catId} (${count})</button>`; }).join('')}</div>`;
-        if (filteredFavs.length === 0) {
-            html += `<div class="empty-fav"><div class="empty-icon" style="font-size:56px;">⭐</div><div>${currentLang === 'zh' ? '暂无收藏工具' : 'No favorite tools yet'}</div><div style="font-size:14px; margin-top:10px;">${currentLang === 'zh' ? '点击工具卡片上的星星按钮添加收藏' : 'Click the star button on tool cards to add favorites'}</div><div class="back-to-home" onclick="showHome()">${currentLang === 'zh' ? '去首页看看' : 'Go to Homepage'}</div></div>`;
-        } else {
-            html += `<div class="tools-grid">`;
-            filteredFavs.forEach(t => {
-                html += `<div class="tool-card" onclick="showDetail(${t.id})"><button class="favorite-btn active" onclick="toggleFavoriteFromCard(${t.id}, event)">★</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`;
-            });
-            html += `</div>`;
-        }
-        container.innerHTML = html;
-    }
     
     // ==================== 筛选排序 ====================
     let currentSort = 'hot';
@@ -1252,7 +950,6 @@
             <div style="display:flex; gap:15px; margin-bottom:28px; flex-wrap:wrap;">
                 <a href="${t.url}" target="_blank" class="detail-btn detail-btn-primary">🌐 ${currentLang === 'zh' ? '访问官网 →' : 'Visit Website →'}</a>
                 <button class="detail-btn detail-btn-secondary" onclick="copyToClipboard('${t.url}')">📋 ${currentLang === 'zh' ? '复制链接' : 'Copy Link'}</button>
-                <button class="detail-btn detail-btn-secondary" onclick="toggleFavorite(${t.id}); closeModal();">${isFavorite(t.id) ? '⭐ ' + (currentLang === 'zh' ? '已收藏' : 'Favorited') : '☆ ' + (currentLang === 'zh' ? '收藏工具' : 'Favorite')}</button>
             </div>
             <div style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(0,212,255,0.12);">
                 <div style="font-size:15px; font-weight:600; color:#00d4ff; margin-bottom:15px;">🔗 ${currentLang === 'zh' ? '相似工具推荐' : 'Similar Tools'}</div>
@@ -1628,7 +1325,7 @@
         { id: 230, name: "Adobe Stock", category: "ai-nav", sub: "商业视觉素材", desc_zh: "Adobe旗下正版版权素材平台", desc_en: "Adobe's royalty-free stock platform", url: "https://stock.adobe.com", tags: ["国际","综合","付费"], views: 11200, dayViews: 250, weekViews: 1750, monthViews: 7800, price: "paid", hot: 93 },
         { id: 231, name: "Storyblocks", category: "ai-nav", sub: "商业视频素材", desc_zh: "海外订阅制素材平台，无限下载", desc_en: "Subscription-based stock platform, unlimited downloads", url: "https://www.storyblocks.com", tags: ["国际","视频","付费"], views: 6540, dayViews: 130, weekViews: 980, monthViews: 4800, price: "paid", hot: 87 },
         { id: 232, name: "Motion Array", category: "ai-nav", sub: "视频模板素材", desc_zh: "专业视频模板、预设、动态图形库", desc_en: "Professional video templates, presets, motion graphics", url: "https://motionarray.com", tags: ["国际","模板","付费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "paid", hot: 86 }
-    ];
+];
     
     function getToolDesc(tool) {
         return currentLang === 'zh' ? (tool.desc_zh || tool.desc_en) : (tool.desc_en || tool.desc_zh);
@@ -1649,7 +1346,7 @@
             "CapCut": "✂️", "剪映": "✂️", "HeyGen": "👤", "D-ID": "🎭", "Midjourney": "🎨",
             "Stable Diffusion": "🖼️", "DALL-E 3": "🎨", "文心一格": "🎨", "通义万相": "🎨",
             "Leonardo": "🎨", "Playground": "🎮", "Adobe Firefly": "🔥", "堆友": "🤝", "标小智": "💡",
-            "创客贴": "📐", "Remove.bg": "🗑️", "WPS AI": "📑", "CodeGeeX": "💻", "灵犀AI导航": "🦊"
+            "创客贴": "📐", "Remove.bg": "🗑️", "WPS AI": "📑", "CodeGeeX": "💻", "灵犀AI": "🦊"
         };
         return iconMap[name] || "🤖";
     }
@@ -1658,10 +1355,8 @@
     function formatNumber(n) { return n > 9999 ? (n/10000).toFixed(1)+'w' : n; }
     function incrementViews(id) { const t = toolsData.find(t => t.id === id); if (t) t.views++; renderAll(); }
     function closeModal() { document.getElementById("detailModal").classList.remove("active"); }
-    function showSubmitTip() { showToast('📝 ' + (currentLang === 'zh' ? '提交功能开发中，请联系微信: lingxi2026' : 'Submission in development, contact WeChat: lingxi2026')); }
     
     function scrollToCategory(categoryId) {
-        if (showFavoritesPage) showHome();
         setTimeout(() => {
             const target = document.getElementById(`cat-${categoryId}`);
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1677,7 +1372,7 @@
         if (filtered.length === 0) {
             grid.innerHTML = '<div style="text-align:center; padding:50px; color:#606070; font-size:15px;">' + (currentLang === 'zh' ? '暂无工具' : 'No tools found') + '</div>';
         } else {
-            grid.innerHTML = filtered.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('');
+            grid.innerHTML = filtered.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('');
         }
         const bar = grid.parentElement.querySelector('.subcategory-bar');
         if (bar) {
@@ -1695,8 +1390,7 @@
     
     function renderSidebar() {
         const sidebar = document.getElementById("sidebar");
-        sidebar.innerHTML = `<div class="sidebar-item" onclick="showHome()"><span>🏠</span> ${currentLang === 'zh' ? '首页' : 'Home'}</div><div class="sidebar-item" onclick="showFavorites()"><span>⭐</span> ${currentLang === 'zh' ? '我的收藏' : 'My Favorites'}<span class="fav-count" id="favCountSpan">${favorites.length}</span></div><div class="sidebar-fav-section">${categories.map(cat => `<div class="sidebar-item" onclick="clearSearchAndScroll('${cat.id}')"><span>${cat.icon}</span> ${getCategoryName(cat)}</div>`).join('')}</div>`;
-        updateFavCountInSidebar();
+        sidebar.innerHTML = `<div class="sidebar-item" onclick="showHome()"><span>🏠</span> ${currentLang === 'zh' ? '首页' : 'Home'}</div><div class="sidebar-fav-section">${categories.map(cat => `<div class="sidebar-item" onclick="clearSearchAndScroll('${cat.id}')"><span>${cat.icon}</span> ${getCategoryName(cat)}</div>`).join('')}</div>`;
     }
     
     function renderContent() {
@@ -1705,7 +1399,7 @@
         for (const cat of categories) {
             const tools = toolsData.filter(t => t.category === cat.id);
             if (tools.length === 0) continue;
-            html += `<div class="category-block" id="cat-${cat.id}"><div class="category-header"><div class="category-title"><span>${cat.icon}</span> ${getCategoryName(cat)}</div></div><div class="subcategory-bar"><button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">${currentLang === 'zh' ? '全部' : 'All'}</button>${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}<button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button></div><div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">${tools.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><button class="favorite-btn ${isFavorite(t.id) ? 'active' : ''}" onclick="toggleFavoriteFromCard(${t.id}, event)">${isFavorite(t.id) ? '★' : '☆'}</button><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('')}</div></div>`;
+            html += `<div class="category-block" id="cat-${cat.id}"><div class="category-header"><div class="category-title"><span>${cat.icon}</span> ${getCategoryName(cat)}</div></div><div class="subcategory-bar"><button class="subcategory-btn ${!currentSubFilter[cat.id] ? 'active' : ''}" onclick="filterBySub('${cat.id}', null)">${currentLang === 'zh' ? '全部' : 'All'}</button>${cat.sub.map(sub => `<button class="subcategory-btn ${currentSubFilter[cat.id] === sub ? 'active' : ''}" onclick="filterBySub('${cat.id}', '${sub}')">${sub}</button>`).join('')}<button class="more-btn" onclick="scrollToCategory('${cat.id}')">more+</button></div><div class="tools-grid ${currentView === 'list' ? 'list-view' : ''}" id="grid-${cat.id}">${tools.map(t => `<div class="tool-card" onclick="showDetail(${t.id})" data-hot="${t.hot}"><div class="tool-header"><span class="tool-name">${t.name}</span><span class="free-badge">${currentLang === 'zh' ? (t.price === 'free' ? '免费' : t.price === 'paid' ? '付费' : '部分免费') : (t.price === 'free' ? 'Free' : t.price === 'paid' ? 'Paid' : 'Freemium')}</span></div><div class="tool-desc">${getToolDesc(t)}</div><div class="tool-tags">${t.tags.slice(0,3).map(tg => `<span class="tool-tag">${tg}</span>`).join('')}</div><div class="tool-footer"><span>👁️ ${formatNumber(t.views)}</span><span class="tool-link">${currentLang === 'zh' ? '查看详情 →' : 'Details →'}</span></div></div>`).join('')}</div></div>`;
         }
         container.innerHTML = html;
         if (currentSearchKeyword) performSearch();
@@ -1743,13 +1437,18 @@
         document.getElementById("tagCloud").innerHTML = allTags.map(tag => `<span class="tag" onclick="searchByTag('${tag}')">${tag}</span>`).join('');
     }
     
-    function searchByKeyword(kw) { if (showFavoritesPage) showHome(); setTimeout(() => { document.getElementById("heroSearchInput").value = kw; performSearch(); }, 100); }
-    function searchByTag(tag) { if (showFavoritesPage) showHome(); setTimeout(() => { document.getElementById("heroSearchInput").value = tag; performSearch(); }, 100); }
+    function searchByKeyword(kw) { setTimeout(() => { document.getElementById("heroSearchInput").value = kw; performSearch(); }, 100); }
+    function searchByTag(tag) { setTimeout(() => { document.getElementById("heroSearchInput").value = tag; performSearch(); }, 100); }
+    function showHome() { renderAll(); }
     
     function renderAll() {
-        if (showFavoritesPage) renderFavoritesPage();
-        else { renderSidebar(); renderContent(); renderFeatured(); renderRank(); renderHotNews(); renderTagCloud(); }
-        renderSearchHistory(); updateFavCountInSidebar(); renderUserBar();
+        renderSidebar();
+        renderContent();
+        renderFeatured();
+        renderRank();
+        renderHotNews();
+        renderTagCloud();
+        renderSearchHistory();
     }
     
     function init() {
@@ -1759,15 +1458,10 @@
         window.filterBySub = filterBySub; window.scrollToCategory = scrollToCategory; window.performSearch = performSearch;
         window.clearSearch = clearSearch; window.handleSearchInput = handleSearchInput; window.searchByKeyword = searchByKeyword;
         window.searchByTag = searchByTag; window.clearSearchAndScroll = clearSearchAndScroll; window.clearSearchHistory = clearSearchHistory;
-        window.toggleFavorite = toggleFavorite; window.toggleFavoriteFromCard = toggleFavoriteFromCard; window.showFavorites = showFavorites;
-        window.showHome = showHome; window.filterFavByCategory = filterFavByCategory; window.clearAllFavorites = clearAllFavorites;
-        window.exportFavorites = exportFavorites; window.importFavorites = importFavorites; window.showDetail = showDetail;
-        window.closeModal = closeModal; window.showSubmitTip = showSubmitTip; window.showFriendlyLink = showFriendlyLink;
-        window.showDisclaimer = showDisclaimer; window.showAdvertise = showAdvertise; window.showAbout = showAbout;
-        window.showIcp = showIcp; window.openLink = openLink; window.setSort = setSort; window.setPriceFilter = setPriceFilter;
-        window.setView = setView; window.copyToClipboard = copyToClipboard; window.handleLogin = handleLogin;
-        window.handleRegister = handleRegister; window.handleLogout = handleLogout; window.showUserProfile = showUserProfile;
-        window.showAuthModal = showAuthModal;
+        window.showDetail = showDetail; window.closeModal = closeModal; window.showSubmitTip = showSubmitTip;
+        window.showFriendlyLink = showFriendlyLink; window.showDisclaimer = showDisclaimer; window.showAbout = showAbout;
+        window.openLink = openLink; window.setSort = setSort; window.setPriceFilter = setPriceFilter; window.setView = setView;
+        window.copyToClipboard = copyToClipboard;
     }
     init();
 </script>
