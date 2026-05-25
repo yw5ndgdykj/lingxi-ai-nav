@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== 完整样式（与之前稳定版本完全一致） ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Microsoft YaHei', sans-serif;
@@ -299,7 +300,6 @@
         }
         .more-btn:hover { color: #00d4ff; transform: translateX(3px); }
 
-        /* ==================== 修改后的卡片样式（紧凑小巧，无大图标） ==================== */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -327,7 +327,6 @@
             background: rgba(28, 28, 48, 0.85);
         }
         
-        /* 工具名称和价格标签在同一行 */
         .tool-header {
             display: flex;
             align-items: baseline;
@@ -351,7 +350,6 @@
             flex-shrink: 0;
         }
         
-        /* 描述文字 */
         .tool-desc {
             font-size: 12px;
             color: #a0a0b0;
@@ -363,7 +361,6 @@
             overflow: hidden;
         }
         
-        /* 标签区域 */
         .tool-tags {
             display: flex;
             flex-wrap: wrap;
@@ -379,7 +376,6 @@
             font-weight: 500;
         }
         
-        /* 底部：浏览量和查看详情 */
         .tool-footer {
             display: flex;
             justify-content: space-between;
@@ -402,7 +398,6 @@
             transform: translateX(3px);
         }
         
-        /* 收藏按钮位置保持不变 */
         .favorite-btn {
             position: absolute;
             top: 12px;
@@ -424,7 +419,6 @@
         }
         .favorite-btn:hover, .favorite-btn.active { opacity: 1; transform: scale(1.1); }
         
-        /* 列表视图适配 */
         .tools-grid.list-view {
             display: flex;
             flex-direction: column;
@@ -463,7 +457,6 @@
             margin-left: 10px;
         }
 
-        /* 以下所有样式保持不变（收藏页面、统计面板、右侧栏、页脚、弹窗等） */
         .favorites-header {
             display: flex; justify-content: space-between; align-items: center;
             margin-bottom: 25px; padding-bottom: 18px; border-bottom: 2px solid rgba(0, 212, 255, 0.2);
@@ -1223,6 +1216,7 @@
         showToast(viewType === 'grid' ? (currentLang === 'zh' ? '网格视图' : 'Grid view') : (currentLang === 'zh' ? '列表视图' : 'List view'));
     }
     
+    // ==================== 评分和详情页 ====================
     let toolRatings = JSON.parse(localStorage.getItem('lingxi_tool_ratings') || '{}');
     
     function saveRating(toolId, rating) {
@@ -1283,6 +1277,7 @@
         });
     }
     
+    // ==================== 数据统计 ====================
     let siteStats = JSON.parse(localStorage.getItem('lingxi_site_stats') || '{"totalVisits":0,"todayVisits":0,"lastVisitDate":""}');
     const today = new Date().toISOString().slice(0,10);
     if (siteStats.lastVisitDate !== today) { siteStats.todayVisits = 0; siteStats.lastVisitDate = today; }
@@ -1306,7 +1301,7 @@
         const weekViews = [1280, 1450, 1320, 1680, 2100, 2560, 1890];
         const totalViews = toolsData.reduce((sum, t) => sum + t.views, 0);
         
-        container.innerHTML = `<div class="stat-card"><div class="stat-number">${toolsData.length}</div><div class="stat-label">${currentLang === 'zh' ? '收录工具' : 'Tools'}</div></div><div class="stat-card"><div class="stat-number">${toolsData.filter(t => t.price === 'free').length}</div><div class="stat-label">${currentLang === 'zh' ? '免费工具' : 'Free'}</div></div><div class="stat-card"><div class="stat-number">${formatNumber(totalViews)}</div><div class="stat-label">${currentLang === 'zh' ? '总浏览量' : 'Total Views'}</div></div><div class="stat-card"><div class="stat-number">${siteStats.todayVisits || 0}</div><div class="stat-label">${currentLang === 'zh' ? '今日访问' : 'Today'}</div></div>`;
+                container.innerHTML = `<div class="stat-card"><div class="stat-number">${toolsData.length}</div><div class="stat-label">${currentLang === 'zh' ? '收录工具' : 'Tools'}</div></div><div class="stat-card"><div class="stat-number">${toolsData.filter(t => t.price === 'free').length}</div><div class="stat-label">${currentLang === 'zh' ? '免费工具' : 'Free'}</div></div><div class="stat-card"><div class="stat-number">${formatNumber(totalViews)}</div><div class="stat-label">${currentLang === 'zh' ? '总浏览量' : 'Total Views'}</div></div><div class="stat-card"><div class="stat-number">${siteStats.todayVisits || 0}</div><div class="stat-label">${currentLang === 'zh' ? '今日访问' : 'Today'}</div></div>`;
         
         const contentArea = document.getElementById('contentArea');
         const existingPanel = document.getElementById('statsDetailPanel');
@@ -1339,13 +1334,13 @@
         });
     }
     
-    // ==================== 完整22个分类 ====================
+    // ==================== 分类配置 ====================
     const categories = [
         { id: "ai-model", name_zh: "AI大模型", name_en: "AI Models", icon: "🤖", sub: ["AI大语言模型", "AI视频大模型", "AI行业大模型", "AI多模态大模型"] },
-        { id: "ai-search", name_zh: "AI搜索应用", name_en: "AI Search", icon: "🔍", sub: ["AI搜索引擎", "AI问答搜索"] },
-        { id: "ai-writing", name_zh: "AI写作平台", name_en: "AI Writing", icon: "✍️", sub: ["AI论文写作", "AI写作工具", "AIGC检测", "降AIGC率", "AI小红书文案", "AI写小说", "AI写标书"] },
-        { id: "ai-video", name_zh: "AI视频创作", name_en: "AI Video", icon: "🎬", sub: ["AI视频生成", "AI数字人", "AI换脸", "AI视频编辑", "AI视频去水印"] },
-        { id: "ai-image", name_zh: "AI图像工具", name_en: "AI Image", icon: "🎨", sub: ["AI绘画", "AI LOGO设计", "AI绘本", "AI图片背景移除", "AI证件照", "设计素材"] },
+        { id: "ai-search", name_zh: "AI搜索应用", name_en: "AI Search", icon: "🔍", sub: ["AI搜索引擎", "AI问答搜索", "传统搜索AI升级"] },
+        { id: "ai-writing", name_zh: "AI写作平台", name_en: "AI Writing", icon: "✍️", sub: ["AI论文写作", "AI写作工具", "AI文案生成", "AI内容创作"] },
+        { id: "ai-video", name_zh: "AI视频创作", name_en: "AI Video", icon: "🎬", sub: ["AI视频生成", "AI数字人", "AI视频编辑", "AI视频增强"] },
+        { id: "ai-image", name_zh: "AI图像工具", name_en: "AI Image", icon: "🎨", sub: ["AI绘画", "AI LOGO设计", "AI图像增强", "AI抠图", "AI设计素材"] },
         { id: "ai-office", name_zh: "AI办公效率", name_en: "AI Office", icon: "💼", sub: ["AIPPT", "AI会议记录", "产品设计协作", "思维导图", "AI图表", "AI翻译"] },
         { id: "ai-job", name_zh: "AI求职招聘", name_en: "AI Job", icon: "📄", sub: ["AI简历制作", "AI招聘"] },
         { id: "ai-code", name_zh: "AI编程开发", name_en: "AI Code", icon: "💻", sub: ["AI编程助手", "AI代码生成", "AI开发工具"] },
@@ -1360,9 +1355,9 @@
         { id: "ai-gadget", name_zh: "AI产品猎奇", name_en: "AI Gadget", icon: "🎮", sub: ["AI辅助思维训练", "AI应用大众点评", "猫咪语音翻译", "易经命理预测"] },
         { id: "ai-game", name_zh: "AI软件游戏", name_en: "AI Game", icon: "🎲", sub: ["AI游戏开发", "AI游戏伙伴", "AI虚拟世界"] },
         { id: "ai-compute", name_zh: "AI算力服务", name_en: "AI Compute", icon: "☁️", sub: ["AI云计算", "AI算力平台"] },
-        { id: "ai-nav", name_zh: "AI导航平台", name_en: "AI Directory", icon: "🧭", sub: ["AI工具导航", "AI资源导航"] },
         { id: "ai-book", name_zh: "AI书籍杂志", name_en: "AI Books", icon: "📚", sub: ["AI技术书籍", "AI行业杂志"] },
-        { id: "ai-news", name_zh: "AI资讯知识", name_en: "AI News", icon: "📰", sub: ["AI产品排行", "AI行业资讯", "AI公司动态"] }
+        { id: "ai-news", name_zh: "AI资讯知识", name_en: "AI News", icon: "📰", sub: ["AI产品排行", "AI行业资讯", "AI公司动态"] },
+        { id: "ai-nav", name_zh: "AI素材资源", name_en: "AI Resources", icon: "🎨", sub: ["免费图片素材", "免费视频素材", "免费音效素材", "免费设计素材", "商业素材库"] }
     ];
     
     function getCategoryNameById(catId) {
@@ -1377,6 +1372,7 @@
     
     // ==================== 工具数据 ====================
     const toolsData = [
+        // ==================== AI大模型（16个） ====================
         { id: 1, name: "DeepSeek", category: "ai-model", sub: "AI大语言模型", desc_zh: "深度求索大语言模型，中文理解能力强", desc_en: "DeepSeek LLM with strong Chinese understanding", url: "https://chat.deepseek.com", tags: ["国产","免费","大模型"], views: 13280, dayViews: 380, weekViews: 2350, monthViews: 9200, price: "free", hot: 98 },
         { id: 2, name: "文心一言", category: "ai-model", sub: "AI大语言模型", desc_zh: "百度研发的知识增强大语言模型", desc_en: "Baidu's knowledge-enhanced LLM", url: "https://yiyan.baidu.com", tags: ["国产","免费"], views: 10060, dayViews: 290, weekViews: 1980, monthViews: 7400, price: "free", hot: 95 },
         { id: 3, name: "Kimi", category: "ai-model", sub: "AI大语言模型", desc_zh: "月之暗面超长上下文，200万字处理", desc_en: "Moonshot AI with 2M token context", url: "https://kimi.moonshot.cn", tags: ["国产","免费"], views: 11800, dayViews: 370, weekViews: 2450, monthViews: 9800, price: "free", hot: 97 },
@@ -1393,13 +1389,245 @@
         { id: 14, name: "Gemini", category: "ai-model", sub: "AI大语言模型", desc_zh: "Google大语言模型", desc_en: "Google's multimodal LLM", url: "https://gemini.google.com", tags: ["国际","免费"], views: 7650, dayViews: 180, weekViews: 1200, monthViews: 5800, price: "free", hot: 90 },
         { id: 15, name: "Grok", category: "ai-model", sub: "AI大语言模型", desc_zh: "xAI大语言模型", desc_en: "xAI's witty LLM", url: "https://grok.x.ai", tags: ["国际","付费"], views: 4320, dayViews: 100, weekViews: 700, monthViews: 3500, price: "paid", hot: 85 },
         { id: 16, name: "MiniMax", category: "ai-model", sub: "AI大语言模型", desc_zh: "MiniMax大语言模型", desc_en: "MiniMax LLM", url: "https://www.minimax.com", tags: ["国产","免费"], views: 3870, dayViews: 85, weekViews: 600, monthViews: 2900, price: "free", hot: 83 },
-        { id: 17, name: "可灵AI", category: "ai-video", sub: "AI视频生成", desc_zh: "快手AI视频生成工具", desc_en: "Kuaishou AI video generation", url: "https://kling.kuaishou.com", tags: ["视频","生成"], views: 8900, dayViews: 180, weekViews: 1250, monthViews: 5600, price: "free", hot: 96 },
-        { id: 18, name: "即梦AI", category: "ai-video", sub: "AI视频生成", desc_zh: "字节跳动AI视频创作平台", desc_en: "ByteDance AI video creation", url: "https://jimeng.jianying.com", tags: ["视频","创作"], views: 7650, dayViews: 150, weekViews: 1050, monthViews: 5200, price: "free", hot: 91 },
-        { id: 19, name: "Midjourney", category: "ai-image", sub: "AI绘画", desc_zh: "顶级AI绘画工具", desc_en: "Top-tier AI image generation", url: "https://www.midjourney.com", tags: ["绘画","国际"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "paid", hot: 98 },
-        { id: 20, name: "Stable Diffusion", category: "ai-image", sub: "AI绘画", desc_zh: "开源AI绘画模型", desc_en: "Open-source AI image model", url: "https://stability.ai", tags: ["开源","绘画"], views: 12340, dayViews: 280, weekViews: 1950, monthViews: 8500, price: "free", hot: 95 },
-        { id: 21, name: "WPS AI", category: "ai-office", sub: "AIPPT", desc_zh: "WPS办公套件AI助手", desc_en: "WPS Office AI assistant", url: "https://ai.wps.cn", tags: ["办公","AI"], views: 12340, dayViews: 420, weekViews: 2800, monthViews: 10200, price: "both", hot: 94 },
-        { id: 22, name: "CodeGeeX", category: "ai-code", sub: "AI编程助手", desc_zh: "智谱AI编程助手", desc_en: "Zhipu AI coding assistant", url: "https://codegeex.cn", tags: ["编程","AI"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
-        { id: 23, name: "灵犀AI导航", category: "ai-nav", sub: "AI工具导航", desc_zh: "发现最聪明的AI工具，智能导航平台", desc_en: "Discover smartest AI tools, intelligent directory", url: "https://yw5ndgdykj.github.io/lingxi-ai-nav/", tags: ["导航","精选"], views: 5600, dayViews: 150, weekViews: 980, monthViews: 4500, price: "free", hot: 89 }
+        // ==================== AI搜索应用（11个） ====================
+        { id: 17, name: "秘塔AI", category: "ai-search", sub: "AI搜索引擎", desc_zh: "无广告AI搜索引擎，支持信源追溯", desc_en: "Ad-free AI search engine with source tracing", url: "https://metaso.cn", tags: ["国产","搜索","免费"], views: 5430, dayViews: 120, weekViews: 890, monthViews: 4100, price: "free", hot: 88 },
+        { id: 18, name: "纳米AI搜索", category: "ai-search", sub: "AI搜索引擎", desc_zh: "360旗下AI搜索引擎", desc_en: "360's AI search engine", url: "https://nami.360.cn", tags: ["国产","搜索","免费"], views: 4320, dayViews: 95, weekViews: 720, monthViews: 3500, price: "free", hot: 85 },
+        { id: 19, name: "天工AI搜索", category: "ai-search", sub: "AI搜索引擎", desc_zh: "昆仑万维AI搜索，支持长上下文", desc_en: "Kunlun Wanwei AI search", url: "https://search.tiangong.cn", tags: ["国产","搜索","免费"], views: 3980, dayViews: 90, weekViews: 650, monthViews: 3100, price: "free", hot: 84 },
+        { id: 20, name: "Perplexity", category: "ai-search", sub: "AI搜索引擎", desc_zh: "AI驱动的知识问答引擎", desc_en: "AI-powered knowledge answer engine", url: "https://perplexity.ai", tags: ["国际","搜索","免费"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 92 },
+        { id: 21, name: "360AI搜索", category: "ai-search", sub: "AI搜索引擎", desc_zh: "多模型协同AI搜索", desc_en: "Multi-model collaborative AI search", url: "https://ai.360.com", tags: ["国产","搜索","免费"], views: 3650, dayViews: 85, weekViews: 590, monthViews: 2900, price: "free", hot: 83 },
+        { id: 22, name: "夸克AI", category: "ai-search", sub: "AI搜索引擎", desc_zh: "阿里旗下智能搜索，集成灵知大模型", desc_en: "Alibaba's AI-powered smart search", url: "https://www.quark.cn", tags: ["国产","搜索","免费"], views: 5430, dayViews: 130, weekViews: 920, monthViews: 4600, price: "free", hot: 90 },
+        { id: 23, name: "You.com", category: "ai-search", sub: "AI搜索引擎", desc_zh: "AI优先的搜索引擎", desc_en: "AI-first search engine", url: "https://you.com", tags: ["国际","搜索","免费"], views: 4320, dayViews: 90, weekViews: 650, monthViews: 3200, price: "free", hot: 86 },
+        { id: 24, name: "知乎直答", category: "ai-search", sub: "AI问答搜索", desc_zh: "知乎AI问答搜索", desc_en: "Zhihu AI Q&A search", url: "https://zhida.zhihu.com", tags: ["国产","问答","免费"], views: 3210, dayViews: 70, weekViews: 520, monthViews: 2600, price: "free", hot: 80 },
+        { id: 25, name: "得理法搜", category: "ai-search", sub: "AI问答搜索", desc_zh: "法律领域AI搜索", desc_en: "Legal domain AI search", url: "https://www.deligence.com", tags: ["国产","专业","免费"], views: 2980, dayViews: 65, weekViews: 480, monthViews: 2400, price: "free", hot: 78 },
+        { id: 26, name: "必应AI", category: "ai-search", sub: "传统搜索AI升级", desc_zh: "微软New Bing AI搜索", desc_en: "Microsoft New Bing AI search", url: "https://bing.com/chat", tags: ["国际","搜索","免费"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 91 },
+        { id: 27, name: "百度AI搜索", category: "ai-search", sub: "传统搜索AI升级", desc_zh: "百度AI搜索增强版", desc_en: "Baidu AI-powered search", url: "https://www.baidu.com", tags: ["国产","搜索","免费"], views: 8760, dayViews: 200, weekViews: 1400, monthViews: 6500, price: "free", hot: 93 },
+        // ==================== AI写作平台（12个） ====================
+        { id: 28, name: "Notion AI", category: "ai-writing", sub: "AI写作工具", desc_zh: "集成于Notion的AI写作助手", desc_en: "AI writing assistant integrated in Notion", url: "https://www.notion.so/product/ai", tags: ["国际","写作","付费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "paid", hot: 90 },
+        { id: 29, name: "Copy.ai", category: "ai-writing", sub: "AI文案生成", desc_zh: "国际知名AI营销文案工具", desc_en: "World-renowned AI marketing copy tool", url: "https://www.copy.ai", tags: ["国际","文案","部分免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "both", hot: 88 },
+        { id: 30, name: "Jasper", category: "ai-writing", sub: "AI内容创作", desc_zh: "专业AI内容创作平台", desc_en: "Professional AI content creation platform", url: "https://www.jasper.ai", tags: ["国际","内容","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 87 },
+        { id: 31, name: "写作猫", category: "ai-writing", sub: "AI写作工具", desc_zh: "智能写作校对工具", desc_en: "Smart writing proofreading tool", url: "https://xiezuocat.com", tags: ["国产","写作","免费"], views: 5430, dayViews: 100, weekViews: 820, monthViews: 4100, price: "free", hot: 84 },
+        { id: 32, name: "火龙果写作", category: "ai-writing", sub: "AI写作工具", desc_zh: "AI辅助写作平台", desc_en: "AI-assisted writing platform", url: "https://www.mypitaya.com", tags: ["国产","写作","部分免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "both", hot: 82 },
+        { id: 33, name: "笔杆论文", category: "ai-writing", sub: "AI论文写作", desc_zh: "智能论文写作辅助工具", desc_en: "Smart paper writing assistant", url: "https://www.bigan.net", tags: ["国产","论文","部分免费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "both", hot: 81 },
+        { id: 34, name: "Grammarly", category: "ai-writing", sub: "AI写作工具", desc_zh: "英语语法校对写作助手", desc_en: "English grammar checking and writing assistant", url: "https://www.grammarly.com", tags: ["国际","语法","部分免费"], views: 11200, dayViews: 220, weekViews: 1800, monthViews: 8500, price: "both", hot: 92 },
+        { id: 35, name: "Rytr", category: "ai-writing", sub: "AI写作工具", desc_zh: "AI内容生成工具", desc_en: "AI content generation tool", url: "https://rytr.me", tags: ["国际","内容","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 36, name: "Writesonic", category: "ai-writing", sub: "AI内容创作", desc_zh: "AI内容创作平台", desc_en: "AI content creation platform", url: "https://writesonic.com", tags: ["国际","内容","部分免费"], views: 4870, dayViews: 95, weekViews: 780, monthViews: 3800, price: "both", hot: 86 },
+        { id: 37, name: "CopySmith", category: "ai-writing", sub: "AI文案生成", desc_zh: "电商AI文案生成工具", desc_en: "E-commerce AI copywriting tool", url: "https://copysmith.ai", tags: ["国际","电商","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+        { id: 38, name: "Wordtune", category: "ai-writing", sub: "AI写作工具", desc_zh: "AI句子改写润色工具", desc_en: "AI sentence rewriting and polishing tool", url: "https://www.wordtune.com", tags: ["国际","润色","免费"], views: 6540, dayViews: 120, weekViews: 1000, monthViews: 5000, price: "free", hot: 87 },
+        { id: 39, name: "QuillBot", category: "ai-writing", sub: "AI写作工具", desc_zh: "AI论文改写和总结工具", desc_en: "AI paraphrasing and summarizing tool", url: "https://quillbot.com", tags: ["国际","改写","部分免费"], views: 9870, dayViews: 180, weekViews: 1500, monthViews: 7200, price: "both", hot: 90 },
+        // ==================== AI视频创作（12个） ====================
+        { id: 40, name: "可灵AI", category: "ai-video", sub: "AI视频生成", desc_zh: "快手AI视频生成工具，支持文生视频", desc_en: "Kuaishou AI video generation tool", url: "https://kling.kuaishou.com", tags: ["国产","视频","免费"], views: 8900, dayViews: 180, weekViews: 1250, monthViews: 5600, price: "free", hot: 96 },
+        { id: 41, name: "即梦AI", category: "ai-video", sub: "AI视频生成", desc_zh: "字节跳动AI视频创作平台", desc_en: "ByteDance AI video creation platform", url: "https://jimeng.jianying.com", tags: ["国产","视频","免费"], views: 7650, dayViews: 150, weekViews: 1050, monthViews: 5200, price: "free", hot: 91 },
+        { id: 42, name: "Runway", category: "ai-video", sub: "AI视频生成", desc_zh: "AI视频编辑与生成工具，Gen-2模型", desc_en: "AI video editing and generation tool", url: "https://runwayml.com", tags: ["国际","视频","付费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "paid", hot: 90 },
+        { id: 43, name: "Pika Labs", category: "ai-video", sub: "AI视频生成", desc_zh: "AI视频生成平台，支持文生视频", desc_en: "AI video generation platform", url: "https://pika.art", tags: ["国际","视频","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 44, name: "腾讯智影", category: "ai-video", sub: "AI数字人", desc_zh: "腾讯AI数字人视频平台", desc_en: "Tencent AI digital human video platform", url: "https://zenvideo.qq.com", tags: ["国产","数字人","部分免费"], views: 5430, dayViews: 100, weekViews: 820, monthViews: 4100, price: "both", hot: 85 },
+        { id: 45, name: "Vidu", category: "ai-video", sub: "AI视频生成", desc_zh: "文生视频大模型，国产Sora级模型", desc_en: "Text-to-video foundation model", url: "https://www.vidu.studio", tags: ["国产","视频","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 46, name: "海螺AI", category: "ai-video", sub: "AI视频生成", desc_zh: "MiniMax旗下AI视频生成工具", desc_en: "MiniMax AI video generation tool", url: "https://hailuoai.com", tags: ["国产","视频","免费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "free", hot: 82 },
+        { id: 47, name: "Sora", category: "ai-video", sub: "AI视频生成", desc_zh: "OpenAI文生视频模型，引领行业", desc_en: "OpenAI's text-to-video model", url: "https://openai.com/sora", tags: ["国际","视频","待发布"], views: 15420, dayViews: 320, weekViews: 2400, monthViews: 10200, price: "paid", hot: 95 },
+        { id: 48, name: "CapCut", category: "ai-video", sub: "AI视频编辑", desc_zh: "剪映海外版，AI视频剪辑工具", desc_en: "AI-powered video editing tool", url: "https://www.capcut.com", tags: ["国产","编辑","免费"], views: 12340, dayViews: 250, weekViews: 1900, monthViews: 8500, price: "free", hot: 92 },
+        { id: 49, name: "剪映", category: "ai-video", sub: "AI视频编辑", desc_zh: "字节跳动AI视频剪辑工具", desc_en: "ByteDance AI video editing tool", url: "https://www.capcut.cn", tags: ["国产","编辑","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 91 },
+        { id: 50, name: "HeyGen", category: "ai-video", sub: "AI数字人", desc_zh: "AI数字人视频生成平台", desc_en: "AI digital human video generation platform", url: "https://www.heygen.com", tags: ["国际","数字人","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 87 },
+        { id: 51, name: "D-ID", category: "ai-video", sub: "AI数字人", desc_zh: "AI数字人视频创作平台", desc_en: "AI digital human video creation platform", url: "https://www.d-id.com", tags: ["国际","数字人","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        // ==================== AI图像工具（12个） ====================
+        { id: 52, name: "Midjourney", category: "ai-image", sub: "AI绘画", desc_zh: "顶级AI绘画工具", desc_en: "Top-tier AI image generation", url: "https://www.midjourney.com", tags: ["国际","绘画","付费"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "paid", hot: 98 },
+        { id: 53, name: "Stable Diffusion", category: "ai-image", sub: "AI绘画", desc_zh: "开源AI绘画模型", desc_en: "Open-source AI image model", url: "https://stability.ai", tags: ["开源","绘画","免费"], views: 12340, dayViews: 280, weekViews: 1950, monthViews: 8500, price: "free", hot: 95 },
+        { id: 54, name: "DALL-E 3", category: "ai-image", sub: "AI绘画", desc_zh: "OpenAI图像生成模型", desc_en: "OpenAI's image generation model", url: "https://openai.com/dall-e-3", tags: ["国际","绘画","付费"], views: 11200, dayViews: 260, weekViews: 1800, monthViews: 7800, price: "paid", hot: 94 },
+        { id: 55, name: "文心一格", category: "ai-image", sub: "AI绘画", desc_zh: "百度AI绘画平台", desc_en: "Baidu AI painting platform", url: "https://yige.baidu.com", tags: ["国产","绘画","部分免费"], views: 7650, dayViews: 160, weekViews: 1100, monthViews: 5200, price: "both", hot: 91 },
+        { id: 56, name: "通义万相", category: "ai-image", sub: "AI绘画", desc_zh: "阿里AI绘画平台", desc_en: "Alibaba AI painting platform", url: "https://tongyi.aliyun.com/wanxiang", tags: ["国产","绘画","免费"], views: 5430, dayViews: 120, weekViews: 850, monthViews: 4100, price: "free", hot: 86 },
+        { id: 57, name: "Leonardo", category: "ai-image", sub: "AI绘画", desc_zh: "AI绘画创作平台", desc_en: "AI painting creation platform", url: "https://leonardo.ai", tags: ["国际","绘画","免费"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 58, name: "Playground", category: "ai-image", sub: "AI绘画", desc_zh: "在线AI图像生成", desc_en: "Online AI image generation", url: "https://playground.com", tags: ["国际","绘画","免费"], views: 4320, dayViews: 95, weekViews: 680, monthViews: 3300, price: "free", hot: 84 },
+        { id: 59, name: "Adobe Firefly", category: "ai-image", sub: "AI绘画", desc_zh: "Adobe AI图像生成工具", desc_en: "Adobe AI image generation tool", url: "https://firefly.adobe.com", tags: ["国际","绘画","部分免费"], views: 7650, dayViews: 160, weekViews: 1150, monthViews: 5600, price: "both", hot: 89 },
+        { id: 60, name: "堆友", category: "ai-image", sub: "AI绘画", desc_zh: "阿里AI设计平台", desc_en: "Alibaba AI design platform", url: "https://draft.aliyun.com", tags: ["国产","设计","免费"], views: 3980, dayViews: 85, weekViews: 650, monthViews: 3100, price: "free", hot: 82 },
+        { id: 61, name: "标小智", category: "ai-image", sub: "AI LOGO设计", desc_zh: "AI智能LOGO设计工具", desc_en: "AI smart logo design tool", url: "https://logo.xiaoheihe.cn", tags: ["国产","LOGO","部分免费"], views: 5430, dayViews: 120, weekViews: 890, monthViews: 4200, price: "both", hot: 86 },
+        { id: 62, name: "创客贴", category: "ai-image", sub: "AI设计素材", desc_zh: "在线AI图形设计平台", desc_en: "Online AI graphic design platform", url: "https://www.chuangkit.com", tags: ["国产","设计","部分免费"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "both", hot: 88 },
+        { id: 63, name: "Remove.bg", category: "ai-image", sub: "AI图像增强", desc_zh: "AI一键抠图工具", desc_en: "AI one-click background remover", url: "https://www.remove.bg", tags: ["国际","抠图","部分免费"], views: 8760, dayViews: 180, weekViews: 1350, monthViews: 6500, price: "both", hot: 90 },
+        // ==================== AI办公效率（原有） ====================
+        { id: 64, name: "WPS AI", category: "ai-office", sub: "AIPPT", desc_zh: "WPS办公套件AI助手", desc_en: "WPS Office AI assistant", url: "https://ai.wps.cn", tags: ["国产","办公","部分免费"], views: 12340, dayViews: 420, weekViews: 2800, monthViews: 10200, price: "both", hot: 94 },
+        { id: 65, name: "Gamma", category: "ai-office", sub: "AIPPT", desc_zh: "AI生成PPT和文档，极简设计", desc_en: "AI-powered presentation and document generator", url: "https://gamma.app", tags: ["国际","PPT","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 90 },
+        { id: 66, name: "Tome", category: "ai-office", sub: "AIPPT", desc_zh: "AI叙事PPT工具", desc_en: "AI storytelling presentation tool", url: "https://tome.app", tags: ["国际","PPT","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 67, name: "Beautiful.ai", category: "ai-office", sub: "AIPPT", desc_zh: "AI智能PPT设计工具", desc_en: "AI smart presentation design tool", url: "https://www.beautiful.ai", tags: ["国际","PPT","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 68, name: "有道翻译", category: "ai-office", sub: "AI翻译", desc_zh: "AI智能翻译工具", desc_en: "AI smart translation tool", url: "https://fanyi.youdao.com", tags: ["国产","翻译","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 92 },
+        { id: 69, name: "DeepL", category: "ai-office", sub: "AI翻译", desc_zh: "全球最精准的AI翻译工具", desc_en: "World's most accurate AI translation tool", url: "https://www.deepl.com", tags: ["国际","翻译","部分免费"], views: 11200, dayViews: 220, weekViews: 1700, monthViews: 8200, price: "both", hot: 94 },
+        { id: 70, name: "腾讯翻译君", category: "ai-office", sub: "AI翻译", desc_zh: "腾讯AI翻译工具", desc_en: "Tencent AI translation tool", url: "https://trans.qq.com", tags: ["国产","翻译","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 71, name: "飞书妙记", category: "ai-office", sub: "AI会议记录", desc_zh: "飞书AI会议纪要工具", desc_en: "Feishu AI meeting notes tool", url: "https://www.feishu.cn/product/minutes", tags: ["国产","会议","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 89 },
+        { id: 72, name: "通义听悟", category: "ai-office", sub: "AI会议记录", desc_zh: "阿里AI音视频内容总结工具", desc_en: "Alibaba AI audio/video content summarizer", url: "https://tingwu.aliyun.com", tags: ["国产","会议","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 73, name: "讯飞听见", category: "ai-office", sub: "AI会议记录", desc_zh: "讯飞AI语音转文字工具", desc_en: "iFlytek AI speech-to-text tool", url: "https://www.iflyrec.com", tags: ["国产","会议","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 74, name: "Boardmix", category: "ai-office", sub: "AI协作白板", desc_zh: "在线AI协作白板，支持思维导图", desc_en: "Online AI collaborative whiteboard", url: "https://www.boardmix.cn", tags: ["国产","协作","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 75, name: "ProcessOn", category: "ai-office", sub: "AI流程图", desc_zh: "在线流程图思维导图工具", desc_en: "Online flowchart and mind map tool", url: "https://www.processon.com", tags: ["国产","流程图","部分免费"], views: 6540, dayViews: 130, weekViews: 1000, monthViews: 5000, price: "both", hot: 88 },
+        { id: 76, name: "亿图脑图", category: "ai-office", sub: "AI思维导图", desc_zh: "AI辅助思维导图工具", desc_en: "AI-assisted mind map tool", url: "https://www.edrawsoft.cn", tags: ["国产","思维导图","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        // ==================== AI求职招聘（10个） ====================
+        { id: 79, name: "职徒简历", category: "ai-job", sub: "AI简历制作", desc_zh: "AI智能简历优化与模板平台", desc_en: "AI smart resume optimization platform", url: "https://www.52cv.com", tags: ["国产","简历","部分免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "both", hot: 88 },
+        { id: 80, name: "超级简历", category: "ai-job", sub: "AI简历制作", desc_zh: "AI智能简历制作工具", desc_en: "AI smart resume builder", url: "https://www.superjz.com", tags: ["国产","简历","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 86 },
+        { id: 81, name: "知页简历", category: "ai-job", sub: "AI简历制作", desc_zh: "专业简历制作平台", desc_en: "Professional resume building platform", url: "https://www.zhiye.com", tags: ["国产","简历","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 84 },
+        { id: 82, name: "智聘引擎", category: "ai-job", sub: "AI岗位匹配", desc_zh: "AI精准匹配岗位与求职者", desc_en: "AI-powered job matching platform", url: "https://zhipin.com", tags: ["国产","匹配","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 82 },
+        { id: 83, name: "支付宝晓叶", category: "ai-job", sub: "AI招聘助手", desc_zh: "支付宝AI就业助手，支持AI面试", desc_en: "Alipay AI employment assistant", url: "https://www.alipay.com", tags: ["国产","招聘","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 90 },
+        { id: 84, name: "AI得贤招聘官", category: "ai-job", sub: "AI面试系统", desc_zh: "AI智能面试评估系统", desc_en: "AI smart interview assessment system", url: "https://www.aidexian.com", tags: ["国产","面试","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+        { id: 85, name: "HireVue", category: "ai-job", sub: "AI视频面试", desc_zh: "AI视频面试分析平台", desc_en: "AI video interview analysis platform", url: "https://www.hirevue.com", tags: ["国际","面试","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 87 },
+        { id: 86, name: "Eightfold AI", category: "ai-job", sub: "AI人才匹配", desc_zh: "AI人才智能匹配平台", desc_en: "AI talent intelligence platform", url: "https://eightfold.ai", tags: ["国际","匹配","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 84 },
+        { id: 87, name: "Moka", category: "ai-job", sub: "AI招聘系统", desc_zh: "智能招聘管理系统", desc_en: "Smart recruitment management system", url: "https://www.mokahr.com", tags: ["国产","ATS","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 86 },
+        { id: 88, name: "北森", category: "ai-job", sub: "AI招聘系统", desc_zh: "一体化HR SaaS平台", desc_en: "Integrated HR SaaS platform", url: "https://www.beisen.com", tags: ["国产","HR","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+// ==================== AI编程开发（12个） ====================
+        { id: 89, name: "GitHub Copilot", category: "ai-code", sub: "AI编程助手", desc_zh: "GitHub AI编程助手，代码补全", desc_en: "GitHub AI coding assistant", url: "https://github.com/features/copilot", tags: ["国际","编程","付费"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "paid", hot: 98 },
+        { id: 90, name: "通义灵码", category: "ai-code", sub: "AI编程助手", desc_zh: "阿里云AI编程助手", desc_en: "Alibaba Cloud AI coding assistant", url: "https://tongyi.aliyun.com/lingma", tags: ["国产","编程","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 92 },
+        { id: 91, name: "CodeBuddy", category: "ai-code", sub: "AI编程助手", desc_zh: "腾讯云AI编程助手", desc_en: "Tencent Cloud AI coding assistant", url: "https://codebuddy.tencent.com", tags: ["国产","编程","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 89 },
+        { id: 92, name: "文心快码", category: "ai-code", sub: "AI编程助手", desc_zh: "百度AI编程助手", desc_en: "Baidu AI coding assistant", url: "https://wenxin.baidu.com", tags: ["国产","编程","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 93, name: "Trae", category: "ai-code", sub: "AI编程助手", desc_zh: "字节跳动AI编程助手", desc_en: "ByteDance AI coding assistant", url: "https://trae.ai", tags: ["国产","编程","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 94, name: "Cursor", category: "ai-code", sub: "AI编程助手", desc_zh: "AI代码编辑器，深度IDE融合", desc_en: "AI code editor with deep IDE integration", url: "https://cursor.sh", tags: ["国际","编程","付费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "paid", hot: 91 },
+        { id: 95, name: "CodeGeeX", category: "ai-code", sub: "AI编程助手", desc_zh: "智谱AI编程助手", desc_en: "Zhipu AI coding assistant", url: "https://codegeex.cn", tags: ["国产","编程","免费"], views: 6540, dayViews: 140, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 96, name: "Amazon CodeWhisperer", category: "ai-code", sub: "AI编程助手", desc_zh: "亚马逊AI编程助手，安全扫描", desc_en: "Amazon AI coding assistant with security scanning", url: "https://aws.amazon.com/codewhisperer", tags: ["国际","编程","部分免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "both", hot: 89 },
+        { id: 97, name: "Claude Code", category: "ai-code", sub: "AI编程助手", desc_zh: "Anthropic代码架构助手", desc_en: "Anthropic code architecture assistant", url: "https://claude.ai", tags: ["国际","编程","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 90 },
+        { id: 98, name: "DeepSeek Coder", category: "ai-code", sub: "AI编程助手", desc_zh: "深度求索AI编程助手，开源", desc_en: "DeepSeek AI coding assistant, open-source", url: "https://coder.deepseek.com", tags: ["国产","编程","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 87 },
+        { id: 99, name: "Windsurf", category: "ai-code", sub: "AI编程助手", desc_zh: "AI代码编辑器，遗留系统维护", desc_en: "AI code editor for legacy system maintenance", url: "https://codeium.com", tags: ["国际","编程","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 85 },
+        { id: 100, name: "飞算JavaAI", category: "ai-code", sub: "AI编程助手", desc_zh: "Java专属AI编程工具", desc_en: "Java-specialized AI coding tool", url: "https://www.feisuanyz.com", tags: ["国产","Java","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 84 },
+        // ==================== AI音频音乐（10个） ====================
+        { id: 101, name: "Suno", category: "ai-audio", sub: "AI音乐生成", desc_zh: "AI音乐生成工具，支持人声", desc_en: "AI music generation tool with vocals", url: "https://suno.ai", tags: ["国际","音乐","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 95 },
+        { id: 102, name: "网易天音", category: "ai-audio", sub: "AI音乐生成", desc_zh: "网易AI音乐创作平台", desc_en: "NetEase AI music creation platform", url: "https://tianyin.163.com", tags: ["国产","音乐","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 103, name: "Udio", category: "ai-audio", sub: "AI音乐生成", desc_zh: "AI音乐生成平台，高质量输出", desc_en: "High-quality AI music generation platform", url: "https://www.udio.com", tags: ["国际","音乐","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 90 },
+        { id: 104, name: "牛学长变声精灵", category: "ai-audio", sub: "AI变声", desc_zh: "AI实时变声软件", desc_en: "AI real-time voice changer", url: "https://www.niuxuezhang.com", tags: ["国产","变声","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        { id: 105, name: "讯飞配音", category: "ai-audio", sub: "AI配音", desc_zh: "科大讯飞AI配音工具", desc_en: "iFlytek AI voice dubbing tool", url: "https://peiyin.xfyun.cn", tags: ["国产","配音","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 106, name: "魔音工坊", category: "ai-audio", sub: "AI配音", desc_zh: "AI智能配音工具", desc_en: "AI smart voice dubbing tool", url: "https://www.moyin.com", tags: ["国产","配音","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 85 },
+        { id: 107, name: "剪映配音", category: "ai-audio", sub: "AI配音", desc_zh: "剪映内置AI配音功能", desc_en: "CapCut built-in AI voice dubbing", url: "https://www.capcut.cn", tags: ["国产","配音","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 91 },
+        { id: 108, name: "AIVA", category: "ai-audio", sub: "AI音乐生成", desc_zh: "AI古典音乐创作工具", desc_en: "AI classical music composition tool", url: "https://www.aiva.ai", tags: ["国际","音乐","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 109, name: "Soundraw", category: "ai-audio", sub: "AI音乐生成", desc_zh: "AI免版税音乐生成", desc_en: "AI royalty-free music generator", url: "https://soundraw.io", tags: ["国际","音乐","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 110, name: "Beatoven", category: "ai-audio", sub: "AI音乐生成", desc_zh: "AI背景音乐生成工具", desc_en: "AI background music generation tool", url: "https://beatoven.ai", tags: ["国际","音乐","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+// ==================== AI创意设计（10个） ====================
+        { id: 111, name: "Canva", category: "ai-design", sub: "AI设计平台", desc_zh: "在线AI平面设计平台", desc_en: "Online AI graphic design platform", url: "https://www.canva.cn", tags: ["国际","设计","部分免费"], views: 12340, dayViews: 250, weekViews: 1900, monthViews: 8500, price: "both", hot: 94 },
+        { id: 112, name: "即时设计", category: "ai-design", sub: "UI设计", desc_zh: "在线UI设计工具，AI辅助", desc_en: "Online UI design tool with AI assistance", url: "https://js.design", tags: ["国产","UI","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 89 },
+        { id: 113, name: "MasterGo", category: "ai-design", sub: "UI设计", desc_zh: "协同AI设计平台", desc_en: "Collaborative AI design platform", url: "https://mastergo.com", tags: ["国产","UI","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 114, name: "稿定设计", category: "ai-design", sub: "AI设计平台", desc_zh: "AI智能设计工具", desc_en: "AI smart design tool", url: "https://www.gaoding.com", tags: ["国产","设计","部分免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "both", hot: 90 },
+        { id: 115, name: "创客贴", category: "ai-design", sub: "AI设计平台", desc_zh: "在线AI图形设计平台", desc_en: "Online AI graphic design platform", url: "https://www.chuangkit.com", tags: ["国产","设计","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 116, name: "标小智", category: "ai-design", sub: "AI LOGO设计", desc_zh: "AI智能LOGO设计工具", desc_en: "AI smart logo design tool", url: "https://logo.xiaoheihe.cn", tags: ["国产","LOGO","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        { id: 117, name: "Looka", category: "ai-design", sub: "AI LOGO设计", desc_zh: "AI品牌设计平台", desc_en: "AI brand design platform", url: "https://looka.com", tags: ["国际","LOGO","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+        { id: 118, name: "Designs.ai", category: "ai-design", sub: "AI设计平台", desc_zh: "AI智能设计套件", desc_en: "AI smart design suite", url: "https://designs.ai", tags: ["国际","设计","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 119, name: "Figma AI", category: "ai-design", sub: "UI设计", desc_zh: "Figma内置AI设计助手", desc_en: "Figma built-in AI design assistant", url: "https://figma.com", tags: ["国际","UI","部分免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "both", hot: 92 },
+        { id: 120, name: "Pixso", category: "ai-design", sub: "UI设计", desc_zh: "国产在线UI设计工具", desc_en: "Domestic online UI design tool", url: "https://pixso.cn", tags: ["国产","UI","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+// ==================== AI对话聊天（8个） ====================
+        { id: 121, name: "Pi", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "个性化AI对话助手，高情商", desc_en: "Personal AI conversation assistant", url: "https://pi.ai", tags: ["国际","聊天","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 89 },
+        { id: 122, name: "Poe", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "多模型AI聊天平台", desc_en: "Multi-model AI chat platform", url: "https://poe.com", tags: ["国际","聊天","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 91 },
+        { id: 123, name: "Character.AI", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "角色扮演AI聊天", desc_en: "Role-playing AI chat", url: "https://character.ai", tags: ["国际","聊天","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 92 },
+        { id: 124, name: "海螺AI", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "MiniMax旗下AI对话", desc_en: "MiniMax AI conversation", url: "https://hailuoai.com", tags: ["国产","聊天","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 125, name: "问小白", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "智能问答助手", desc_en: "Smart Q&A assistant", url: "https://wenxiaobai.com", tags: ["国产","聊天","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 126, name: "紫东太初", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "中科院大模型", desc_en: "Chinese Academy of Sciences LLM", url: "https://taichu.ia.ac.cn", tags: ["国产","聊天","免费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "free", hot: 83 },
+        { id: 127, name: "讯飞星火助手", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "讯飞星火AI对话助手", desc_en: "iFlytek Spark AI conversation", url: "https://xinghuo.xfyun.cn", tags: ["国产","聊天","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 128, name: "智谱清言", category: "ai-chat", sub: "AI聊天机器人", desc_zh: "智谱AI对话助手", desc_en: "Zhipu AI conversation assistant", url: "https://chatglm.cn", tags: ["国产","聊天","免费"], views: 5630, dayViews: 130, weekViews: 920, monthViews: 4300, price: "free", hot: 88 },
+// ==================== AI医疗健康（8个） ====================
+        { id: 129, name: "鹰瞳", category: "ai-medical", sub: "AI医学影像", desc_zh: "AI视网膜影像诊断", desc_en: "AI retinal image diagnosis", url: "https://www.airdoc.com", tags: ["国产","医疗","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 130, name: "左手医生", category: "ai-medical", sub: "AI问诊", desc_zh: "AI智能问诊平台", desc_en: "AI smart diagnosis platform", url: "https://www.zuoshouyisheng.com", tags: ["国产","问诊","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 131, name: "智云健康", category: "ai-medical", sub: "AI健康助手", desc_zh: "AI慢病管理平台", desc_en: "AI chronic disease management platform", url: "https://www.idoc24.com", tags: ["国产","健康","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 132, name: "Ada Health", category: "ai-medical", sub: "AI问诊", desc_zh: "AI健康评估助手", desc_en: "AI health assessment assistant", url: "https://ada.com", tags: ["国际","问诊","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 133, name: "微医AI", category: "ai-medical", sub: "AI问诊", desc_zh: "微医AI智能问诊", desc_en: "WeDoctor AI smart diagnosis", url: "https://www.guahao.com", tags: ["国产","问诊","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 86 },
+        { id: 134, name: "推想医疗", category: "ai-medical", sub: "AI医学影像", desc_zh: "AI医疗影像诊断", desc_en: "AI medical image diagnosis", url: "https://www.infervision.com", tags: ["国产","影像","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+        { id: 135, name: "数坤科技", category: "ai-medical", sub: "AI医学影像", desc_zh: "AI心血管影像诊断", desc_en: "AI cardiovascular image diagnosis", url: "https://www.shukun.net", tags: ["国产","影像","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 136, name: "Babylon Health", category: "ai-medical", sub: "AI问诊", desc_zh: "AI健康咨询平台", desc_en: "AI health consultation platform", url: "https://www.babylonhealth.com", tags: ["国际","问诊","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+// ==================== AI金融理财（8个） ====================
+        { id: 137, name: "同花顺AI", category: "ai-finance", sub: "AI金融分析", desc_zh: "AI智能投顾", desc_en: "AI smart investment advisor", url: "https://www.10jqka.com.cn", tags: ["国产","金融","部分免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "both", hot: 89 },
+        { id: 138, name: "东方财富AI", category: "ai-finance", sub: "AI金融分析", desc_zh: "AI财经分析助手", desc_en: "AI financial analysis assistant", url: "https://www.eastmoney.com", tags: ["国产","金融","部分免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "both", hot: 88 },
+        { id: 139, name: "随手记", category: "ai-finance", sub: "AI记账", desc_zh: "AI智能记账工具", desc_en: "AI smart accounting tool", url: "https://www.suishouji.com", tags: ["国产","记账","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 86 },
+        { id: 140, name: "简七理财", category: "ai-finance", sub: "AI投顾", desc_zh: "AI理财助手", desc_en: "AI financial assistant", url: "https://www.jian7.com", tags: ["国产","理财","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 85 },
+        { id: 141, name: "雪球AI", category: "ai-finance", sub: "AI金融分析", desc_zh: "AI股票分析助手", desc_en: "AI stock analysis assistant", url: "https://xueqiu.com", tags: ["国产","股票","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 142, name: "挖财", category: "ai-finance", sub: "AI记账", desc_zh: "AI智能记账理财", desc_en: "AI smart accounting and finance", url: "https://www.wacai.com", tags: ["国产","记账","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 143, name: "有钱花", category: "ai-finance", sub: "AI金融分析", desc_zh: "度小满AI信贷助手", desc_en: "Du Xiaoman AI credit assistant", url: "https://www.youqianhua.com", tags: ["国产","信贷","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 144, name: "财联社AI", category: "ai-finance", sub: "AI金融分析", desc_zh: "AI财经资讯分析", desc_en: "AI financial news analysis", url: "https://www.cls.cn", tags: ["国产","资讯","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+// ==================== AI提示指令（8个） ====================
+        { id: 145, name: "PromptBase", category: "ai-prompt", sub: "提示词库", desc_zh: "提示词交易市场", desc_en: "Prompt marketplace", url: "https://promptbase.com", tags: ["国际","提示词","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 88 },
+        { id: 146, name: "FlowGPT", category: "ai-prompt", sub: "提示词库", desc_zh: "提示词分享社区", desc_en: "Prompt sharing community", url: "https://flowgpt.com", tags: ["国际","提示词","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 147, name: "LearnPrompt", category: "ai-prompt", sub: "提示词优化", desc_zh: "提示词学习教程", desc_en: "Prompt learning tutorial", url: "https://learnprompt.pro", tags: ["国产","教程","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 148, name: "AI Short", category: "ai-prompt", sub: "提示词库", desc_zh: "AI提示词大全", desc_en: "AI prompt collection", url: "https://ai-short.cn", tags: ["国产","提示词","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 149, name: "PromptHero", category: "ai-prompt", sub: "提示词库", desc_zh: "AI绘画提示词库", desc_en: "AI art prompt library", url: "https://prompthero.com", tags: ["国际","绘画","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 150, name: "PublicPrompts", category: "ai-prompt", sub: "提示词库", desc_zh: "开源提示词库", desc_en: "Open-source prompt library", url: "https://publicprompts.art", tags: ["国际","开源","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 151, name: "PromptPerfect", category: "ai-prompt", sub: "提示词优化", desc_zh: "AI提示词优化工具", desc_en: "AI prompt optimization tool", url: "https://promptperfect.jina.ai", tags: ["国际","优化","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        { id: 152, name: "OpenPrompt", category: "ai-prompt", sub: "提示词库", desc_zh: "AI提示词分享平台", desc_en: "AI prompt sharing platform", url: "https://openprompt.com", tags: ["国际","分享","免费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "free", hot: 83 },
+// ==================== AI营销推广（8个） ====================
+        { id: 153, name: "快会务", category: "ai-marketing", sub: "AI营销工具", desc_zh: "AI智能会务营销", desc_en: "AI smart event marketing", url: "https://www.kuaikuai.cn", tags: ["国产","营销","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 154, name: "句易网", category: "ai-marketing", sub: "AI文案生成", desc_zh: "AI文案生成工具", desc_en: "AI copywriting tool", url: "https://www.juyi.net", tags: ["国产","文案","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 85 },
+        { id: 155, name: "易撰", category: "ai-marketing", sub: "AI内容创作", desc_zh: "AI内容创作平台", desc_en: "AI content creation platform", url: "https://www.yizhuan5.com", tags: ["国产","内容","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 86 },
+        { id: 156, name: "Jasper AI", category: "ai-marketing", sub: "AI营销文案", desc_zh: "AI营销内容创作", desc_en: "AI marketing content creation", url: "https://www.jasper.ai", tags: ["国际","营销","付费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "paid", hot: 88 },
+        { id: 157, name: "HubSpot AI", category: "ai-marketing", sub: "AI营销工具", desc_zh: "AI客户关系管理", desc_en: "AI customer relationship management", url: "https://www.hubspot.com", tags: ["国际","CRM","部分免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "both", hot: 89 },
+        { id: 158, name: "Copy.ai", category: "ai-marketing", sub: "AI营销文案", desc_zh: "AI营销文案生成", desc_en: "AI marketing copy generation", url: "https://www.copy.ai", tags: ["国际","文案","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 159, name: "Writesonic", category: "ai-marketing", sub: "AI营销文案", desc_zh: "AI广告文案生成", desc_en: "AI ad copy generation", url: "https://writesonic.com", tags: ["国际","广告","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        { id: 160, name: "文案狗", category: "ai-marketing", sub: "AI文案生成", desc_zh: "AI中文创意文案", desc_en: "AI Chinese creative copywriting", url: "https://www.wenangou.com", tags: ["国产","文案","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+// ==================== AI智能硬件（8个） ====================
+        { id: 161, name: "宇树科技", category: "ai-hardware", sub: "具身智能机器人", desc_zh: "四足机器人研发，行业领先", desc_en: "Leading quadruped robot R&D", url: "https://www.unitree.com", tags: ["国产","机器人","付费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "paid", hot: 88 },
+        { id: 162, name: "小米CyberDog", category: "ai-hardware", sub: "具身智能机器人", desc_zh: "小米仿生机器人", desc_en: "Xiaomi bionic robot", url: "https://www.mi.com/cyberdog", tags: ["国产","机器人","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 163, name: "优必选", category: "ai-hardware", sub: "具身智能机器人", desc_zh: "AI人形机器人研发", desc_en: "AI humanoid robot R&D", url: "https://www.ubtrobot.com", tags: ["国产","机器人","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+        { id: 164, name: "Rokid", category: "ai-hardware", sub: "AI眼镜", desc_zh: "AR智能眼镜", desc_en: "AR smart glasses", url: "https://www.rokid.com", tags: ["国产","眼镜","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 165, name: "华为昇腾", category: "ai-hardware", sub: "AI芯片", desc_zh: "AI计算芯片", desc_en: "AI computing chip", url: "https://e.huawei.com", tags: ["国产","芯片","付费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "paid", hot: 90 },
+        { id: 166, name: "寒武纪", category: "ai-hardware", sub: "AI芯片", desc_zh: "AI芯片研发企业", desc_en: "AI chip R&D company", url: "https://www.cambricon.com", tags: ["国产","芯片","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 167, name: "地平线", category: "ai-hardware", sub: "AI芯片", desc_zh: "智能驾驶AI芯片", desc_en: "Autonomous driving AI chip", url: "https://www.horizon.ai", tags: ["国产","芯片","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 168, name: "XREAL", category: "ai-hardware", sub: "AI眼镜", desc_zh: "AR智能眼镜品牌", desc_en: "AR smart glasses brand", url: "https://www.xreal.com", tags: ["国产","眼镜","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+// ==================== AI产品猎奇（8个） ====================
+        { id: 169, name: "猫语翻译器", category: "ai-gadget", sub: "猫咪语音翻译", desc_zh: "AI猫语翻译工具", desc_en: "AI cat language translator", url: "https://meowtalk.app", tags: ["国际","猎奇","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 170, name: "命理AI", category: "ai-gadget", sub: "易经命理预测", desc_zh: "AI命理分析工具", desc_en: "AI fortune telling tool", url: "https://www.ai8.ai", tags: ["国产","命理","部分免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "both", hot: 83 },
+        { id: 171, name: "头像生成器", category: "ai-gadget", sub: "AI辅助思维训练", desc_zh: "AI头像生成工具", desc_en: "AI avatar generator", url: "https://thispersondoesnotexist.com", tags: ["国际","头像","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 172, name: "AI算命", category: "ai-gadget", sub: "易经命理预测", desc_zh: "AI面相手相分析", desc_en: "AI face and palm reading", url: "https://www.aiguasha.com", tags: ["国产","命理","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 84 },
+        { id: 173, name: "HeyPhoto", category: "ai-gadget", sub: "AI辅助思维训练", desc_zh: "AI照片编辑工具", desc_en: "AI photo editing tool", url: "https://heyphoto.net", tags: ["国际","编辑","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 174, name: "DeepNostalgia", category: "ai-gadget", sub: "AI辅助思维训练", desc_zh: "AI老照片复活工具", desc_en: "AI old photo animation tool", url: "https://www.myheritage.com", tags: ["国际","怀旧","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 86 },
+        { id: 175, name: "Artbreeder", category: "ai-gadget", sub: "AI辅助思维训练", desc_zh: "AI图像杂交创作平台", desc_en: "AI image breeding platform", url: "https://www.artbreeder.com", tags: ["国际","创作","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 176, name: "This Resume Does Not Exist", category: "ai-gadget", sub: "AI辅助思维训练", desc_zh: "AI生成虚假简历", desc_en: "AI generated fake resume", url: "https://thisresumedoesnotexist.com", tags: ["国际","简历","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 82 },
+// ==================== AI软件游戏（8个） ====================
+        { id: 177, name: "神奇宝贝AI", category: "ai-game", sub: "AI游戏伙伴", desc_zh: "AI驱动的宝可梦游戏", desc_en: "AI-powered Pokemon game", url: "https://pokerogue.net", tags: ["国际","游戏","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 178, name: "AI Dungeon", category: "ai-game", sub: "AI游戏开发", desc_zh: "AI驱动的文字冒险游戏", desc_en: "AI-powered text adventure game", url: "https://aidungeon.io", tags: ["国际","冒险","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 179, name: "Inworld", category: "ai-game", sub: "AI游戏伙伴", desc_zh: "AI游戏角色引擎", desc_en: "AI game character engine", url: "https://inworld.ai", tags: ["国际","角色","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 86 },
+        { id: 180, name: "Scenario", category: "ai-game", sub: "AI游戏开发", desc_zh: "AI游戏资产生成平台", desc_en: "AI game asset generation platform", url: "https://scenario.com", tags: ["国际","资产","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 181, name: "Leonardo.ai", category: "ai-game", sub: "AI游戏开发", desc_zh: "AI游戏素材生成", desc_en: "AI game asset generation", url: "https://leonardo.ai", tags: ["国际","素材","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 182, name: "Ludo.ai", category: "ai-game", sub: "AI游戏开发", desc_zh: "AI游戏设计助手", desc_en: "AI game design assistant", url: "https://ludo.ai", tags: ["国际","设计","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+        { id: 183, name: "Meshy", category: "ai-game", sub: "AI游戏开发", desc_zh: "AI 3D模型生成工具", desc_en: "AI 3D model generation tool", url: "https://www.meshy.ai", tags: ["国际","3D","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 184, name: "Charisma", category: "ai-game", sub: "AI游戏伙伴", desc_zh: "AI虚拟角色对话平台", desc_en: "AI virtual character conversation platform", url: "https://charisma.ai", tags: ["国际","对话","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+// ==================== AI算力服务（8个） ====================
+        { id: 185, name: "阿里云百炼", category: "ai-compute", sub: "AI云计算", desc_zh: "阿里大模型服务平台", desc_en: "Alibaba LLM service platform", url: "https://bailian.console.aliyun.com", tags: ["国产","算力","部分免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "both", hot: 88 },
+        { id: 186, name: "腾讯云TI", category: "ai-compute", sub: "AI云计算", desc_zh: "腾讯AI开发平台", desc_en: "Tencent AI development platform", url: "https://cloud.tencent.com/product/ti", tags: ["国产","算力","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 87 },
+        { id: 187, name: "百度智能云", category: "ai-compute", sub: "AI算力平台", desc_zh: "百度AI算力服务", desc_en: "Baidu AI computing service", url: "https://cloud.baidu.com", tags: ["国产","算力","部分免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "both", hot: 89 },
+        { id: 188, name: "AutoDL", category: "ai-compute", sub: "AI算力平台", desc_zh: "AI算力租赁平台", desc_en: "AI computing power rental platform", url: "https://www.autodl.com", tags: ["国产","算力","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+        { id: 189, name: "恒源云", category: "ai-compute", sub: "AI算力平台", desc_zh: "GPU算力租赁平台", desc_en: "GPU computing power rental platform", url: "https://www.gpushare.com", tags: ["国产","GPU","付费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "paid", hot: 84 },
+        { id: 190, name: "青椒云", category: "ai-compute", sub: "AI云计算", desc_zh: "云端GPU算力服务", desc_en: "Cloud GPU computing service", url: "https://www.qingjiaocloud.com", tags: ["国产","GPU","付费"], views: 3980, dayViews: 80, weekViews: 650, monthViews: 3200, price: "paid", hot: 83 },
+        { id: 191, name: "阿里云PAI", category: "ai-compute", sub: "AI云计算", desc_zh: "阿里AI开发平台", desc_en: "Alibaba AI development platform", url: "https://www.aliyun.com/product/bigdata/learn", tags: ["国产","开发","部分免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "both", hot: 86 },
+        { id: 192, name: "华为云ModelArts", category: "ai-compute", sub: "AI云计算", desc_zh: "华为AI开发平台", desc_en: "Huawei AI development platform", url: "https://www.huaweicloud.com/product/modelarts.html", tags: ["国产","开发","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 85 },
+// ==================== AI书籍杂志（8个） ====================
+        { id: 193, name: "机器之心", category: "ai-book", sub: "AI行业杂志", desc_zh: "AI科技媒体，深度报道", desc_en: "AI tech media, in-depth reporting", url: "https://www.jiqizhixin.com", tags: ["国产","资讯","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 89 },
+        { id: 194, name: "量子位", category: "ai-book", sub: "AI行业杂志", desc_zh: "AI产业媒体", desc_en: "AI industry media", url: "https://www.qbitai.com", tags: ["国产","资讯","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 88 },
+        { id: 195, name: "新智元", category: "ai-book", sub: "AI行业杂志", desc_zh: "AI前沿资讯", desc_en: "AI frontier news", url: "https://www.aiera.com.cn", tags: ["国产","资讯","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 196, name: "智东西", category: "ai-book", sub: "AI行业杂志", desc_zh: "AI产业报道", desc_en: "AI industry reporting", url: "https://zhidx.com", tags: ["国产","资讯","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 197, name: "InfoQ", category: "ai-book", sub: "AI技术书籍", desc_zh: "技术社区，AI专题", desc_en: "Tech community, AI topics", url: "https://www.infoq.cn", tags: ["国产","技术","免费"], views: 7650, dayViews: 140, weekViews: 1100, monthViews: 5500, price: "free", hot: 88 },
+        { id: 198, name: "CSDN", category: "ai-book", sub: "AI技术书籍", desc_zh: "中文技术社区，AI专栏", desc_en: "Chinese tech community, AI column", url: "https://www.csdn.net", tags: ["国产","技术","免费"], views: 9870, dayViews: 200, weekViews: 1500, monthViews: 7200, price: "free", hot: 90 },
+        { id: 199, name: "36氪AI", category: "ai-book", sub: "AI行业杂志", desc_zh: "科技媒体AI专栏", desc_en: "Tech media AI column", url: "https://36kr.com", tags: ["国产","科技","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 89 },
+        { id: 200, name: "O'Reilly", category: "ai-book", sub: "AI技术书籍", desc_zh: "国际技术书籍出版社", desc_en: "International tech book publisher", url: "https://www.oreilly.com", tags: ["国际","书籍","付费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "paid", hot: 85 },
+// ==================== AI资讯知识（8个） ====================
+        { id: 201, name: "AI产品榜", category: "ai-news", sub: "AI产品排行", desc_zh: "AI产品数据排行榜", desc_en: "AI product data ranking", url: "https://www.aicc.com.cn", tags: ["国产","榜单","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 202, name: "智源社区", category: "ai-news", sub: "AI行业资讯", desc_zh: "AI学术社区", desc_en: "AI academic community", url: "https://hub.baai.ac.cn", tags: ["国产","社区","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 85 },
+        { id: 203, name: "AI科技评论", category: "ai-news", sub: "AI行业资讯", desc_zh: "AI科技媒体", desc_en: "AI tech media", url: "https://www.aitechreview.com", tags: ["国产","评论","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 204, name: "机器之心Pro", category: "ai-news", sub: "AI行业资讯", desc_zh: "深度AI行业报告", desc_en: "In-depth AI industry report", url: "https://pro.jiqizhixin.com", tags: ["国产","报告","部分免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "both", hot: 86 },
+        { id: 205, name: "The Batch", category: "ai-news", sub: "AI行业资讯", desc_zh: "吴恩达团队AI周刊", desc_en: "Andrew Ng's team AI weekly", url: "https://www.deeplearning.ai/the-batch", tags: ["国际","周刊","免费"], views: 6540, dayViews: 120, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 206, name: "Import AI", category: "ai-news", sub: "AI行业资讯", desc_zh: "Jack Clark AI周报", desc_en: "Jack Clark's AI weekly", url: "https://jack-clark.net", tags: ["国际","周报","免费"], views: 4320, dayViews: 85, weekViews: 680, monthViews: 3500, price: "free", hot: 84 },
+        { id: 207, name: "Datawhale", category: "ai-news", sub: "AI行业资讯", desc_zh: "AI开源学习社区", desc_en: "AI open-source learning community", url: "https://www.datawhale.cn", tags: ["国产","学习","免费"], views: 5430, dayViews: 100, weekViews: 850, monthViews: 4200, price: "free", hot: 86 },
+        { id: 208, name: "arXiv", category: "ai-news", sub: "AI产品排行", desc_zh: "AI论文预印本平台", desc_en: "AI paper preprint platform", url: "https://arxiv.org", tags: ["国际","论文","免费"], views: 8760, dayViews: 160, weekViews: 1200, monthViews: 6200, price: "free", hot: 89 },
+// ==================== AI素材资源（24个） ====================
+        // ----- 免费图片素材（8个） -----
+        { id: 209, name: "Unsplash", category: "ai-nav", sub: "免费图片素材", desc_zh: "全球知名免费高清摄影图片库，可商用", desc_en: "World-famous free high-resolution photo library, commercial use allowed", url: "https://unsplash.com", tags: ["国际","图片","免费"], views: 15420, dayViews: 350, weekViews: 2400, monthViews: 10200, price: "free", hot: 98 },
+        { id: 210, name: "Pexels", category: "ai-nav", sub: "免费图片素材", desc_zh: "免费高清图片+视频素材库，支持中文搜索", desc_en: "Free HD photo + video library with Chinese search support", url: "https://www.pexels.com", tags: ["国际","图片","免费"], views: 12340, dayViews: 280, weekViews: 1950, monthViews: 8500, price: "free", hot: 95 },
+        { id: 211, name: "Pixabay", category: "ai-nav", sub: "免费图片素材", desc_zh: "超百万免费图片、矢量图和插画", desc_en: "Over 1 million free images, vectors, and illustrations", url: "https://pixabay.com", tags: ["国际","图片","免费"], views: 11200, dayViews: 260, weekViews: 1800, monthViews: 7800, price: "free", hot: 94 },
+        { id: 212, name: "Stocksnap", category: "ai-nav", sub: "免费图片素材", desc_zh: "免费高分辨率图片库，无需注册即可下载", desc_en: "Free high-resolution image library, no registration required", url: "https://stocksnap.io", tags: ["国际","图片","免费"], views: 5430, dayViews: 120, weekViews: 850, monthViews: 4100, price: "free", hot: 86 },
+        { id: 213, name: "Freepik", category: "ai-nav", sub: "免费设计素材", desc_zh: "海量矢量图、插画、PSD素材", desc_en: "Massive vector graphics, illustrations, PSD resources", url: "https://www.freepik.com", tags: ["国际","设计","部分免费"], views: 9870, dayViews: 220, weekViews: 1550, monthViews: 7200, price: "both", hot: 92 },
+        { id: 214, name: "Flaticon", category: "ai-nav", sub: "免费图标素材", desc_zh: "超百万矢量图标，支持SVG/PNG格式", desc_en: "Over 1 million vector icons, support SVG/PNG", url: "https://www.flaticon.com", tags: ["国际","图标","免费"], views: 8760, dayViews: 200, weekViews: 1400, monthViews: 6500, price: "free", hot: 91 },
+        { id: 215, name: "Coverr", category: "ai-nav", sub: "免费视频素材", desc_zh: "免费可商用视频素材，无需注册直接下载", desc_en: "Free commercial-use video clips, direct download", url: "https://coverr.co", tags: ["国际","视频","免费"], views: 5430, dayViews: 120, weekViews: 850, monthViews: 4100, price: "free", hot: 87 },
+        { id: 216, name: "Ignite Motion", category: "ai-nav", sub: "免费视频素材", desc_zh: "科技感背景动画、循环视频素材", desc_en: "Tech background animations, loop video clips", url: "https://www.ignitemotion.com", tags: ["国际","视频","免费"], views: 4320, dayViews: 95, weekViews: 720, monthViews: 3500, price: "free", hot: 85 },
+        // ----- 免费音效素材（4个） -----
+        { id: 217, name: "爱给网", category: "ai-nav", sub: "免费音效素材", desc_zh: "国内知名音效、配乐、模板素材库", desc_en: "Well-known domestic sound effects, music, template library", url: "https://www.aigei.com", tags: ["国产","音效","免费"], views: 7650, dayViews: 160, weekViews: 1150, monthViews: 5600, price: "free", hot: 89 },
+        { id: 218, name: "Looperman", category: "ai-nav", sub: "免费音效素材", desc_zh: "免费音效和循环音乐素材社区", desc_en: "Free sound effects and loop music community", url: "https://www.looperman.com", tags: ["国际","音效","免费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "free", hot: 86 },
+        { id: 219, name: "Bensound", category: "ai-nav", sub: "免费音效素材", desc_zh: "免费背景音乐配乐网站", desc_en: "Free background music website", url: "https://www.bensound.com", tags: ["国际","音乐","免费"], views: 6540, dayViews: 130, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 220, name: "MyFreeMP3", category: "ai-nav", sub: "免费音效素材", desc_zh: "免费音乐在线播放和下载工具", desc_en: "Free music online player and download tool", url: "https://tools.liumingye.cn", tags: ["国产","音乐","免费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "free", hot: 86 },
+        // ----- 免费设计素材（6个） -----
+        { id: 221, name: "墨刀素材广场", category: "ai-nav", sub: "免费设计素材", desc_zh: "国内原型设计组件库，含微信小程序组件", desc_en: "Domestic prototyping component library", url: "https://modao.cc", tags: ["国产","设计","免费"], views: 6540, dayViews: 130, weekViews: 980, monthViews: 4800, price: "free", hot: 87 },
+        { id: 222, name: "Pixso资源社区", category: "ai-nav", sub: "免费设计素材", desc_zh: "大厂设计系统资源库，含Ant Design等", desc_en: "Design system resource library", url: "https://pixso.cn", tags: ["国产","设计","免费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "free", hot: 86 },
+        { id: 223, name: "模板王", category: "ai-nav", sub: "免费设计素材", desc_zh: "免费商用字体、PPT模板、网页模板", desc_en: "Free commercial fonts, PPT templates, web templates", url: "https://www.mobanwang.com", tags: ["国产","模板","免费"], views: 4320, dayViews: 95, weekViews: 720, monthViews: 3500, price: "free", hot: 84 },
+        { id: 224, name: "星空落资源网", category: "ai-nav", sub: "免费设计素材", desc_zh: "免费资源站，含教材、设计素材、影视音乐", desc_en: "Free resource site for study materials, design assets", url: "http://xingkongluo.com", tags: ["国产","综合","免费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "free", hot: 85 },
+        { id: 225, name: "LottieFiles", category: "ai-nav", sub: "免费动效素材", desc_zh: "海量Lottie动效图标库，支持AE动画导出", desc_en: "Massive Lottie animation icon library", url: "https://lottiefiles.com", tags: ["国际","动效","免费"], views: 6540, dayViews: 130, weekViews: 980, monthViews: 4800, price: "free", hot: 88 },
+        { id: 226, name: "Google Fonts", category: "ai-nav", sub: "免费字体素材", desc_zh: "开源免费字体库，含思源黑体等中文字体", desc_en: "Open-source free font library, including Chinese fonts", url: "https://fonts.google.com", tags: ["国际","字体","免费"], views: 8760, dayViews: 180, weekViews: 1350, monthViews: 6500, price: "free", hot: 90 },
+        // ----- 付费专业素材（6个） -----
+        { id: 227, name: "光厂", category: "ai-nav", sub: "商业视频素材", desc_zh: "国内最大正版视频素材平台，本土化场景", desc_en: "Largest domestic royalty-free video platform", url: "https://www.vjshi.com", tags: ["国产","视频","付费"], views: 9870, dayViews: 220, weekViews: 1550, monthViews: 7200, price: "paid", hot: 92 },
+        { id: 228, name: "包图网", category: "ai-nav", sub: "商业设计素材", desc_zh: "国内更新快速的视频、图片、字体素材库", desc_en: "Fast-updating video, image, font library", url: "https://ibaotu.com", tags: ["国产","综合","付费"], views: 8760, dayViews: 190, weekViews: 1400, monthViews: 6500, price: "paid", hot: 90 },
+        { id: 229, name: "卓特视觉", category: "ai-nav", sub: "商业图片素材", desc_zh: "Adobe Stock合作伙伴，超8亿正版素材", desc_en: "Adobe Stock partner, over 800 million royalty-free assets", url: "https://www.droitstock.com", tags: ["国产","图片","付费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "paid", hot: 86 },
+        { id: 230, name: "Adobe Stock", category: "ai-nav", sub: "商业视觉素材", desc_zh: "Adobe旗下正版版权素材平台", desc_en: "Adobe's royalty-free stock platform", url: "https://stock.adobe.com", tags: ["国际","综合","付费"], views: 11200, dayViews: 250, weekViews: 1750, monthViews: 7800, price: "paid", hot: 93 },
+        { id: 231, name: "Storyblocks", category: "ai-nav", sub: "商业视频素材", desc_zh: "海外订阅制素材平台，无限下载", desc_en: "Subscription-based stock platform, unlimited downloads", url: "https://www.storyblocks.com", tags: ["国际","视频","付费"], views: 6540, dayViews: 130, weekViews: 980, monthViews: 4800, price: "paid", hot: 87 },
+        { id: 232, name: "Motion Array", category: "ai-nav", sub: "视频模板素材", desc_zh: "专业视频模板、预设、动态图形库", desc_en: "Professional video templates, presets, motion graphics", url: "https://motionarray.com", tags: ["国际","模板","付费"], views: 5430, dayViews: 110, weekViews: 850, monthViews: 4100, price: "paid", hot: 86 }
     ];
     
     function getToolDesc(tool) {
@@ -1411,9 +1639,17 @@
             "DeepSeek": "🐋", "文心一言": "📚", "Kimi": "🌙", "通义千问": "☁️", "豆包": "🫘", 
             "智谱清言": "🐉", "天工Skywork": "⚙️", "ChatGPT": "🤖", "讯飞星火": "🔥", 
             "腾讯混元": "💧", "腾讯元宝": "💰", "百川大模型": "🌊", "Claude": "👨‍🎓",
-            "Gemini": "⭐", "Grok": "🎭", "MiniMax": "🎵", "可灵AI": "🎥", "即梦AI": "✨",
-            "Midjourney": "🎨", "Stable Diffusion": "🖼️", "WPS AI": "📑", "CodeGeeX": "💻",
-            "灵犀AI导航": "🦊"
+            "Gemini": "⭐", "Grok": "🎭", "MiniMax": "🎵", "秘塔AI": "🔍", "纳米AI搜索": "🔬",
+            "天工AI搜索": "⚡", "Perplexity": "❓", "360AI搜索": "🛡️", "夸克AI": "🚀",
+            "You.com": "🌐", "知乎直答": "💭", "得理法搜": "⚖️", "必应AI": "🔷", "百度AI搜索": "🐻",
+            "Notion AI": "📓", "Copy.ai": "📝", "Jasper": "💎", "写作猫": "🐱", "火龙果写作": "🔥",
+            "笔杆论文": "✏️", "Grammarly": "📖", "Rytr": "✍️", "Writesonic": "🎯", "CopySmith": "📋",
+            "Wordtune": "🔄", "QuillBot": "🤖", "可灵AI": "🎥", "即梦AI": "✨", "Runway": "🎬",
+            "Pika Labs": "🎞️", "腾讯智影": "📹", "Vidu": "🎥", "海螺AI": "🐚", "Sora": "🌟",
+            "CapCut": "✂️", "剪映": "✂️", "HeyGen": "👤", "D-ID": "🎭", "Midjourney": "🎨",
+            "Stable Diffusion": "🖼️", "DALL-E 3": "🎨", "文心一格": "🎨", "通义万相": "🎨",
+            "Leonardo": "🎨", "Playground": "🎮", "Adobe Firefly": "🔥", "堆友": "🤝", "标小智": "💡",
+            "创客贴": "📐", "Remove.bg": "🗑️", "WPS AI": "📑", "CodeGeeX": "💻", "灵犀AI导航": "🦊"
         };
         return iconMap[name] || "🤖";
     }
